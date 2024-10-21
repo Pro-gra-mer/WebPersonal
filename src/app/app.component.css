@@ -1,3 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
+
+.logo {
+  font-family: "Bad Script", cursive;
+  font-size: 1.6em;
+  font-style: normal;
+  padding-right: 100px;
+}
+
 nav {
-  font-weight: 600;
+  font-size: 1.4em;
+  padding-left: 250px;
+  margin-bottom: -50px;
+}
+
+nav a {
+  margin-right: 2rem;
 }

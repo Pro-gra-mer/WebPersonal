@@ -1,1 +1,51 @@
-<p>register works!</p>
+<div class="container-fluid px-5 py-3">
+  <h2 class="text-center">Registro</h2>
+  <form>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre Completo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Ingrese su nombre completo"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Ingrese su correo electrónico"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Ingrese su contraseña"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label"
+        >Confirmar Contraseña</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        placeholder="Confirme su contraseña"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Registrar</button>
+  </form>
+  <div class="text-center mt-3">
+    <span>¿Ya tienes cuenta? <a href="/login">Inicia Sesión aquí</a></span>
+  </div>
+</div>

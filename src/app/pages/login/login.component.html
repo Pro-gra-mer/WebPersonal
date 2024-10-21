@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="container-fluid px-5 py-3">
+  <h2 class="text-center">Iniciar Sesión</h2>
+  <form>
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Ingrese su correo electrónico"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Ingrese su contraseña"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+  </form>
+  <div class="text-center mt-3">
+    <a href="#">¿Olvidaste tu contraseña?</a>
+  </div>
+  <div class="text-center mt-2">
+    <span>No tienes cuenta? <a href="/register">Regístrate aquí</a></span>
+  </div>
+</div>
