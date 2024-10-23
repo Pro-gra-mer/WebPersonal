@@ -4,6 +4,6 @@
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(135deg, #2c3e50, #4ca1af);
 }
