@@ -13,3 +13,7 @@ h5 {
 .btn {
   margin-left: 20px;
 }
+
+.carousel {
+  min-height: 550px;
+}
