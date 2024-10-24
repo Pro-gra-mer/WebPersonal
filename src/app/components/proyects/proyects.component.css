@@ -1,0 +1,23 @@
+h4 {
+  color: white;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+h5 {
+  color: black;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+p {
+  color: black;
+}
+
+img {
+  height: 400px;
+}
+
+.btn {
+  margin-bottom: 30px;
+}
