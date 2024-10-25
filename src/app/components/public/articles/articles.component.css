@@ -1,0 +1,27 @@
+h4 {
+  color: white;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+h5 {
+  color: black;
+}
+
+.btn {
+  margin-bottom: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card-title {
+  cursor: pointer;
+  color: inherit;
+}
+
+.card-title:hover {
+  color: blue;
+  text-decoration: underline;
+}
