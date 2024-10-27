@@ -25,3 +25,11 @@ nav a {
 
   flex: 1; /* Ocupa el espacio disponible */
 }
+
+@media (max-width: 576px) {
+  nav {
+    font-size: 1.4em;
+    padding-left: 0;
+    margin-bottom: -50px;
+  }
+}

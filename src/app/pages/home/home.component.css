@@ -1,6 +1,7 @@
 h1 {
   font-size: 2.6em;
   margin-top: 80px;
+  margin-bottom: 20px;
   color: white;
   text-align: center;
 }
@@ -12,4 +13,10 @@ h1 {
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 576px) {
+  .header-img {
+    height: 250px;
+  }
 }

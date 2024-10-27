@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Para usar *ngFor y *ngIf
+import { CommonModule, DatePipe, registerLocaleData } from '@angular/common'; // Para usar *ngFor y *ngIf
 import { ProjectCardComponent } from '../project-card/project-card.component';
+import localeEs from '@angular/common/locales/es'; // Importa el locale español
 
 interface Project {
   id: number;
@@ -14,7 +15,7 @@ interface Project {
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, ProjectCardComponent],
+  imports: [CommonModule, DatePipe, ProjectCardComponent],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
 })
@@ -48,6 +49,10 @@ export class ProjectsComponent implements OnInit {
   ];
 
   latestProjects: Project[] = []; // Array vacío para rellenar con los últimos 3 proyectos
+  constructor() {
+    // Registra el locale español para toda la aplicación
+    registerLocaleData(localeEs, 'es');
+  }
 
   ngOnInit() {
     // Toma solo los últimos 3 proyectos
