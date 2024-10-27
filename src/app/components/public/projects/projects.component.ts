@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common'; // Para usar *ngFor y *ngIf
 import { ProjectCardComponent } from '../project-card/project-card.component';
+import { RouterModule } from '@angular/router';
 import localeEs from '@angular/common/locales/es'; // Importa el locale español
 
 interface Project {
@@ -15,7 +16,7 @@ interface Project {
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, DatePipe, ProjectCardComponent],
+  imports: [RouterModule, CommonModule, DatePipe, ProjectCardComponent],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
 })

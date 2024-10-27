@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ArticleCardComponent } from '../article-card/article-card.component';
 import localeEs from '@angular/common/locales/es'; // Importa el locale español
 
@@ -15,7 +16,7 @@ interface Article {
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [CommonModule, DatePipe, ArticleCardComponent],
+  imports: [RouterModule, CommonModule, DatePipe, ArticleCardComponent],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css'],
 })
