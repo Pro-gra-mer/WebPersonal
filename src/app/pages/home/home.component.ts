@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { ProyectsComponent } from '../../components/public/proyects/proyects.component';
+import { ProjectsComponent } from '../../components/public/projects/projects.component';
 import { ArticlesComponent } from '../../components/public/articles/articles.component';
 import { CarouselComponent } from '../../components/public/carousel/carousel.component';
 import { MessageFormComponent } from '../../components/user/message-form/message-form.component';
-import { ProyectDetailComponent } from '../../components/public/proyect-detail/proyect-detail.component';
-import { ArticleDetailComponent } from '../../components/public/article-detail/article-detail.component';
 import { MessagesListComponent } from '../../components/public/messages-list/messages-list.component';
 
 @Component({
@@ -12,12 +10,11 @@ import { MessagesListComponent } from '../../components/public/messages-list/mes
   standalone: true,
   imports: [
     CarouselComponent,
-    ProyectsComponent,
+    ProjectsComponent,
     ArticlesComponent,
     MessageFormComponent,
-    ProyectDetailComponent,
-    ArticleDetailComponent,
     MessagesListComponent,
+    ProjectsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
