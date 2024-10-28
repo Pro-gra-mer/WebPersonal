@@ -1,1 +1,64 @@
-<p>upload-article works!</p>
+<div class="container-fluid px-5 py-3">
+  <h2 class="text-center">Subir Artículo</h2>
+  <form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Título del Artículo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Ingrese el título del artículo"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="slug" class="form-label">URL Amigable (Slug)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="slug"
+        placeholder="Ingrese una URL amigable"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="metaDescription" class="form-label">Meta Descripción</label>
+      <textarea
+        class="form-control"
+        id="metaDescription"
+        rows="2"
+        placeholder="Breve descripción para SEO"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="keyword" class="form-label">Palabra Clave Principal</label>
+      <input
+        type="text"
+        class="form-control"
+        id="keyword"
+        placeholder="Ingrese la palabra clave principal"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Contenido</label>
+      <textarea
+        class="form-control"
+        id="content"
+        rows="8"
+        placeholder="Escriba el contenido completo del artículo"
+        required
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label"
+        >URL de la Imagen Destacada</label
+      >
+      <input
+        type="url"
+        class="form-control"
+        id="imageUrl"
+        placeholder="Ingrese la URL de la imagen destacada"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Subir Artículo</button>
+  </form>
+</div>

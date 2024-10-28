@@ -8,6 +8,7 @@ import { ArticlesListComponent } from './pages/articles-list/articles-list.compo
 import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { ProjectsListComponent } from './pages/projects-list/projects-list.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'articles/:id', component: ArticleDetailComponent },
   { path: 'projects', component: ProjectsListComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

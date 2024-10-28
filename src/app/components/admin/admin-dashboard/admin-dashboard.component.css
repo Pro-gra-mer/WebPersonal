@@ -1,0 +1,16 @@
+.container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+  gap: 30px; /* Espacio entre los elementos */
+}
+
+.container > * {
+  flex: 1 1 calc(50% - 20px); /* Cada elemento ocupa 50% menos el espacio del gap */
+  min-width: 300px; /* Tamaño mínimo para mantener el diseño en pantallas pequeñas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra opcional para mejorar el diseño */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #f9f9f9; /* Color de fondo opcional */
+}

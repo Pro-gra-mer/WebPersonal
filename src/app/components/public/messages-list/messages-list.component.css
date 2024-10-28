@@ -1,3 +1,5 @@
-h4 {
-  color: white;
+/* styles.css */
+.table {
+  border-radius: 8px;
+  overflow: hidden;
 }

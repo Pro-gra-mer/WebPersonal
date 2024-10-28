@@ -1,0 +1,36 @@
+<div class="container-fluid px-5 py-3">
+  <h2 class="text-center">Subir Proyecto</h2>
+  <form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Título del Proyecto</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Ingrese el título del proyecto"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea
+        class="form-control"
+        id="description"
+        rows="4"
+        placeholder="Ingrese una descripción breve del proyecto"
+        required
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">URL de la Imagen</label>
+      <input
+        type="url"
+        class="form-control"
+        id="imageUrl"
+        placeholder="Ingrese la URL de la imagen del proyecto"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Subir Proyecto</button>
+  </form>
+</div>

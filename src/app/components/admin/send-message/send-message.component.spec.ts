@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadProyectComponent } from './upload-proyect.component';
+import { SendMessageComponent } from './send-message.component';
 
-describe('UploadProyectComponent', () => {
-  let component: UploadProyectComponent;
-  let fixture: ComponentFixture<UploadProyectComponent>;
+describe('SendMessageComponent', () => {
+  let component: SendMessageComponent;
+  let fixture: ComponentFixture<SendMessageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UploadProyectComponent]
+      imports: [SendMessageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(UploadProyectComponent);
+    fixture = TestBed.createComponent(SendMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

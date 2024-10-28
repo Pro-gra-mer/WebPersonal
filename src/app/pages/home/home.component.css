@@ -15,6 +15,13 @@ h1 {
   background-repeat: no-repeat;
 }
 
+.size-s {
+  max-width: 500px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
 @media (max-width: 576px) {
   .header-img {
     height: 250px;
