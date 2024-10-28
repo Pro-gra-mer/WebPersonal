@@ -29,7 +29,7 @@ export class MessagesListComponent implements OnInit {
     this.messages = this.messages.map((msg) => {
       const formattedDate = this.dateService.transformDate(msg.date, 'es-ES', {
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric',
       });
       return { ...msg, formattedDate };
