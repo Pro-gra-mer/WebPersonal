@@ -3,3 +3,11 @@
   border-radius: 8px;
   overflow: hidden;
 }
+
+.container {
+  margin-bottom: 50px;
+}
+
+h2 {
+  color: white;
+}

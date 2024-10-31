@@ -14,13 +14,13 @@ interface Project {
 }
 
 @Component({
-  selector: 'app-projects',
+  selector: 'app-last-projects',
   standalone: true,
   imports: [RouterModule, CommonModule, DatePipe, ProjectCardComponent],
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css'],
+  templateUrl: './last-projects.component.html',
+  styleUrls: ['./last-projects.component.css'],
 })
-export class ProjectsComponent implements OnInit {
+export class LastProjectsComponent implements OnInit {
   // Lista ficticia de proyectos con links y publishDate
   allProjects: Project[] = [
     {

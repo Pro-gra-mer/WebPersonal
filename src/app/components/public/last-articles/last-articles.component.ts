@@ -14,13 +14,13 @@ interface Article {
 }
 
 @Component({
-  selector: 'app-articles',
+  selector: 'app-last-articles',
   standalone: true,
   imports: [RouterModule, CommonModule, DatePipe, ArticleCardComponent],
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css'],
+  templateUrl: './last-articles.component.html',
+  styleUrls: ['./last-articles.component.css'],
 })
-export class ArticlesComponent implements OnInit {
+export class LastArticlesComponent implements OnInit {
   // Lista ficticia de artículos con links dinámicos
   allArticles: Article[] = [
     {

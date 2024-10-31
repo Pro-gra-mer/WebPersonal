@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ProjectsComponent } from '../../components/public/projects/projects.component';
-import { ArticlesComponent } from '../../components/public/articles/articles.component';
+import { LastProjectsComponent } from '../../components/public/last-projects/last-projects.component';
+import { LastArticlesComponent } from '../../components/public/last-articles/last-articles.component';
 import { CarouselComponent } from '../../components/public/carousel/carousel.component';
 import { MessagesListComponent } from '../../components/public/messages-list/messages-list.component';
 import { SendMessageComponent } from '../../components/admin/send-message/send-message.component';
@@ -10,10 +10,9 @@ import { SendMessageComponent } from '../../components/admin/send-message/send-m
   standalone: true,
   imports: [
     CarouselComponent,
-    ProjectsComponent,
-    ArticlesComponent,
+    LastArticlesComponent,
+    LastProjectsComponent,
     MessagesListComponent,
-    ProjectsComponent,
     SendMessageComponent,
   ],
   templateUrl: './home.component.html',
