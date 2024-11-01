@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Primer Artículo",
+    "description": "Descripción del primer artículo",
+    "content": "Contenido detallado del primer artículo",
+    "publishDate": "2023-10-01",
+    "imageUrl": "assets/images/gim.jpg",
+    "link": "https://example.com/articulo1"
+  },
+  {
+    "id": 2,
+    "title": "Segundo Artículo",
+    "description": "Descripción del segundo artículo",
+    "content": "Contenido detallado del segundo artículo",
+    "publishDate": "2024-10-05",
+    "imageUrl": "assets/images/usa.jpg",
+    "link": "https://example.com/articulo2"
+  },
+  {
+    "id": 3,
+    "title": "Tercer Artículo",
+    "description": "Descripción del tercer artículo",
+    "content": "Contenido detallado del tercer artículo",
+    "publishDate": "2024-10-06",
+    "imageUrl": "assets/images/dalle.webp",
+    "link": "https://example.com/articulo3"
+  },
+  {
+    "id": 4,
+    "title": "Cuarto Artículo",
+    "description": "Descripción del cuarto artículo",
+    "content": "Contenido detallado del cuarto artículo",
+    "publishDate": "2024-10-10",
+    "imageUrl": "assets/images/dalle.webp",
+    "link": "https://example.com/articulo4"
+  },
+  {
+    "id": 5,
+    "title": "Quinto Artículo",
+    "description": "Descripción del quinto artículo",
+    "content": "Contenido detallado del quinto artículo",
+    "publishDate": "2024-10-10",
+    "imageUrl": "assets/images/dalle.webp",
+    "link": "https://example.com/articulo5"
+  }
+]

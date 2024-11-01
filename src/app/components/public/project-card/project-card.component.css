@@ -8,17 +8,38 @@ p {
   color: black;
 }
 
-img {
-  height: 400px;
-}
-
+/* project-card.component.css */
 .card {
+  height: 100%;
+  max-height: 350px; /* Limita la altura de cada tarjeta */
+  overflow: hidden; /* Oculta cualquier contenido que desborde */
   transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transición */
   cursor: pointer;
 }
 
+.card-body {
+  padding: 15px; /* Ajusta el padding interno para reducir altura */
+}
+
+.card-img-top {
+  max-height: 150px; /* Limita la altura de la imagen */
+  object-fit: cover; /* Mantiene la proporción de la imagen y recorta si es necesario */
+  width: 100%;
+}
+
+.card-title {
+  font-size: 1.2em;
+  margin-bottom: 10px; /* Ajusta el margen inferior del título */
+}
+
+.card-text {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Efecto de hover */
 .card:hover {
-  transform: scale(1.05); /* Aumenta el tamaño de la tarjeta */
+  transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
 }
 

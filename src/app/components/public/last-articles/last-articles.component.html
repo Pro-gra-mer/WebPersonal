@@ -3,9 +3,11 @@
 
 <div class="articles-section mb-5">
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let article of latestArticles">
+    <div class="col" *ngFor="let article of articles">
       <app-article-card
+        [id]="article.id"
         [title]="article.title"
+        [description]="article.description"
         [imageUrl]="article.imageUrl"
         [publishDate]="article.publishDate"
         [link]="article.link"

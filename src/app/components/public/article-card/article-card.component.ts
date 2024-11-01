@@ -1,14 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DateService } from '../../../services/date.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-article-card',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './article-card.component.html',
   styleUrls: ['./article-card.component.css'],
   providers: [DateService], // Incluye DateService aquí
 })
 export class ArticleCardComponent implements OnInit {
+  @Input() id!: number;
   @Input() title!: string;
   @Input() description!: string;
   @Input() imageUrl!: string;

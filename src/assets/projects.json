@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Proyecto 1",
+    "description": "Descripción del primer proyecto",
+    "content": "Contenido detallado del primer proyecto",
+    "publishDate": "2024-01-01",
+    "imageUrl": "assets/images/gim.jpg",
+    "link": "https://example.com/articulo1"
+  },
+  {
+    "id": 2,
+    "title": "Proyecto 2",
+    "description": "Descripción del segundo proyecto",
+    "content": "Contenido detallado del segundo proyecto",
+    "publishDate": "2024-02-05",
+    "imageUrl": "assets/images/usa.jpg",
+    "link": "https://example.com/articulo2"
+  },
+  {
+    "id": 3,
+    "title": "Proyecto 3",
+    "description": "Descripción del tercer proyecto",
+    "content": "Contenido detallado del tercer proyecto",
+    "publishDate": "2024-03-06",
+    "imageUrl": "assets/images/dalle.webp",
+    "link": "https://example.com/articulo3"
+  },
+  {
+    "id": 4,
+    "title": "Proyecto 4",
+    "description": "Descripción del cuarto proyecto",
+    "content": "Contenido detallado del cuarto proyecto",
+    "publishDate": "2024-04-10",
+    "imageUrl": "assets/images/dalle.webp",
+    "link": "https://example.com/articulo4"
+  },
+  {
+    "id": 5,
+    "title": "Proyecto 5",
+    "description": "Descripción del quinto proyecto",
+    "content": "Contenido detallado del quinto proyecto",
+    "publishDate": "2024-10-10",
+    "imageUrl": "assets/images/dalle.webp",
+    "link": "https://example.com/articulo5"
+  }
+]

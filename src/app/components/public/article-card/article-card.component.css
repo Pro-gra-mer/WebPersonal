@@ -2,16 +2,7 @@ h5 {
   color: black;
 }
 
-a {
-  text-decoration: none;
-}
-
 .card-title {
   cursor: pointer;
   color: inherit;
-}
-
-.card-title:hover {
-  color: blue;
-  text-decoration: underline;
 }

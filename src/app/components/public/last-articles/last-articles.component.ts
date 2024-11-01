@@ -1,63 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ArticleService } from '../../../services/article.service';
+import { Article } from '../../../models/article.model';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ArticleCardComponent } from '../article-card/article-card.component';
-import localeEs from '@angular/common/locales/es'; // Importa el locale español
-
-interface Article {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  publishDate: Date;
-  link: string;
-}
 
 @Component({
   selector: 'app-last-articles',
   standalone: true,
-  imports: [RouterModule, CommonModule, DatePipe, ArticleCardComponent],
+  imports: [RouterLink, CommonModule, ArticleCardComponent],
   templateUrl: './last-articles.component.html',
   styleUrls: ['./last-articles.component.css'],
 })
 export class LastArticlesComponent implements OnInit {
-  // Lista ficticia de artículos con links dinámicos
-  allArticles: Article[] = [
-    {
-      id: 1,
-      title: 'Mock Article 1',
-      description: 'Description for mock article 1',
-      imageUrl: 'assets/images/dalle.webp',
-      publishDate: new Date('2023-10-01'),
-      link: '/articles/1',
-    },
-    {
-      id: 2,
-      title: 'Mock Article 2',
-      description: 'Description for mock article 2',
-      imageUrl: 'assets/images/dalle.webp',
-      publishDate: new Date('2023-09-20'),
-      link: '/articles/2',
-    },
-    {
-      id: 3,
-      title: 'Mock Article 3',
-      description: 'Description for mock article 3',
-      imageUrl: 'assets/images/dalle.webp',
-      publishDate: new Date('2023-08-15'),
-      link: '/articles/3',
-    },
-  ];
+  articles: Article[] = [];
 
-  latestArticles: Article[] = []; // Array vacío para rellenar con los últimos 3 artículos
+  constructor(private articleService: ArticleService) {}
 
-  constructor() {
-    // Registra el locale español para toda la aplicación
-    registerLocaleData(localeEs, 'es');
-  }
-
-  ngOnInit() {
-    // Toma solo los últimos 3 artículos
-    this.latestArticles = this.allArticles.slice(-3);
+  ngOnInit(): void {
+    this.articleService.getArticles().subscribe((articles) => {
+      // Filtra los tres últimos artículos
+      this.articles = articles.slice(-3).reverse();
+    });
   }
 }
