@@ -5,5 +5,4 @@ export interface Project {
   content: string;
   publishDate: Date;
   imageUrl: string;
-  link: string;
 }

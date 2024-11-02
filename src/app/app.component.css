@@ -17,6 +17,12 @@ nav a {
   margin-right: 2rem;
 }
 
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Asegúrate de que quede por encima del contenido */
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

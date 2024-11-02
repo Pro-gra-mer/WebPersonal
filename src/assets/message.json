@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "user": "Usuario1",
+    "content": "Este es el primer mensaje.",
+    "date": "2023-10-01"
+  },
+  {
+    "id": 2,
+    "user": "Usuario2",
+    "content": " huraaaaaaaaaacaneandoooooooooooooooooooooooooooooooo",
+    "date": "2023-10-02"
+  },
+  {
+    "id": 3,
+    "user": "Usuario3",
+    "content": "Con esta configuración, las opciones de formato year, month, day, hour y minute se aplicarán automáticamente siempre que no especifiques un conjunto diferente de opciones al llamar a transformDate.",
+    "date": "2023-10-03"
+  },
+  {
+    "id": 4,
+    "user": "Usuario4",
+    "content": "Este es el mensaje de Usuario4.",
+    "date": "2023-10-04"
+  },
+  {
+    "id": 5,
+    "user": "Usuario5",
+    "content": "kjhkjfhd dshf fk jsdghf klkf lskjhflkhlhsuifyskert  iyu d urtilu4waeyruitjfkyw8e77r ",
+    "date": "2023-10-05"
+  },
+  {
+    "id": 6,
+    "user": "Usuario5",
+    "content": "fd.,jkhjkjoeipip4i54i5po4ipo5i",
+    "date": "2023-10-06"
+  },
+  {
+    "id": 7,
+    "user": "Usuario5",
+    "content": "sup adadasdsdadadasddadasd",
+    "date": "2023-10-07"
+  },
+  {
+    "id": 8,
+    "user": "Usuario5",
+    "content": "sup adadasdsdadadasddadasd",
+    "date": "2023-10-07"
+  },
+  {
+    "id": 9,
+    "user": "Usuario5",
+    "content": "sup adadasdsdadadasddadasd",
+    "date": "2023-10-07"
+  },
+  {
+    "id": 10,
+    "user": "Usuario5",
+    "content": "sup adadasdsdadadasddadasd",
+    "date": "2023-10-07"
+  },
+  {
+    "id": 11,
+    "user": "Usuario5",
+    "content": "sup adadasdsdadadasddadasd",
+    "date": "2023-10-07"
+  }
+]

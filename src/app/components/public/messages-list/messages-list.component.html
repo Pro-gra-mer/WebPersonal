@@ -1,9 +1,18 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Lista de Mensajes</h2>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let message of messages">
+    <li class="list-group-item" *ngFor="let message of displayedMessages">
       <strong>{{ message.user }}:</strong> {{ message.content }}
-      <span class="text-muted float-end">{{ message.formattedDate }}</span>
+      <span class="text-muted float-end date-separator">{{
+        message.formattedDate
+      }}</span>
     </li>
   </ul>
+
+  <!-- Botón "Ver más" solo si hay más mensajes que mostrar -->
+  <div class="text-center mt-3" *ngIf="messagesLimit < messages.length">
+    <button class="btn btn-primary" (click)="loadMoreMessages()">
+      Ver más
+    </button>
+  </div>
 </div>

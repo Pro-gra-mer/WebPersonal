@@ -1,4 +1,3 @@
-/* styles.css */
 .table {
   border-radius: 8px;
   overflow: hidden;
@@ -10,4 +9,9 @@
 
 h2 {
   color: white;
+}
+
+.date-separator {
+  margin-top: 20px; /* Separación span de la fecha */
+  font-size: 0.9em;
 }
