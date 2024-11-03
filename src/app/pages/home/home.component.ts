@@ -3,7 +3,7 @@ import { LastProjectsComponent } from '../../components/public/last-projects/las
 import { LastArticlesComponent } from '../../components/public/last-articles/last-articles.component';
 import { CarouselComponent } from '../../components/public/carousel/carousel.component';
 import { MessagesListComponent } from '../../components/public/messages-list/messages-list.component';
-import { SendMessageComponent } from '../../components/admin/send-message/send-message.component';
+import { MessageComponent } from '../../components/shared/message/message.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { SendMessageComponent } from '../../components/admin/send-message/send-m
     LastArticlesComponent,
     LastProjectsComponent,
     MessagesListComponent,
-    SendMessageComponent,
+    MessageComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
