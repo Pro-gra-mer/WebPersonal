@@ -1,8 +1,10 @@
 export interface Article {
   id: number;
   title: string;
-  description: string;
   content: string;
-  publishDate: Date;
+  publishDate: Date; // Fecha de publicación
   imageUrl: string;
+  slug: string;
+  metaDescription: string;
+  keyword: string;
 }

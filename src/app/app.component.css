@@ -23,6 +23,10 @@ nav a {
   z-index: 1000; /* Asegúrate de que quede por encima del contenido */
 }
 
+.navbar .logout-link {
+  cursor: pointer;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

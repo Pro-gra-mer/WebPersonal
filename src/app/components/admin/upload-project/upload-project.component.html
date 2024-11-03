@@ -1,12 +1,14 @@
 <div class="container-fluid px-5 py-3">
   <h2 class="text-center">Subir Proyecto</h2>
-  <form>
+  <form (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="title" class="form-label">Título del Proyecto</label>
       <input
         type="text"
         class="form-control"
         id="title"
+        [(ngModel)]="project.title"
+        name="title"
         placeholder="Ingrese el título del proyecto"
         required
       />
@@ -16,10 +18,33 @@
       <textarea
         class="form-control"
         id="description"
-        rows="4"
+        [(ngModel)]="project.description"
+        name="description"
+        rows="3"
         placeholder="Ingrese una descripción breve del proyecto"
         required
       ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Contenido del Proyecto</label>
+      <textarea
+        class="form-control"
+        id="content"
+        [(ngModel)]="project.content"
+        name="content"
+        rows="5"
+        placeholder="Ingrese el contenido detallado del proyecto"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="publishDate" class="form-label">Fecha de Publicación</label>
+      <input
+        type="date"
+        class="form-control"
+        id="publishDate"
+        [(ngModel)]="project.publishDate"
+        name="publishDate"
+      />
     </div>
     <div class="mb-3">
       <label for="imageUrl" class="form-label">URL de la Imagen</label>
@@ -27,8 +52,9 @@
         type="url"
         class="form-control"
         id="imageUrl"
+        [(ngModel)]="project.imageUrl"
+        name="imageUrl"
         placeholder="Ingrese la URL de la imagen del proyecto"
-        required
       />
     </div>
     <button type="submit" class="btn btn-primary w-100">Subir Proyecto</button>

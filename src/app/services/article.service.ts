@@ -8,7 +8,7 @@ import { Article } from '../models/article.model';
   providedIn: 'root',
 })
 export class ArticleService {
-  private apiUrl = '/assets/articles.json'; // URL base de tu API backend
+  private apiUrl = 'http://localhost:3000/articles'; // URL base de tu API backend
 
   constructor(private http: HttpClient) {}
 

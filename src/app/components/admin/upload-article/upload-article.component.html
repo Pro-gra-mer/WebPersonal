@@ -1,53 +1,74 @@
 <div class="container-fluid px-5 py-3">
-  <h2 class="text-center">Subir Artículo</h2>
-  <form>
+  <h2 class="text-center mb-4">Subir Artículo</h2>
+  <form (ngSubmit)="onSubmit()">
+    <!-- Título del Artículo -->
     <div class="mb-3">
       <label for="title" class="form-label">Título del Artículo</label>
       <input
         type="text"
         class="form-control"
         id="title"
+        [(ngModel)]="article.title"
+        name="title"
         placeholder="Ingrese el título del artículo"
         required
       />
     </div>
+
+    <!-- Slug -->
     <div class="mb-3">
       <label for="slug" class="form-label">URL Amigable (Slug)</label>
       <input
         type="text"
         class="form-control"
         id="slug"
+        [(ngModel)]="article.slug"
+        name="slug"
         placeholder="Ingrese una URL amigable"
       />
     </div>
+
+    <!-- Meta Descripción -->
     <div class="mb-3">
       <label for="metaDescription" class="form-label">Meta Descripción</label>
       <textarea
         class="form-control"
         id="metaDescription"
+        [(ngModel)]="article.metaDescription"
+        name="metaDescription"
         rows="2"
         placeholder="Breve descripción para SEO"
       ></textarea>
     </div>
+
+    <!-- Palabra Clave Principal -->
     <div class="mb-3">
       <label for="keyword" class="form-label">Palabra Clave Principal</label>
       <input
         type="text"
         class="form-control"
         id="keyword"
+        [(ngModel)]="article.keyword"
+        name="keyword"
         placeholder="Ingrese la palabra clave principal"
       />
     </div>
+
+    <!-- Contenido -->
     <div class="mb-3">
       <label for="content" class="form-label">Contenido</label>
       <textarea
         class="form-control"
         id="content"
+        [(ngModel)]="article.content"
+        name="content"
         rows="8"
         placeholder="Escriba el contenido completo del artículo"
         required
       ></textarea>
     </div>
+
+    <!-- URL de la Imagen -->
     <div class="mb-3">
       <label for="imageUrl" class="form-label"
         >URL de la Imagen Destacada</label
@@ -56,9 +77,24 @@
         type="url"
         class="form-control"
         id="imageUrl"
+        [(ngModel)]="article.imageUrl"
+        name="imageUrl"
         placeholder="Ingrese la URL de la imagen destacada"
       />
     </div>
+    <div class="mb-3">
+      <label for="publishDate" class="form-label">Fecha de Publicación</label>
+      <input
+        type="date"
+        class="form-control"
+        id="publishDate"
+        [(ngModel)]="article.publishDate"
+        name="publishDate"
+        required
+      />
+    </div>
+
+    <!-- Botón de Enviar -->
     <button type="submit" class="btn btn-primary w-100">Subir Artículo</button>
   </form>
 </div>
