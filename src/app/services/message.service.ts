@@ -8,7 +8,7 @@ import { Message } from '../models/message.model';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = '/assets/message.json'; // Ruta al archivo JSON en assets
+  private apiUrl = 'http://localhost:3000/messages'; // Ruta al archivo JSON en assets
 
   constructor(private http: HttpClient) {}
 
@@ -17,10 +17,9 @@ export class MessageService {
     return this.http.get<Message[]>(this.apiUrl);
   }
 
-  // Agregar un nuevo mensaje (solo simulado aquí, ya que no modifica el JSON)
-  addMessage(newMessage: Message): Observable<Message> {
-    // Este método sería un POST real a una API, aquí solo simula la estructura
-    return this.http.post<Message>(this.apiUrl, newMessage);
+  // Método para enviar un nuevo mensaje
+  sendMessage(message: Message): Observable<Message> {
+    return this.http.post<Message>(this.apiUrl, message);
   }
 
   // Obtener un solo mensaje por ID

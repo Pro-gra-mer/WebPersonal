@@ -21,6 +21,8 @@
         id="message"
         rows="5"
         placeholder="Escriba su mensaje aquí"
+        [(ngModel)]="content"
+        name="message"
         [readonly]="!isLoggedIn"
         required
       ></textarea>

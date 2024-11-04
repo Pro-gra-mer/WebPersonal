@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.isLoggedIn = false;
-    this.isAdmin = false;
+    this.isAdmin = this.authService.isAdmin(); // Actualiza el estado
+    this.isLoggedIn = this.authService.isLoggedIn(); // Actualiza el estado
   }
 }

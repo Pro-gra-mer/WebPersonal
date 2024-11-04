@@ -15,6 +15,7 @@ p {
   overflow: hidden; /* Oculta cualquier contenido que desborde */
   transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transición */
   cursor: pointer;
+  margin-bottom: 70px;
 }
 
 .card-body {
@@ -22,7 +23,7 @@ p {
 }
 
 .card-img-top {
-  max-height: 150px; /* Limita la altura de la imagen */
+  max-height: 200px; /* Limita la altura de la imagen */
   object-fit: cover; /* Mantiene la proporción de la imagen y recorta si es necesario */
   width: 100%;
 }

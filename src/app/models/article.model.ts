@@ -2,7 +2,7 @@ export interface Article {
   id: number;
   title: string;
   content: string;
-  publishDate: Date; // Fecha de publicación
+  publishDate: Date;
   imageUrl: string;
   slug: string;
   metaDescription: string;

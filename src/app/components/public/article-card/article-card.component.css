@@ -6,3 +6,14 @@ h5 {
   cursor: pointer;
   color: inherit;
 }
+.card {
+  height: 100%;
+  max-height: 500px; /* Limita la altura de cada tarjeta */
+  overflow: hidden; /* Oculta cualquier contenido que desborde */
+}
+
+.card-img-top {
+  max-height: 200px; /* Limita la altura de la imagen */
+  object-fit: cover; /* Mantiene la proporción de la imagen y recorta si es necesario */
+  width: 100%;
+}
