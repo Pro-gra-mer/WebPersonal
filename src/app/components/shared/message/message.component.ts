@@ -1,9 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { Message } from '../../../models/message.model';
+import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,10 +14,11 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css'],
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   username: string = '';
   content: string = '';
+  private usernameSubscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -25,38 +27,46 @@ export class MessageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn(); // Verifica el estado de autenticación
+    this.isLoggedIn = this.authService.isLoggedIn();
 
-    // Obtiene el nombre de usuario logueado, si está disponible
-    if (this.isLoggedIn) {
-      this.username = this.authService.getUsername(); // Se asegura que AuthService tiene getUsername()
+    // Suscríbete a los cambios de username
+    this.usernameSubscription = this.authService.username$.subscribe(
+      (username) => {
+        this.username = username;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    // Cancela la suscripción para evitar fugas de memoria
+    if (this.usernameSubscription) {
+      this.usernameSubscription.unsubscribe();
     }
   }
 
   onSubmit(): void {
     if (this.isLoggedIn) {
-      // Crear un objeto de mensaje con los datos del usuario y contenido
+      // Crear el mensaje y enviarlo si el usuario está logueado
       const newMessage: Message = {
         id: Date.now(),
         user: this.username,
         content: this.content,
         date: new Date(),
-        formattedDate: '', // Puede ser vacío si se formatea en el servicio
+        formattedDate: '',
         formatteddate: new Date(),
       };
 
-      // Envía el mensaje usando MessageService
       this.messageService.sendMessage(newMessage).subscribe({
         next: (response) => {
           console.log('Mensaje enviado:', response);
-          this.content = ''; // Limpia el campo después de enviar
+          this.content = ''; // Limpia el campo de mensaje después de enviar
         },
         error: (error) => {
           console.error('Error al enviar el mensaje:', error);
         },
       });
     } else {
-      // Si no está logueado, redirige al formulario de inicio de sesión
+      // Si el usuario no está logueado, redirige a la página de inicio de sesión
       this.router
         .navigate(['/login'])
         .catch((err) => console.error('Error de navegación:', err));

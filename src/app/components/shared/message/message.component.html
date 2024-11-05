@@ -29,7 +29,13 @@
     </div>
 
     <!-- Botón Enviar o Iniciar Sesión -->
-    <button type="submit" class="btn btn-primary w-50">
+    <button
+      type="submit"
+      class="btn w-50"
+      [class.btn-primary]="isLoggedIn"
+      [class.btn-secondary]="!isLoggedIn"
+      [disabled]="!isLoggedIn"
+    >
       {{ isLoggedIn ? "Enviar" : "Inicia sesión para comentar" }}
     </button>
   </form>

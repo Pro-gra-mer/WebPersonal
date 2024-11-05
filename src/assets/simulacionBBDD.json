@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "id": 0,
+      "id": "0",
       "title": "Socializate",
       "description": "Una red social creada con Angular, Bootstrap, Java y SpringBoot",
       "content": "jfdlkjg kldfjgklfj fj  jjkb nfdlufedu nmd g kld ykcnv,mxznfgoin lkvcb jclcjdfj klvbcmjkjgzdfklmn klcv jzxcvhbkjzk     fjioñdfugiodj kldjgiodf u gjklfdjigo j jJ A JOj AJSj JJK LJKo OjoJj",
@@ -9,7 +9,7 @@
       "imageUrl": "https://concepto.de/wp-content/uploads/2014/08/redes-sociales-1-e1551307320533.jpg"
     },
     {
-      "id": 0,
+      "id": "0",
       "title": "Cursos web",
       "description": "Una red social creada con Angular, Bootstrap, Java y SpringBoot",
       "content": "jfdlkjg kldfjgklfj fj  jjkb nfdlufedu nmd g kld ykcnv,mxznfgoin lkvcb jclcjdfj klvbcmjkjgzdfklmn klcv jzxcvhbkjzk     fjioñdfugiodj kldjgiodf u gjklfdjigo j jJ A JOj AJSj JJK LJKo OjoJj",
@@ -19,7 +19,7 @@
   ],
   "articles": [
     {
-      "id": 0,
+      "id": "0",
       "title": "\"Cómo Aprender Java desde Cero\"",
       "description": "",
       "content": "bnvbhnbvnj",
@@ -30,7 +30,7 @@
       "keyword": "TypeScript"
     },
     {
-      "id": 0,
+      "id": "0",
       "title": "",
       "description": "",
       "content": "d",
@@ -41,7 +41,7 @@
       "keyword": "c"
     },
     {
-      "id": 0,
+      "id": "0",
       "title": "El mejor FrameWork",
       "description": "",
       "content": "fgfdgfd",
@@ -52,7 +52,7 @@
       "keyword": "dfgfdgfd"
     },
     {
-      "id": 0,
+      "id": "0",
       "title": "Hola",
       "description": "",
       "content": "hoy",
@@ -65,21 +65,21 @@
   ],
   "messages": [
     {
-      "id": 1,
+      "id": "1",
       "user": "UsuarioEjemplo",
       "content": "Este es un mensaje de ejemplo",
       "date": "2023-10-01T10:00:00Z",
       "formattedDate": "1 de octubre de 2023"
     },
     {
-      "id": 1,
+      "id": "1",
       "user": "UsuarioEjemplo",
       "content": "Este es un mensaje de ejemplo",
       "date": "2023-10-01T10:00:00Z",
       "formattedDate": "1 de octubre de 2023"
     },
     {
-      "id": 1730738556466,
+      "id": "1730738556466",
       "user": "UsuarioEjemplo",
       "content": "",
       "date": "2024-11-04T16:42:36.466Z",
@@ -87,7 +87,7 @@
       "formatteddate": "2024-11-04T16:42:36.466Z"
     },
     {
-      "id": 1730738982428,
+      "id": "1730738982428",
       "user": "UsuarioEjemplo",
       "content": "ChatGPT va lento cuando tiene un historual de conversacione smuy largo",
       "date": "2024-11-04T16:49:42.428Z",
@@ -95,7 +95,7 @@
       "formatteddate": "2024-11-04T16:49:42.428Z"
     },
     {
-      "id": 1730739312881,
+      "id": "1730739312881",
       "user": "UsuarioEjemplo",
       "content": "Hello world",
       "date": "2024-11-04T16:55:12.881Z",
@@ -103,7 +103,7 @@
       "formatteddate": "2024-11-04T16:55:12.881Z"
     },
     {
-      "id": 1730739320425,
+      "id": "1730739320425",
       "user": "UsuarioEjemplo",
       "content": "Se me veee",
       "date": "2024-11-04T16:55:20.425Z",
@@ -111,7 +111,7 @@
       "formatteddate": "2024-11-04T16:55:20.425Z"
     },
     {
-      "id": 1730740940231,
+      "id": "1730740940231",
       "user": "Rebeca",
       "content": "Me encanta hacer mi web cada día le añado funcionalidad ",
       "date": "2024-11-04T17:22:20.231Z",
@@ -119,7 +119,7 @@
       "formatteddate": "2024-11-04T17:22:20.231Z"
     },
     {
-      "id": 1730742637321,
+      "id": "1730742637321",
       "user": "Rebeca",
       "content": "hoklalñdlfmkldsmv ",
       "date": "2024-11-04T17:50:37.321Z",
@@ -127,7 +127,7 @@
       "formatteddate": "2024-11-04T17:50:37.321Z"
     },
     {
-      "id": 1730742784176,
+      "id": "1730742784176",
       "user": "Rebeca",
       "content": "Hola perola",
       "date": "2024-11-04T17:53:04.176Z",
@@ -135,12 +135,44 @@
       "formatteddate": "2024-11-04T17:53:04.176Z"
     },
     {
-      "id": 1730746233968,
+      "id": "1730746233968",
       "user": "Rebeca",
       "content": "Cierre de Día",
       "date": "2024-11-04T18:50:33.968Z",
       "formattedDate": "",
       "formatteddate": "2024-11-04T18:50:33.968Z"
+    },
+    {
+      "id": 1730828911366,
+      "user": "Rebeca",
+      "content": "Perfecto! He completado el formulario mensaje",
+      "date": "2024-11-05T17:48:31.366Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-05T17:48:31.366Z"
+    },
+    {
+      "id": 1730829059525,
+      "user": "Rebeca",
+      "content": "Sip",
+      "date": "2024-11-05T17:50:59.525Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-05T17:50:59.525Z"
+    },
+    {
+      "id": 1730829140134,
+      "user": "Rebeca",
+      "content": "sip",
+      "date": "2024-11-05T17:52:20.134Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-05T17:52:20.134Z"
+    },
+    {
+      "id": 1730829156495,
+      "user": "Rebeca",
+      "content": "ahora sí que sí!",
+      "date": "2024-11-05T17:52:36.495Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-05T17:52:36.495Z"
     }
   ],
   "users": []

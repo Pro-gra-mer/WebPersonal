@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -6,20 +7,21 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private loggedIn = true;
   private admin = true;
-  private username = 'Rebeca'; // Simulación de un nombre de usuario logueado
+  private usernameSubject = new BehaviorSubject<string>('Rebeca'); // Emite el nombre de usuario actual
 
-  // Simula el inicio de sesión y asigna el nombre de usuario
+  // Observable público que emite el valor del username
+  public username$: Observable<string> = this.usernameSubject.asObservable();
+
   login(username: string, isAdmin: boolean): void {
     this.loggedIn = true;
     this.admin = isAdmin;
-    this.username = username; // Guarda el nombre del usuario al iniciar sesión
+    this.usernameSubject.next(username); // Emite el nuevo nombre de usuario
   }
 
   logout(): void {
     this.loggedIn = false;
     this.admin = false;
-    this.username = ''; // Limpia el nombre del usuario al cerrar sesión
-    console.log(this.username); // La consola muestra que sí se limpia el username
+    this.usernameSubject.next(''); // Emite un valor vacío al cerrar sesión
   }
 
   isLoggedIn(): boolean {
@@ -28,9 +30,5 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this.admin;
-  }
-
-  getUsername(): string {
-    return this.username;
   }
 }
