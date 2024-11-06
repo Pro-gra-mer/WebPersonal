@@ -1,32 +1,62 @@
 <div class="container-fluid px-5 py-3">
   <h2 class="text-center">Iniciar Sesión</h2>
-  <form>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="email" class="form-label">Correo Electrónico</label>
       <input
         type="email"
         class="form-control"
         id="email"
+        formControlName="email"
         placeholder="Ingrese su correo electrónico"
-        required
       />
+      <div
+        *ngIf="submitted && loginForm.controls['email'].errors"
+        class="text-danger"
+      >
+        <small *ngIf="loginForm.controls['email'].errors['required']"
+          >El correo es requerido.</small
+        >
+        <small *ngIf="loginForm.controls['email'].errors['email']"
+          >Formato de correo inválido.</small
+        >
+      </div>
     </div>
+
     <div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>
       <input
         type="password"
         class="form-control"
         id="password"
+        formControlName="password"
         placeholder="Ingrese su contraseña"
-        required
       />
+      <div
+        *ngIf="submitted && loginForm.controls['password'].errors"
+        class="text-danger"
+      >
+        <small *ngIf="loginForm.controls['password'].errors['required']"
+          >La contraseña es requerida.</small
+        >
+        <small *ngIf="loginForm.controls['password'].errors['minlength']"
+          >Mínimo 8 caracteres.</small
+        >
+      </div>
     </div>
+
     <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
   </form>
+
+  <!-- Mensaje de error de autenticación -->
+  <div *ngIf="loginError" class="text-danger text-center mt-3">
+    {{ loginError }}
+  </div>
+
   <div class="text-center mt-3">
     <a href="#">¿Olvidaste tu contraseña?</a>
   </div>
   <div class="text-center mt-2">
-    <span>No tienes cuenta? <a href="/register">Regístrate aquí</a></span>
+    <span>No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></span>
   </div>
 </div>

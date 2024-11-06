@@ -19,8 +19,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // Actualiza el estado de isAdmin e isLoggedIn desde el AuthService
-    this.isAdmin = this.authService.isAdmin();
-    this.isLoggedIn = this.authService.isLoggedIn();
+    this.authService.username$.subscribe((username) => {
+      this.isLoggedIn = !!username;
+      this.isAdmin = this.authService.isAdmin();
+    });
   }
 
   logout(): void {

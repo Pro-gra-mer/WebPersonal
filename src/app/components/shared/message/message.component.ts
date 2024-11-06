@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { Message } from '../../../models/message.model';
-import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-message',
@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   username: string = '';
   content: string = '';
-  private usernameSubscription: Subscription = new Subscription();
+  private authSubscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -27,20 +27,17 @@ export class MessageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
-
-    // Suscríbete a los cambios de username
-    this.usernameSubscription = this.authService.username$.subscribe(
-      (username) => {
-        this.username = username;
-      }
-    );
+    // Suscribirse a los cambios en el estado de autenticación y nombre de usuario
+    this.authSubscription = this.authService.username$.subscribe((username) => {
+      this.username = username ?? ''; // Asegura que username sea siempre string
+      this.isLoggedIn = !!username; // Actualiza isLoggedIn según si hay un username
+    });
   }
 
   ngOnDestroy(): void {
     // Cancela la suscripción para evitar fugas de memoria
-    if (this.usernameSubscription) {
-      this.usernameSubscription.unsubscribe();
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
     }
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'; // Para que se actualizen los datos en
 import { Message } from '../models/message.model';
 
 @Injectable({

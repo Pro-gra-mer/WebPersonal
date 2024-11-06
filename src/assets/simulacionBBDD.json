@@ -31,7 +31,7 @@
     },
     {
       "id": "0",
-      "title": "",
+      "title": "Java",
       "description": "",
       "content": "d",
       "publishDate": "2024-11-03T19:01:49.822Z",
@@ -65,44 +65,6 @@
   ],
   "messages": [
     {
-      "id": "1",
-      "user": "UsuarioEjemplo",
-      "content": "Este es un mensaje de ejemplo",
-      "date": "2023-10-01T10:00:00Z",
-      "formattedDate": "1 de octubre de 2023"
-    },
-    {
-      "id": "1",
-      "user": "UsuarioEjemplo",
-      "content": "Este es un mensaje de ejemplo",
-      "date": "2023-10-01T10:00:00Z",
-      "formattedDate": "1 de octubre de 2023"
-    },
-    {
-      "id": "1730738556466",
-      "user": "UsuarioEjemplo",
-      "content": "",
-      "date": "2024-11-04T16:42:36.466Z",
-      "formattedDate": "",
-      "formatteddate": "2024-11-04T16:42:36.466Z"
-    },
-    {
-      "id": "1730738982428",
-      "user": "UsuarioEjemplo",
-      "content": "ChatGPT va lento cuando tiene un historual de conversacione smuy largo",
-      "date": "2024-11-04T16:49:42.428Z",
-      "formattedDate": "",
-      "formatteddate": "2024-11-04T16:49:42.428Z"
-    },
-    {
-      "id": "1730739312881",
-      "user": "UsuarioEjemplo",
-      "content": "Hello world",
-      "date": "2024-11-04T16:55:12.881Z",
-      "formattedDate": "",
-      "formatteddate": "2024-11-04T16:55:12.881Z"
-    },
-    {
       "id": "1730739320425",
       "user": "UsuarioEjemplo",
       "content": "Se me veee",
@@ -119,61 +81,68 @@
       "formatteddate": "2024-11-04T17:22:20.231Z"
     },
     {
-      "id": "1730742637321",
+      "id": 1730831935340,
       "user": "Rebeca",
-      "content": "hoklalñdlfmkldsmv ",
-      "date": "2024-11-04T17:50:37.321Z",
+      "content": "Hola",
+      "date": "2024-11-05T18:38:55.340Z",
       "formattedDate": "",
-      "formatteddate": "2024-11-04T17:50:37.321Z"
+      "formatteddate": "2024-11-05T18:38:55.340Z"
     },
     {
-      "id": "1730742784176",
+      "id": 1730832111730,
       "user": "Rebeca",
-      "content": "Hola perola",
-      "date": "2024-11-04T17:53:04.176Z",
+      "content": "si",
+      "date": "2024-11-05T18:41:51.730Z",
       "formattedDate": "",
-      "formatteddate": "2024-11-04T17:53:04.176Z"
+      "formatteddate": "2024-11-05T18:41:51.730Z"
     },
     {
-      "id": "1730746233968",
+      "id": 1730833670750,
       "user": "Rebeca",
-      "content": "Cierre de Día",
-      "date": "2024-11-04T18:50:33.968Z",
+      "content": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+      "date": "2024-11-05T19:07:50.750Z",
       "formattedDate": "",
-      "formatteddate": "2024-11-04T18:50:33.968Z"
+      "formatteddate": "2024-11-05T19:07:50.750Z"
     },
     {
-      "id": 1730828911366,
+      "id": 1730833693998,
       "user": "Rebeca",
-      "content": "Perfecto! He completado el formulario mensaje",
-      "date": "2024-11-05T17:48:31.366Z",
+      "content": "sssssssssssssssssssssssssssss",
+      "date": "2024-11-05T19:08:13.998Z",
       "formattedDate": "",
-      "formatteddate": "2024-11-05T17:48:31.366Z"
+      "formatteddate": "2024-11-05T19:08:13.998Z"
     },
     {
-      "id": 1730829059525,
+      "id": 1730909031309,
       "user": "Rebeca",
-      "content": "Sip",
-      "date": "2024-11-05T17:50:59.525Z",
+      "content": "Hola hoy\n",
+      "date": "2024-11-06T16:03:51.309Z",
       "formattedDate": "",
-      "formatteddate": "2024-11-05T17:50:59.525Z"
+      "formatteddate": "2024-11-06T16:03:51.309Z"
     },
     {
-      "id": 1730829140134,
-      "user": "Rebeca",
-      "content": "sip",
-      "date": "2024-11-05T17:52:20.134Z",
+      "id": 1730912644851,
+      "user": "apple",
+      "content": "Guayyyyyyyyy",
+      "date": "2024-11-06T17:04:04.851Z",
       "formattedDate": "",
-      "formatteddate": "2024-11-05T17:52:20.134Z"
-    },
-    {
-      "id": 1730829156495,
-      "user": "Rebeca",
-      "content": "ahora sí que sí!",
-      "date": "2024-11-05T17:52:36.495Z",
-      "formattedDate": "",
-      "formatteddate": "2024-11-05T17:52:36.495Z"
+      "formatteddate": "2024-11-06T17:04:04.851Z"
     }
   ],
-  "users": []
+  "users": [
+    {
+      "id": "9245",
+      "username": "apple",
+      "email": "rbkperez.o@gmail.com",
+      "password": "a1234567",
+      "confirmPassword": "a1234567"
+    },
+    {
+      "id": "ae5b",
+      "username": "orange",
+      "email": "rbkperez.o@gmail.com",
+      "password": "s1234567",
+      "confirmPassword": "s1234567"
+    }
+  ]
 }
