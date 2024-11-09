@@ -24,9 +24,9 @@ export class ProjectService {
 
   // Método para crear un nuevo proyecto
   createProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.apiUrl, project);
+    const projectWithId = { ...project, id: Date.now() }; // Genera ID aquí
+    return this.http.post<Project>(this.apiUrl, projectWithId);
   }
-
   // Método para actualizar un proyecto existente
   updateProject(id: number, project: Project): Observable<Project> {
     return this.http.put<Project>(`${this.apiUrl}/${id}`, project);

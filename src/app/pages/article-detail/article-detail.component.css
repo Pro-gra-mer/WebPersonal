@@ -1,3 +1,8 @@
 .container {
   margin-top: 50px;
 }
+.card-img-top {
+  max-height: 500px; /* Limita la altura de la imagen */
+  object-fit: cover; /* Ajusta la imagen para que se recorte sin distorsión */
+  width: 100%; /* Asegura que la imagen ocupe el ancho completo */
+}

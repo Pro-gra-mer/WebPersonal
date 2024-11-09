@@ -1,9 +1,13 @@
-<div class="container py-5">
+<div class="container py-5" *ngIf="project">
   <div class="card mb-5">
-    <img [src]="" class="card-img-top" alt="" />
+    <img
+      class="card-img-top"
+      [src]="project.imageUrl"
+      alt="{{ project.title }}"
+    />
     <div class="card-body">
-      <h2 class="card-title">Título</h2>
-      <p class="card-text">Detalles del proyecto</p>
+      <h2 class="card-title">{{ project.title }}</h2>
+      <p class="card-text">{{ project.content }}</p>
     </div>
   </div>
   <a class="btn btn-primary" [routerLink]="'/projects'">Todos los Proyectos</a>

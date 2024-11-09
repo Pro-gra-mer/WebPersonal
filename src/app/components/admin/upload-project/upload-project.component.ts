@@ -1,45 +1,48 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../models/project.model';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-upload-project',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './upload-project.component.html',
   styleUrls: ['./upload-project.component.css'],
 })
 export class UploadProjectComponent {
-  project: Project = {
-    id: 0, // El id puede ser gestionado por el backend al crear el proyecto
-    title: '',
-    description: '',
-    content: '',
-    publishDate: new Date(),
-    imageUrl: '',
-  };
+  projectForm: FormGroup;
+  message: string | null = null;
 
-  constructor(private projectService: ProjectService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private projectService: ProjectService
+  ) {
+    this.projectForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.maxLength(50)]],
+      description: ['', [Validators.required, Validators.maxLength(250)]],
+      content: ['', [Validators.required]],
+      publishDate: [new Date(), Validators.required],
+      imageUrl: ['', [Validators.required, Validators.pattern('https?://.+')]],
+    });
+  }
 
   onSubmit(): void {
-    this.projectService.createProject(this.project).subscribe(
-      (response) => {
-        console.log('Proyecto subido:', response);
+    if (this.projectForm.invalid) {
+      this.message = 'Por favor, completa todos los campos correctamente.';
+      return;
+    }
 
-        // Reinicia el formulario después de enviar el proyecto
-        this.project = {
-          id: 0,
-          title: '',
-          description: '',
-          content: '',
-          publishDate: new Date(),
-          imageUrl: '',
-        };
+    this.projectService.createProject(this.projectForm.value).subscribe({
+      next: () => {
+        this.message = 'Proyecto subido exitosamente.';
+        this.projectForm.reset();
       },
-      (error) => {
-        console.error('Error al subir el proyecto:', error);
-      }
-    );
+      error: (error) => {
+        this.message = 'Error al subir el proyecto: ' + error.message;
+      },
+    });
   }
 }

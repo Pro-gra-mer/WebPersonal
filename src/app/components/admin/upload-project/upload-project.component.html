@@ -1,14 +1,13 @@
 <div class="container-fluid px-5 py-3">
   <h2 class="text-center">Subir Proyecto</h2>
-  <form (ngSubmit)="onSubmit()">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label for="title" class="form-label">Título del Proyecto</label>
       <input
         type="text"
-        class="form-control"
         id="title"
-        [(ngModel)]="project.title"
-        name="title"
+        formControlName="title"
+        class="form-control"
         placeholder="Ingrese el título del proyecto"
         required
       />
@@ -16,47 +15,47 @@
     <div class="mb-3">
       <label for="description" class="form-label">Descripción</label>
       <textarea
-        class="form-control"
         id="description"
-        [(ngModel)]="project.description"
-        name="description"
-        rows="3"
+        formControlName="description"
+        class="form-control"
+        rows="4"
         placeholder="Ingrese una descripción breve del proyecto"
         required
       ></textarea>
     </div>
     <div class="mb-3">
-      <label for="content" class="form-label">Contenido del Proyecto</label>
+      <label for="content" class="form-label">Contenido</label>
       <textarea
-        class="form-control"
         id="content"
-        [(ngModel)]="project.content"
-        name="content"
+        formControlName="content"
+        class="form-control"
         rows="5"
-        placeholder="Ingrese el contenido detallado del proyecto"
+        placeholder="Ingrese el contenido completo del proyecto"
+        required
       ></textarea>
     </div>
     <div class="mb-3">
       <label for="publishDate" class="form-label">Fecha de Publicación</label>
       <input
         type="date"
-        class="form-control"
         id="publishDate"
-        [(ngModel)]="project.publishDate"
-        name="publishDate"
+        formControlName="publishDate"
+        class="form-control"
+        required
       />
     </div>
     <div class="mb-3">
       <label for="imageUrl" class="form-label">URL de la Imagen</label>
       <input
         type="url"
-        class="form-control"
         id="imageUrl"
-        [(ngModel)]="project.imageUrl"
-        name="imageUrl"
+        formControlName="imageUrl"
+        class="form-control"
         placeholder="Ingrese la URL de la imagen del proyecto"
+        required
       />
     </div>
     <button type="submit" class="btn btn-primary w-100">Subir Proyecto</button>
   </form>
+  <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
 </div>

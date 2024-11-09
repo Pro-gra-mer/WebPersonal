@@ -23,18 +23,25 @@ export class MessagesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.messageService.getMessages().subscribe((messages) => {
+    // Suscripción a los mensajes en tiempo real del servicio
+    this.messageService.messages$.subscribe((messages) => {
+      // Formatea cada mensaje y actualiza la lista de mensajes
       this.messages = messages.map((msg) => ({
         ...msg,
         formattedDate: this.dateService.transformDate(msg.date),
       }));
-      this.displayedMessages = this.messages.slice(0, this.messagesLimit);
+      this.updateDisplayedMessages();
     });
+  }
+
+  // Método para actualizar la lista de mensajes mostrados
+  private updateDisplayedMessages(): void {
+    this.displayedMessages = this.messages.slice(0, this.messagesLimit);
   }
 
   // Método para cargar más mensajes
   loadMoreMessages(): void {
     this.messagesLimit += 5;
-    this.displayedMessages = this.messages.slice(0, this.messagesLimit);
+    this.updateDisplayedMessages();
   }
 }

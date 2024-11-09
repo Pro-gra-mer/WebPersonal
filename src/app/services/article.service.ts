@@ -24,7 +24,8 @@ export class ArticleService {
 
   // Método para crear un nuevo artículo
   createArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, article);
+    const articleWithId = { ...article, id: Date.now() }; // Asigna un ID único aquí
+    return this.http.post<Article>(this.apiUrl, articleWithId);
   }
 
   // Método para actualizar un artículo existente

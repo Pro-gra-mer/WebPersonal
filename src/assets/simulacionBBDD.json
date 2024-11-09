@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "id": "0",
+      "id": "1",
       "title": "Socializate",
       "description": "Una red social creada con Angular, Bootstrap, Java y SpringBoot",
       "content": "jfdlkjg kldfjgklfj fj  jjkb nfdlufedu nmd g kld ykcnv,mxznfgoin lkvcb jclcjdfj klvbcmjkjgzdfklmn klcv jzxcvhbkjzk     fjioñdfugiodj kldjgiodf u gjklfdjigo j jJ A JOj AJSj JJK LJKo OjoJj",
@@ -9,58 +9,52 @@
       "imageUrl": "https://concepto.de/wp-content/uploads/2014/08/redes-sociales-1-e1551307320533.jpg"
     },
     {
-      "id": "0",
+      "id": "2",
       "title": "Cursos web",
       "description": "Una red social creada con Angular, Bootstrap, Java y SpringBoot",
       "content": "jfdlkjg kldfjgklfj fj  jjkb nfdlufedu nmd g kld ykcnv,mxznfgoin lkvcb jclcjdfj klvbcmjkjgzdfklmn klcv jzxcvhbkjzk     fjioñdfugiodj kldjgiodf u gjklfdjigo j jJ A JOj AJSj JJK LJKo OjoJj",
       "publishDate": "2024-11-03",
       "imageUrl": "https://massweb.com.ar/wp-content/uploads/2016/03/25-espectaculares-sitios-web-hechos-con-wordpress.png"
+    },
+    {
+      "id": "1731168501642",
+      "title": "Web Arquitectura Sostenible",
+      "description": "Web desarrollada con React, Node, Express y Mongo",
+      "content": "hgkhdfjkghkjfdhgkjfhdgkjfhdkgjhfdfhdgkjfdg\nfdgjfdigufiuigiofdjgkljfdlkjgkljlkdfjklgjfkljgñahgfuiydguifhgdlkfhgdñjgdfgjdfjgfdkghuirykjvnfjnyufgnfd u   iuorutoirtujgoireutgorugoifgoiufdoiugoifdugiufdioguiofudgiufdiogujiofdugiofuiofuidof ggfjgdljfgfdjgfu ngfigfigfgkf  gpofigopfigopfiogi",
+      "publishDate": "2024-11-09",
+      "imageUrl": "https://media.istockphoto.com/id/1063723682/es/foto/mano-dibujar-una-casa-de-dise%C3%B1o-con-piscina.jpg?s=612x612&w=0&k=20&c=D0alATAVFtt_dwApcWlu2VpXaQMfZ_LdMPsRJmW7HA4="
     }
   ],
   "articles": [
     {
-      "id": "0",
-      "title": "\"Cómo Aprender Java desde Cero\"",
-      "description": "",
-      "content": "bnvbhnbvnj",
-      "publishDate": "2024-11-03T18:56:27.718Z",
-      "imageUrl": "https://www.oracle.com/img/tech/cb88-java-logo-001.jpg",
-      "slug": "como-aprender-angular-desde-cero",
-      "metaDescription": "\"Una guía básica sobre TypeScript y sus beneficios para desarrolladores web.\"",
-      "keyword": "TypeScript"
+      "id": "5",
+      "title": "Go, el lenguaje que se mantiene en alza",
+      "content": "nkjhfkjdkjhdfkl djfkldjdfj ñkldjflñdkfjfldk lkdlñgjk lfñd  gjklfdkglflgkkgkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkggggggggggggggggggggggggggggggggggggggggggggggggoooooooooooooooooooooooooooooooooooooooooooooooggggggggggggggggggggggggggggggggggggggggggggoooooooooooooooooooooooooooooooooooooooooooooooooggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggooooooooooooooooooooooooooooooooooooooooooooooooooooooogggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggoooooooooooooooooooo",
+      "publishDate": "2024-11-09",
+      "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2023-02-09-Go.jpg",
+      "slug": "go-lenguaje-en-alza",
+      "metaDescription": "Descubre por qué el lenguaje de programación Go sigue ganando popularidad en el desarrollo de software, sus principales características y las ventajas que ofrece para proyectos modernos.",
+      "keyword": "Lenguaje de programación Go"
     },
     {
-      "id": "0",
-      "title": "Java",
-      "description": "",
-      "content": "d",
-      "publishDate": "2024-11-03T19:01:49.822Z",
-      "imageUrl": "https://www.oracle.com/img/tech/cb88-java-logo-001.jpg",
-      "slug": "a",
-      "metaDescription": "b",
-      "keyword": "c"
+      "id": "1731173638742",
+      "title": "\"Inteligencia Artificial en 2024: Tendencias y Futuro\"",
+      "content": "\"La inteligencia artificial está revolucionando el mundo en diversas áreas como la medicina, la educación, y el transporte. Este artículo explora las tendencias actuales y lo que nos espera en los próximos años en cuanto a desarrollo y regulación de la IA.\"",
+      "publishDate": "2024-11-09",
+      "imageUrl": "https://mediatek-marketing.transforms.svdcdn.com/production/posts/MediaTek-IA-2023.jpg?w=2048&h=1075&q=80&auto=format&fit=crop&dm=1688130337&s=3b56535c28f441a34db9455d64444cb7",
+      "slug": "\"inteligencia-artificial-2024-tendencias",
+      "metaDescription": "Explora las tendencias actuales y el futuro de la inteligencia artificial en 2024.",
+      "keyword": "Inteligencia Artificial 2024"
     },
     {
-      "id": "0",
-      "title": "El mejor FrameWork",
-      "description": "",
-      "content": "fgfdgfd",
-      "publishDate": "2024-11-03",
-      "imageUrl": "https://d585tldpucybw.cloudfront.net/sfimages/default-source/blogs/2023/2023-11/angular-logo-1200-303.png?sfvrsn=d8bbe35c_3",
-      "slug": "fgfgf",
-      "metaDescription": "fgfgfd",
-      "keyword": "dfgfdgfd"
-    },
-    {
-      "id": "0",
-      "title": "Hola",
-      "description": "",
-      "content": "hoy",
-      "publishDate": "2024-11-03",
+      "id": "1731174302405",
+      "title": "\"Guía Completa de JavaScript para Principiantes\"",
+      "content": "\"JavaScript es el lenguaje de programación de la web, utilizado por millones de desarrolladores para crear experiencias interactivas y dinámicas en sitios web. En esta guía, cubrimos desde los conceptos básicos de variables y tipos de datos hasta estructuras de control, funciones y cómo manipular el DOM.\"",
+      "publishDate": "2024-11-09",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/320px-Unofficial_JavaScript_logo_2.svg.png",
-      "slug": "qué",
-      "metaDescription": "tal",
-      "keyword": "estás"
+      "slug": "guia-completa-javascript-principiantes",
+      "metaDescription": "Descubre todo lo que necesitas saber sobre JavaScript, el lenguaje de la web. Aprende desde lo más básico hasta conceptos avanzados",
+      "keyword": "JavaScript"
     }
   ],
   "messages": [
@@ -81,7 +75,7 @@
       "formatteddate": "2024-11-04T17:22:20.231Z"
     },
     {
-      "id": 1730831935340,
+      "id": "1730831935340",
       "user": "Rebeca",
       "content": "Hola",
       "date": "2024-11-05T18:38:55.340Z",
@@ -89,7 +83,7 @@
       "formatteddate": "2024-11-05T18:38:55.340Z"
     },
     {
-      "id": 1730832111730,
+      "id": "1730832111730",
       "user": "Rebeca",
       "content": "si",
       "date": "2024-11-05T18:41:51.730Z",
@@ -97,7 +91,7 @@
       "formatteddate": "2024-11-05T18:41:51.730Z"
     },
     {
-      "id": 1730833670750,
+      "id": "1730833670750",
       "user": "Rebeca",
       "content": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
       "date": "2024-11-05T19:07:50.750Z",
@@ -105,7 +99,7 @@
       "formatteddate": "2024-11-05T19:07:50.750Z"
     },
     {
-      "id": 1730833693998,
+      "id": "1730833693998",
       "user": "Rebeca",
       "content": "sssssssssssssssssssssssssssss",
       "date": "2024-11-05T19:08:13.998Z",
@@ -113,7 +107,7 @@
       "formatteddate": "2024-11-05T19:08:13.998Z"
     },
     {
-      "id": 1730909031309,
+      "id": "1730909031309",
       "user": "Rebeca",
       "content": "Hola hoy\n",
       "date": "2024-11-06T16:03:51.309Z",
@@ -121,28 +115,61 @@
       "formatteddate": "2024-11-06T16:03:51.309Z"
     },
     {
-      "id": 1730912644851,
+      "id": "1730912644851",
       "user": "apple",
       "content": "Guayyyyyyyyy",
       "date": "2024-11-06T17:04:04.851Z",
       "formattedDate": "",
       "formatteddate": "2024-11-06T17:04:04.851Z"
+    },
+    {
+      "id": "1730913123495",
+      "user": "apple",
+      "content": "jjjjjj",
+      "date": "2024-11-06T17:12:03.495Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-06T17:12:03.495Z"
+    },
+    {
+      "id": "1731002643380",
+      "user": "apple",
+      "content": "gfhklfg`pholfgjljhyh",
+      "date": "2024-11-07T18:04:03.380Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-07T18:04:03.380Z"
+    },
+    {
+      "id": "1731175225096",
+      "user": "apple",
+      "content": "soy la administradora",
+      "date": "2024-11-09T18:00:25.096Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-09T18:00:25.096Z"
+    },
+    {
+      "id": 1731175641408,
+      "user": "apple",
+      "content": "soy una usuaria",
+      "date": "2024-11-09T18:07:21.408Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-09T18:07:21.408Z"
     }
   ],
   "users": [
     {
       "id": "9245",
-      "username": "apple",
+      "username": "admin",
       "email": "rbkperez.o@gmail.com",
       "password": "a1234567",
-      "confirmPassword": "a1234567"
+      "confirmPassword": "a1234567",
+      "isAdmin": true
     },
     {
-      "id": "ae5b",
-      "username": "orange",
-      "email": "rbkperez.o@gmail.com",
-      "password": "s1234567",
-      "confirmPassword": "s1234567"
+      "id": "b0b1",
+      "username": "apple",
+      "email": "rbk_po@hotmail.com",
+      "password": "b1234567",
+      "confirmPassword": "b1234567"
     }
   ]
 }

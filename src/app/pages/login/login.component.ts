@@ -44,11 +44,15 @@ export class LoginComponent {
     // Llama al servicio de autenticación
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        // Redirige al usuario después del inicio de sesión
-        this.router.navigate(['/home']);
+        if (response.success) {
+          // Redirige al usuario después del inicio de sesión exitoso
+          this.router.navigate(['/home']);
+        } else {
+          this.loginError = 'Correo o contraseña incorrectos.';
+        }
       },
       error: (error) => {
-        this.loginError = 'Correo o contraseña incorrectos.';
+        this.loginError = 'Error de servidor. Inténtalo más tarde.';
       },
     });
   }
