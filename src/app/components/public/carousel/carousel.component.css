@@ -21,6 +21,12 @@ h5 {
 /* Define un ancho máximo para las tarjetas en escritorio */
 @media (min-width: 768px) {
   .carousel-item .card {
-    max-width: 700px; /* Ajusta este valor al tamaño deseado en escritorio */
+    max-width: 700px;
+  }
+}
+@media (max-width: 767px) {
+  .carousel-item .card {
+    max-width: 280px;
+    margin-bottom: 0;
   }
 }

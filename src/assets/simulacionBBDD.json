@@ -147,12 +147,20 @@
       "formatteddate": "2024-11-09T18:00:25.096Z"
     },
     {
-      "id": 1731175641408,
+      "id": "1731175641408",
       "user": "apple",
       "content": "soy una usuaria",
       "date": "2024-11-09T18:07:21.408Z",
       "formattedDate": "",
       "formatteddate": "2024-11-09T18:07:21.408Z"
+    },
+    {
+      "id": 1731178123811,
+      "user": "apple",
+      "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "date": "2024-11-09T18:48:43.811Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-09T18:48:43.811Z"
     }
   ],
   "users": [
@@ -170,6 +178,24 @@
       "email": "rbk_po@hotmail.com",
       "password": "b1234567",
       "confirmPassword": "b1234567"
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "1",
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "subject": "Consulta sobre servicios",
+      "message": "Quisiera obtener más información sobre sus servicios.",
+      "date": "2024-11-10T14:30:00Z"
+    },
+    {
+      "id": "db13",
+      "name": "Rosalía",
+      "email": "rbk_po@hotmail.com",
+      "subject": "Oferta de empleo",
+      "message": "Me gustaría tener una entrevista contigo",
+      "date": "2024-11-09T18:32:57.212Z"
     }
   ]
 }

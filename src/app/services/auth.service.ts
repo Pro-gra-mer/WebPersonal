@@ -5,12 +5,12 @@ import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', // Servicio personalizado que al definir providedIn: 'root', Angular lo registra automáticamente como un servicio global.
 })
 export class AuthService {
   private loggedIn = false;
   private admin = false;
-  private usernameSubject = new BehaviorSubject<string | null>(null);
+  private usernameSubject = new BehaviorSubject<string | null>(null); // Siguiendo la convención de nomenclatura, el sufijo Subject indica que es un tipo de Subject, un concepto central en la programación reactiva de RxJS.
   private apiUrl = 'http://localhost:3000/users';
 
   constructor(private http: HttpClient) {}

@@ -23,6 +23,9 @@ h1 {
 }
 
 @media (max-width: 576px) {
+  h1 {
+    font-size: 1.8em;
+  }
   .header-img {
     height: 250px;
   }

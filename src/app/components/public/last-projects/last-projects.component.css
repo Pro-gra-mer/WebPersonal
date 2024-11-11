@@ -27,3 +27,12 @@ p {
   transform: scale(1.05); /* Aumenta el tamaño de la tarjeta */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor */
 }
+
+@media (max-width: 767px) {
+  h4 {
+    margin-top: 400px;
+  }
+  .projects-section {
+    margin-bottom: 0;
+  }
+}

@@ -1,16 +1,18 @@
 <h4>Últimos proyectos</h4>
 <a class="btn btn-primary mb-4" [routerLink]="'/projects'">Ver Más</a>
 
-<div class="row row-cols-1 g-4">
-  <!-- Cada proyecto en una fila individual -->
-  <div class="col" *ngFor="let project of projects">
-    <app-project-card
-      [id]="project.id"
-      [title]="project.title"
-      [description]="project.description"
-      [imageUrl]="project.imageUrl"
-      [publishDate]="project.publishDate"
-    >
-    </app-project-card>
+<div class="projects-section mb-5">
+  <div class="row row-cols-1 g-4">
+    <!-- Cada proyecto en una fila individual -->
+    <div class="col" *ngFor="let project of projects">
+      <app-project-card
+        [id]="project.id"
+        [title]="project.title"
+        [description]="project.description"
+        [imageUrl]="project.imageUrl"
+        [publishDate]="project.publishDate"
+      >
+      </app-project-card>
+    </div>
   </div>
 </div>

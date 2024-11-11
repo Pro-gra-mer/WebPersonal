@@ -5,13 +5,30 @@
 
 .container {
   margin-bottom: 50px;
+  width: 70%; /* Ocupa el 70% del ancho en pantallas grandes */
+  float: left; /* Alinea el contenedor a la izquierda */
+}
+
+.list-group-item {
+  display: inline-block;
+  overflow-wrap: break-word; /* Permite que el texto se divida en múltiples líneas si es muy largo */
+  word-break: break-word; /* Evita que palabras largas se salgan del contenedor */
 }
 
 h2 {
   color: white;
+  text-align: left; /* Alinea el <h2> a la izquierda */
 }
 
 .date-separator {
-  margin-top: 20px; /* Separación span de la fecha */
+  margin-top: 20px; /* Separación del span de la fecha */
   font-size: 0.9em;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .container {
+    width: 100%; /* Ocupa el 100% del ancho en dispositivos móviles */
+    float: none; /* Quita la alineación izquierda en dispositivos móviles */
+  }
 }
