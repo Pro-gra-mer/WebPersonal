@@ -43,7 +43,158 @@ Este proyecto es una aplicación web desarrollada en Angular que sirve como port
 ---
 
 ## 📦 Estructura del Proyecto
-📦src ┣ 📂app ┃ ┣ 📂components ┃ ┃ ┣ 📂admin ┃ ┃ ┃ ┣ 📂upload-article ┃ ┃ ┃ ┣ 📂upload-project ┃ ┃ ┣ 📂public ┃ ┃ ┃ ┣ 📂footer ┃ ┃ ┃ ┣ 📂navbar ┃ ┣ 📂pages ┃ ┃ ┣ 📂home ┃ ┃ ┣ 📂aboutme ┃ ┃ ┣ 📂contact ┃ ┃ ┣ 📂login ┃ ┃ ┗ 📂register ┃ ┣ 📂services ┃ ┣ 📂models ┣ 📂assets ┃ ┣ 📂images
+📦src
+ ┣ 📂app
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂admin
+ ┃ ┃ ┃ ┣ 📂admin-dashboard
+ ┃ ┃ ┃ ┃ ┣ 📜admin-dashboard.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜admin-dashboard.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜admin-dashboard.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜admin-dashboard.component.ts
+ ┃ ┃ ┃ ┣ 📂upload-article
+ ┃ ┃ ┃ ┃ ┣ 📜upload-article.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜upload-article.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜upload-article.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜upload-article.component.ts
+ ┃ ┃ ┃ ┗ 📂upload-project
+ ┃ ┃ ┃ ┃ ┣ 📜upload-project.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜upload-project.component.html
+ ┃ ┃ ┃ ┃ ┗ 📜upload-project.component.ts
+ ┃ ┃ ┣ 📂public
+ ┃ ┃ ┃ ┣ 📂article-card
+ ┃ ┃ ┃ ┃ ┣ 📜article-card.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜article-card.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜article-card.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜article-card.component.ts
+ ┃ ┃ ┃ ┣ 📂carousel
+ ┃ ┃ ┃ ┃ ┣ 📜carousel.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜carousel.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜carousel.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜carousel.component.ts
+ ┃ ┃ ┃ ┣ 📂footer
+ ┃ ┃ ┃ ┃ ┣ 📜footer.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜footer.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜footer.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜footer.component.ts
+ ┃ ┃ ┃ ┣ 📂last-articles
+ ┃ ┃ ┃ ┃ ┣ 📜last-articles.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜last-articles.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜last-articles.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜last-articles.component.ts
+ ┃ ┃ ┃ ┣ 📂last-projects
+ ┃ ┃ ┃ ┃ ┣ 📜last-projects.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜last-projects.component.html
+ ┃ ┃ ┃ ┃ ┗ 📜last-projects.component.ts
+ ┃ ┃ ┃ ┣ 📂messages-list
+ ┃ ┃ ┃ ┃ ┣ 📜messages-list.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜messages-list.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜messages-list.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜messages-list.component.ts
+ ┃ ┃ ┃ ┗ 📂project-card
+ ┃ ┃ ┃ ┃ ┣ 📜project-card.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜project-card.component.html
+ ┃ ┃ ┃ ┃ ┗ 📜project-card.component.ts
+ ┃ ┃ ┣ 📂shared
+ ┃ ┃ ┃ ┗ 📂message
+ ┃ ┃ ┃ ┃ ┣ 📜message.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜message.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜message.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜message.component.ts
+ ┃ ┃ ┗ 📂user
+ ┃ ┃ ┃ ┗ 📂user-logged
+ ┃ ┃ ┃ ┃ ┣ 📜user-logged.component.css
+ ┃ ┃ ┃ ┃ ┣ 📜user-logged.component.html
+ ┃ ┃ ┃ ┃ ┣ 📜user-logged.component.spec.ts
+ ┃ ┃ ┃ ┃ ┗ 📜user-logged.component.ts
+ ┃ ┣ 📂models
+ ┃ ┃ ┣ 📜article.model.ts
+ ┃ ┃ ┣ 📜message.model.ts
+ ┃ ┃ ┣ 📜project.model.ts
+ ┃ ┃ ┗ 📜user.model.ts
+ ┃ ┣ 📂pages
+ ┃ ┃ ┣ 📂aboutme
+ ┃ ┃ ┃ ┣ 📜aboutme.component.css
+ ┃ ┃ ┃ ┣ 📜aboutme.component.html
+ ┃ ┃ ┃ ┣ 📜aboutme.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜aboutme.component.ts
+ ┃ ┃ ┣ 📂article-detail
+ ┃ ┃ ┃ ┣ 📜article-detail.component.css
+ ┃ ┃ ┃ ┣ 📜article-detail.component.html
+ ┃ ┃ ┃ ┣ 📜article-detail.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜article-detail.component.ts
+ ┃ ┃ ┣ 📂articles
+ ┃ ┃ ┃ ┣ 📜articles.component.css
+ ┃ ┃ ┃ ┣ 📜articles.component.html
+ ┃ ┃ ┃ ┣ 📜articles.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜articles.component.ts
+ ┃ ┃ ┣ 📂contact
+ ┃ ┃ ┃ ┣ 📜contact.component.css
+ ┃ ┃ ┃ ┣ 📜contact.component.html
+ ┃ ┃ ┃ ┣ 📜contact.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜contact.component.ts
+ ┃ ┃ ┣ 📂home
+ ┃ ┃ ┃ ┣ 📜home.component.css
+ ┃ ┃ ┃ ┣ 📜home.component.html
+ ┃ ┃ ┃ ┣ 📜home.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜home.component.ts
+ ┃ ┃ ┣ 📂login
+ ┃ ┃ ┃ ┣ 📜login.component.css
+ ┃ ┃ ┃ ┣ 📜login.component.html
+ ┃ ┃ ┃ ┣ 📜login.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜login.component.ts
+ ┃ ┃ ┣ 📂project-detail
+ ┃ ┃ ┃ ┣ 📜project-detail.component.css
+ ┃ ┃ ┃ ┣ 📜project-detail.component.html
+ ┃ ┃ ┃ ┣ 📜project-detail.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜project-detail.component.ts
+ ┃ ┃ ┣ 📂projects
+ ┃ ┃ ┃ ┣ 📜projects.component.css
+ ┃ ┃ ┃ ┣ 📜projects.component.html
+ ┃ ┃ ┃ ┣ 📜projects.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜projects.component.ts
+ ┃ ┃ ┗ 📂register
+ ┃ ┃ ┃ ┣ 📜register.component.css
+ ┃ ┃ ┃ ┣ 📜register.component.html
+ ┃ ┃ ┃ ┣ 📜register.component.spec.ts
+ ┃ ┃ ┃ ┗ 📜register.component.ts
+ ┃ ┣ 📂services
+ ┃ ┃ ┣ 📜article.service.spec.ts
+ ┃ ┃ ┣ 📜article.service.ts
+ ┃ ┃ ┣ 📜auth.service.spec.ts
+ ┃ ┃ ┣ 📜auth.service.ts
+ ┃ ┃ ┣ 📜contact.service.spec.ts
+ ┃ ┃ ┣ 📜contact.service.ts
+ ┃ ┃ ┣ 📜date.service.spec.ts
+ ┃ ┃ ┣ 📜date.service.ts
+ ┃ ┃ ┣ 📜message.service.spec.ts
+ ┃ ┃ ┣ 📜message.service.ts
+ ┃ ┃ ┣ 📜project.service.spec.ts
+ ┃ ┃ ┗ 📜project.service.ts
+ ┃ ┣ 📜app.component.css
+ ┃ ┣ 📜app.component.html
+ ┃ ┣ 📜app.component.ts
+ ┃ ┣ 📜app.config.server.ts
+ ┃ ┣ 📜app.config.ts
+ ┃ ┗ 📜app.routes.ts
+ ┣ 📂assets
+ ┃ ┣ 📂images
+ ┃ ┃ ┣ 📜dalle.webp
+ ┃ ┃ ┣ 📜gim.jpg
+ ┃ ┃ ┣ 📜libro-react.png
+ ┃ ┃ ┣ 📜portada-java-web.png
+ ┃ ┃ ┣ 📜portada-js-web.png
+ ┃ ┃ ┗ 📜usa.jpg
+ ┃ ┣ 📜.gitkeep
+ ┃ ┣ 📜articles.json
+ ┃ ┣ 📜message.json
+ ┃ ┣ 📜projects.json
+ ┃ ┗ 📜simulacionBBDD.json
+ ┣ 📜favicon.ico
+ ┣ 📜index.html
+ ┣ 📜main.server.ts
+ ┣ 📜main.ts
+ ┗ 📜styles.css
 
 
 ---
