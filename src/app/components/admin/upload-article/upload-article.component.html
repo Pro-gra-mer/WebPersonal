@@ -54,18 +54,51 @@
       />
     </div>
 
-    <!-- Contenido -->
+    <!-- Secciones del Contenido -->
     <div class="mb-3">
-      <label for="content" class="form-label">Contenido</label>
-      <textarea
-        class="form-control"
-        id="content"
-        [(ngModel)]="article.content"
-        name="content"
-        rows="8"
-        placeholder="Escriba el contenido completo del artículo"
-        required
-      ></textarea>
+      <label class="form-label">Contenido del Artículo</label>
+      <div *ngFor="let section of article.content; let i = index" class="mb-4">
+        <!-- Subtítulo opcional (h2) -->
+        <label for="heading-{{ i }}" class="form-label">Subtítulo</label>
+        <input
+          type="text"
+          class="form-control"
+          id="heading-{{ i }}"
+          [(ngModel)]="section.heading"
+          name="heading-{{ i }}"
+          placeholder="Escriba un subtítulo (opcional)"
+        />
+
+        <!-- Párrafo obligatorio -->
+        <label for="paragraph-{{ i }}" class="form-label mt-2">Párrafo</label>
+        <textarea
+          class="form-control"
+          id="paragraph-{{ i }}"
+          [(ngModel)]="section.paragraph"
+          name="paragraph-{{ i }}"
+          rows="3"
+          placeholder="Escriba un párrafo para esta sección"
+          required
+        ></textarea>
+
+        <!-- Botón para eliminar la sección -->
+        <button
+          type="button"
+          class="btn btn-danger mt-2"
+          (click)="removeSection(i)"
+        >
+          Eliminar Sección
+        </button>
+      </div>
+
+      <!-- Botón para agregar una nueva sección -->
+      <button
+        type="button"
+        class="btn btn-secondary w-100"
+        (click)="addSection()"
+      >
+        Añadir Sección
+      </button>
     </div>
 
     <!-- URL de la Imagen -->
@@ -82,6 +115,8 @@
         placeholder="Ingrese la URL de la imagen destacada"
       />
     </div>
+
+    <!-- Fecha de Publicación -->
     <div class="mb-3">
       <label for="publishDate" class="form-label">Fecha de Publicación</label>
       <input

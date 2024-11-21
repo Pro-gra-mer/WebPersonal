@@ -6,5 +6,10 @@
     <p class="card-text">
       <small>Publicado el {{ formattedDate }}</small>
     </p>
+
+    <!-- Botón de eliminar (solo visible si el usuario es admin) -->
+    <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteProject()">
+      Eliminar
+    </button>
   </div>
 </div>

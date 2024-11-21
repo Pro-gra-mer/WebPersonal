@@ -1,30 +1,36 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { DateService } from '../../../services/date.service';
-import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { ArticleService } from '../../../services/article.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article-card',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterModule, CommonModule],
   templateUrl: './article-card.component.html',
   styleUrls: ['./article-card.component.css'],
-  providers: [DateService], // Incluye DateService aquí
+  providers: [DateService],
 })
 export class ArticleCardComponent implements OnInit {
   @Input() id!: number;
   @Input() title!: string;
   @Input() description!: string;
   @Input() imageUrl!: string;
-  @Input() publishDate!: Date; // Publicación en formato Date
+  @Input() publishDate!: Date;
   @Input() link!: string;
 
-  formattedDate: string = ''; // Variable para almacenar la fecha formateada
-  isHovered = false;
+  formattedDate: string = '';
+  isAdmin: boolean = false;
 
-  constructor(private dateService: DateService) {}
+  constructor(
+    private dateService: DateService,
+    private authService: AuthService,
+    private articleService: ArticleService
+  ) {}
 
   ngOnInit(): void {
-    // Formatea la fecha de publicación usando el servicio
     this.formattedDate = this.dateService.transformDate(
       this.publishDate,
       'es-ES',
@@ -34,5 +40,22 @@ export class ArticleCardComponent implements OnInit {
         day: 'numeric',
       }
     );
+
+    this.isAdmin = this.authService.isAdmin();
+  }
+
+  // Función para eliminar el artículo
+  deleteArticle(): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este artículo?')) {
+      this.articleService.deleteArticle(this.id).subscribe(
+        () => {
+          alert('Artículo eliminado correctamente');
+        },
+        (error) => {
+          console.error('Error al eliminar el artículo', error);
+          alert('Error al eliminar el artículo');
+        }
+      );
+    }
   }
 }

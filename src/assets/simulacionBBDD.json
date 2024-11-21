@@ -47,14 +47,14 @@
       "keyword": "Inteligencia Artificial 2024"
     },
     {
-      "id": "1731174302405",
-      "title": "\"Guía Completa de JavaScript para Principiantes\"",
-      "content": "\"JavaScript es el lenguaje de programación de la web, utilizado por millones de desarrolladores para crear experiencias interactivas y dinámicas en sitios web. En esta guía, cubrimos desde los conceptos básicos de variables y tipos de datos hasta estructuras de control, funciones y cómo manipular el DOM.\"",
+      "id": "1731173638742",
+      "title": "\"Inteligencia Artificial en 2024: Tendencias y Futuro\"",
+      "content": "\"La inteligencia artificial está revolucionando el mundo en diversas áreas como la medicina, la educación, y el transporte. Este artículo explora las tendencias actuales y lo que nos espera en los próximos años en cuanto a desarrollo y regulación de la IA.\"",
       "publishDate": "2024-11-09",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/320px-Unofficial_JavaScript_logo_2.svg.png",
-      "slug": "guia-completa-javascript-principiantes",
-      "metaDescription": "Descubre todo lo que necesitas saber sobre JavaScript, el lenguaje de la web. Aprende desde lo más básico hasta conceptos avanzados",
-      "keyword": "JavaScript"
+      "imageUrl": "https://mediatek-marketing.transforms.svdcdn.com/production/posts/MediaTek-IA-2023.jpg?w=2048&h=1075&q=80&auto=format&fit=crop&dm=1688130337&s=3b56535c28f441a34db9455d64444cb7",
+      "slug": "\"inteligencia-artificial-2024-tendencias",
+      "metaDescription": "Explora las tendencias actuales y el futuro de la inteligencia artificial en 2024.",
+      "keyword": "Inteligencia Artificial 2024"
     }
   ],
   "messages": [
@@ -155,12 +155,20 @@
       "formatteddate": "2024-11-09T18:07:21.408Z"
     },
     {
-      "id": 1731178123811,
+      "id": "1731178123811",
       "user": "apple",
       "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "date": "2024-11-09T18:48:43.811Z",
       "formattedDate": "",
       "formatteddate": "2024-11-09T18:48:43.811Z"
+    },
+    {
+      "id": "1731950311087",
+      "user": "admin",
+      "content": "Hola atodos! Voy a por el backend!",
+      "date": "2024-11-18T17:18:31.087Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-18T17:18:31.087Z"
     }
   ],
   "users": [
