@@ -6,8 +6,13 @@
     <p class="card-text">
       <small>Publicado el {{ formattedDate }}</small>
     </p>
-    <a [routerLink]="['/articles', id]" class="btn btn-primary" target="_blank"
-      >Leer más</a
-    >
+
+    <!-- Botón para redirigir a la página de detalles -->
+    <a [routerLink]="['/articles', id]" class="btn btn-primary">Leer más</a>
+
+    <!-- Botón de eliminar (solo visible si el usuario es admin) -->
+    <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteArticle()">
+      Eliminar
+    </button>
   </div>
 </div>

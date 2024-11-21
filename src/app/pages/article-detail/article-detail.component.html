@@ -1,14 +1,31 @@
 <div class="container py-5" *ngIf="article">
   <div class="card mb-5">
+    <!-- Imagen del Artículo -->
     <img
+      *ngIf="article.imageUrl"
       [src]="article.imageUrl"
       class="card-img-top"
       alt="Imagen del artículo {{ article.title }}"
     />
+
+    <!-- Contenido de la Tarjeta -->
     <div class="card-body">
+      <!-- Título del Artículo -->
       <h1 class="card-title">{{ article.title }}</h1>
-      <p class="card-text">{{ article.content }}</p>
+
+      <!-- Iteración sobre las Secciones de Contenido -->
+      <div *ngIf="article.content && article.content.length > 0">
+        <div *ngFor="let section of article.content" class="mb-4">
+          <!-- Subtítulo de la Sección (h2) -->
+          <h2 *ngIf="section.heading" class="mt-3">{{ section.heading }}</h2>
+
+          <!-- Párrafo de la Sección -->
+          <p>{{ section.paragraph }}</p>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Botón para volver a la lista de artículos -->
   <a class="btn btn-primary" [routerLink]="'/articles'">Todos los Artículos</a>
 </div>
