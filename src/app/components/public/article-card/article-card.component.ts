@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DateService } from '../../../services/date.service';
 import { AuthService } from '../../../services/auth.service';
 import { ArticleService } from '../../../services/article.service';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-article-card',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './article-card.component.html',
   styleUrls: ['./article-card.component.css'],
   providers: [DateService],
@@ -27,7 +28,8 @@ export class ArticleCardComponent implements OnInit {
   constructor(
     private dateService: DateService,
     private authService: AuthService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -44,18 +46,22 @@ export class ArticleCardComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  // Función para eliminar el artículo
-  deleteArticle(): void {
+  // Función para eliminar el artículo usando firstValueFrom
+  async deleteArticle(): Promise<void> {
     if (confirm('¿Estás seguro de que deseas eliminar este artículo?')) {
-      this.articleService.deleteArticle(this.id).subscribe(
-        () => {
-          alert('Artículo eliminado correctamente');
-        },
-        (error) => {
-          console.error('Error al eliminar el artículo', error);
-          alert('Error al eliminar el artículo');
-        }
-      );
+      try {
+        await firstValueFrom(this.articleService.deleteArticle(this.id));
+        alert('Artículo eliminado correctamente');
+        // Redirigir a una ruta ficticia y luego a /articles
+        this.router
+          .navigateByUrl('/refresh', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/articles']);
+          });
+      } catch (error) {
+        console.error('Error al eliminar el artículo', error);
+        alert('Error al eliminar el artículo');
+      }
     }
   }
 }
