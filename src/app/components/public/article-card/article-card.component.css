@@ -17,3 +17,7 @@ h5 {
   object-fit: cover; /* Mantiene la proporción de la imagen y recorta si es necesario */
   width: 100%;
 }
+
+.btn {
+  margin-right: 10px;
+}
