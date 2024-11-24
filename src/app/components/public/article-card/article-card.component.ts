@@ -24,8 +24,9 @@ export class ArticleCardComponent implements OnInit {
 
   formattedDate: string = '';
   isAdmin: boolean = false;
+  confirmingDelete: boolean = false; // Estado para mostrar la confirmación
 
-  @Output() articleDeleted = new EventEmitter<number>();
+  @Output() articleDeleted = new EventEmitter<number>(); // Output para emitir el ID eliminado
 
   constructor(
     private dateService: DateService,
@@ -47,18 +48,23 @@ export class ArticleCardComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
   }
 
+  confirmDelete(): void {
+    this.confirmingDelete = true; // Activar estado de confirmación
+  }
+
+  cancelDelete(): void {
+    this.confirmingDelete = false; // Cancelar el estado de confirmación
+  }
   // Función para eliminar el artículo usando firstValueFrom
   async deleteArticle(): Promise<void> {
-    if (confirm('¿Estás seguro de que deseas eliminar este artículo?')) {
-      try {
-        await firstValueFrom(this.articleService.deleteArticle(this.id));
-        alert('Artículo eliminado correctamente');
-        // Redirigir a una ruta ficticia y luego a /articles
-        this.articleDeleted.emit(this.id); // Emitimos el ID del proyecto eliminado
-      } catch (error) {
-        console.error('Error al eliminar el artículo', error);
-        alert('Error al eliminar el artículo');
-      }
+    try {
+      await firstValueFrom(this.articleService.deleteArticle(this.id));
+      this.articleDeleted.emit(this.id); // Emitimos el ID del artículo eliminado
+    } catch (error) {
+      console.error('Error al eliminar el artículo', error);
+      alert('Error al eliminar el artículo');
+    } finally {
+      this.confirmingDelete = false; // Restablecer estado de confirmación
     }
   }
 }

@@ -1,19 +1,30 @@
-<div class="card" [routerLink]="['/projects', id]">
+<div class="card mb-3">
   <img [src]="imageUrl" class="card-img-top" alt="Imagen del proyecto" />
   <div class="card-body">
-    <h5 class="card-title">{{ title }}</h5>
+    <h3 class="card-title">{{ title }}</h3>
     <p class="card-text">{{ description }}</p>
     <p class="card-text">
       <small>Publicado el {{ formattedDate }}</small>
     </p>
 
-    <!-- Botón de eliminar (solo visible si el usuario es admin) -->
-    <button
-      *ngIf="isAdmin"
-      class="btn btn-danger"
-      (click)="deleteProject($event)"
-    >
-      Eliminar
-    </button>
+    <!-- Botón para redirigir a la página de detalles -->
+    <a [routerLink]="link" class="btn btn-primary">Ver detalles</a>
+
+    <!-- Botones de eliminar y confirmación (solo visible si el usuario es admin) -->
+    <div class="confirm" *ngIf="isAdmin">
+      <ng-container *ngIf="!confirmingDelete; else confirmButtons">
+        <button class="btn btn-danger" (click)="confirmDelete()">
+          Eliminar
+        </button>
+      </ng-container>
+      <ng-template #confirmButtons>
+        <button class="btn btn-success" (click)="deleteProject()">
+          Aceptar
+        </button>
+        <button class="btn btn-secondary" (click)="cancelDelete()">
+          Cancelar
+        </button>
+      </ng-template>
+    </div>
   </div>
 </div>

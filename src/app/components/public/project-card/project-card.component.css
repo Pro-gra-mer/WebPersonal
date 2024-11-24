@@ -52,3 +52,8 @@ p {
     font-size: 1.6em;
   }
 }
+
+.confirm {
+  /* Botones Eliminar, Aceptar y Cancelar a la derecha */
+  float: right;
+}

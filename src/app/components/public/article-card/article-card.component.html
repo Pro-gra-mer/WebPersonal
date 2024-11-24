@@ -10,9 +10,21 @@
     <!-- Botón para redirigir a la página de detalles -->
     <a [routerLink]="['/articles', id]" class="btn btn-primary">Leer más</a>
 
-    <!-- Botón de eliminar (solo visible si el usuario es admin) -->
-    <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteArticle()">
-      Eliminar
-    </button>
+    <!-- Botones de eliminación y confirmación (solo visible si el usuario es admin) -->
+    <div class="confirm" *ngIf="isAdmin">
+      <ng-container *ngIf="!confirmingDelete; else confirmButtons">
+        <button class="btn btn-danger" (click)="confirmDelete()">
+          Eliminar
+        </button>
+      </ng-container>
+      <ng-template #confirmButtons>
+        <button class="btn btn-success" (click)="deleteArticle()">
+          Aceptar
+        </button>
+        <button class="btn btn-secondary" (click)="cancelDelete()">
+          Cancelar
+        </button>
+      </ng-template>
+    </div>
   </div>
 </div>

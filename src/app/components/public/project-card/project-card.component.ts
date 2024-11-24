@@ -4,7 +4,7 @@ import { DateService } from '../../../services/date.service';
 import { AuthService } from '../../../services/auth.service';
 import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
-import { firstValueFrom } from 'rxjs'; // Importamos firstValueFrom
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-project-card',
@@ -27,6 +27,8 @@ export class ProjectCardComponent implements OnInit {
 
   @Output() projectDeleted = new EventEmitter<number>();
 
+  confirmingDelete: boolean = false; // Estado de confirmación
+
   constructor(
     private dateService: DateService,
     private authService: AuthService,
@@ -47,19 +49,22 @@ export class ProjectCardComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  // Función para eliminar el proyecto usando firstValueFrom
-  async deleteProject(event: Event): Promise<void> {
-    event.stopPropagation(); // Detiene la propagación del clic al contenedor
-    if (confirm('¿Estás seguro de que deseas eliminar este proyecto?')) {
-      try {
-        await firstValueFrom(this.projectService.deleteProject(this.id));
-        alert('Proyecto eliminado correctamente');
-        // Redirigir a una ruta temporal y luego a /projects
-        this.projectDeleted.emit(this.id); // Emitimos el ID del proyecto eliminado
-      } catch (error) {
-        console.error('Error al eliminar el proyecto', error);
-        alert('Error al eliminar el proyecto');
-      }
+  confirmDelete(): void {
+    this.confirmingDelete = true; // Activar estado de confirmación
+  }
+
+  cancelDelete(): void {
+    this.confirmingDelete = false; // Cancelar estado de confirmación
+  }
+
+  async deleteProject(): Promise<void> {
+    try {
+      await firstValueFrom(this.projectService.deleteProject(this.id));
+      this.projectDeleted.emit(this.id); // Emitir ID del proyecto eliminado
+    } catch (error) {
+      console.error('Error al eliminar el proyecto', error);
+    } finally {
+      this.confirmingDelete = false; // Restablecer estado
     }
   }
 }
