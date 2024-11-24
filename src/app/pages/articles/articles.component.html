@@ -9,6 +9,7 @@
         [title]="article.title"
         [publishDate]="article.publishDate"
         [imageUrl]="article.imageUrl"
+        (articleDeleted)="onArticleDeleted($event)"
       >
       </app-article-card>
     </div>

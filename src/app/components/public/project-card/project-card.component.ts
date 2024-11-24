@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DateService } from '../../../services/date.service';
 import { AuthService } from '../../../services/auth.service';
 import { ProjectService } from '../../../services/project.service';
@@ -25,11 +25,12 @@ export class ProjectCardComponent implements OnInit {
   formattedDate: string = '';
   isAdmin: boolean = false;
 
+  @Output() projectDeleted = new EventEmitter<number>();
+
   constructor(
     private dateService: DateService,
     private authService: AuthService,
-    private projectService: ProjectService,
-    private router: Router
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -54,11 +55,7 @@ export class ProjectCardComponent implements OnInit {
         await firstValueFrom(this.projectService.deleteProject(this.id));
         alert('Proyecto eliminado correctamente');
         // Redirigir a una ruta temporal y luego a /projects
-        this.router
-          .navigateByUrl('/refresh', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/projects']);
-          });
+        this.projectDeleted.emit(this.id); // Emitimos el ID del proyecto eliminado
       } catch (error) {
         console.error('Error al eliminar el proyecto', error);
         alert('Error al eliminar el proyecto');

@@ -17,7 +17,12 @@ export class ArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe((data) => {
-      this.articles = data; // Asigna los datos recibidos a la propiedad 'articles'
+      this.articles = data;
     });
+  }
+  // Función para manejar la eliminación de un proyecto
+  onArticleDeleted(deletedId: number): void {
+    // Filtramos el proyecto eliminado
+    this.articles = this.articles.filter((article) => article.id !== deletedId);
   }
 }
