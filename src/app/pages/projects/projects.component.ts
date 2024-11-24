@@ -14,9 +14,15 @@ import { CommonModule } from '@angular/common';
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
   constructor(private projectService: ProjectService) {}
+
   ngOnInit(): void {
     this.projectService.getProjects().subscribe((data) => {
       this.projects = data;
     });
+  }
+
+  onProjectDeleted(deletedId: number): void {
+    // Filtramos el proyecto eliminado
+    this.projects = this.projects.filter((project) => project.id !== deletedId);
   }
 }

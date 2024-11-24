@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DateService } from '../../../services/date.service';
 import { AuthService } from '../../../services/auth.service';
 import { ArticleService } from '../../../services/article.service';
@@ -25,11 +25,12 @@ export class ArticleCardComponent implements OnInit {
   formattedDate: string = '';
   isAdmin: boolean = false;
 
+  @Output() articleDeleted = new EventEmitter<number>();
+
   constructor(
     private dateService: DateService,
     private authService: AuthService,
-    private articleService: ArticleService,
-    private router: Router
+    private articleService: ArticleService
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +54,7 @@ export class ArticleCardComponent implements OnInit {
         await firstValueFrom(this.articleService.deleteArticle(this.id));
         alert('Artículo eliminado correctamente');
         // Redirigir a una ruta ficticia y luego a /articles
-        this.router
-          .navigateByUrl('/refresh', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/articles']);
-          });
+        this.articleDeleted.emit(this.id); // Emitimos el ID del proyecto eliminado
       } catch (error) {
         console.error('Error al eliminar el artículo', error);
         alert('Error al eliminar el artículo');
