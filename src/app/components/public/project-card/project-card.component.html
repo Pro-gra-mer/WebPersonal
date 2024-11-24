@@ -8,7 +8,7 @@
     </p>
 
     <!-- Botón para redirigir a la página de detalles -->
-    <a [routerLink]="link" class="btn btn-primary">Ver detalles</a>
+    <a [routerLink]="['/projects', id]" class="btn btn-primary">Ver detalles</a>
 
     <!-- Botones de eliminar y confirmación (solo visible si el usuario es admin) -->
     <div class="confirm" *ngIf="isAdmin">

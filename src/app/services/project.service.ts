@@ -8,7 +8,7 @@ import { Project } from '../models/project.model';
   providedIn: 'root',
 })
 export class ProjectService {
-  private apiUrl = 'http://localhost:3000/projects'; // URL base de tu API backend
+  private apiUrl = 'http://localhost:8080/api/projects'; // URL base de tu API backend
 
   constructor(private http: HttpClient) {}
 
