@@ -43,16 +43,12 @@ export class LoginComponent {
 
     // Llama al servicio de autenticación
     this.authService.login(this.loginForm.value).subscribe({
-      next: (response) => {
-        if (response.success) {
-          // Redirige al usuario después del inicio de sesión exitoso
-          this.router.navigate(['/home']);
-        } else {
-          this.loginError = 'Correo o contraseña incorrectos.';
-        }
+      next: () => {
+        // Redirige al usuario después del inicio de sesión exitoso
+        this.router.navigate(['/home']);
       },
-      error: (error) => {
-        this.loginError = 'Error de servidor. Inténtalo más tarde.';
+      error: () => {
+        this.loginError = 'Credenciales inválidas o error en el servidor.';
       },
     });
   }
