@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class MessageComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
-  username: string = '';
+  username: string | null = null;
   content: string = '';
   private authSubscription: Subscription = new Subscription();
 
@@ -28,17 +28,21 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Suscribirse a los cambios en el estado de autenticación y nombre de usuario
-    this.authSubscription = this.authService.username$.subscribe((username) => {
-      this.username = username ?? ''; // Asegura que username sea siempre string
-      this.isLoggedIn = !!username; // Actualiza isLoggedIn según si hay un username
-    });
+    this.authSubscription.add(
+      this.authService.isLoggedIn$.subscribe((loggedIn) => {
+        this.isLoggedIn = loggedIn;
+      })
+    );
+    this.authSubscription.add(
+      this.authService.username$.subscribe((username) => {
+        this.username = username;
+      })
+    );
   }
 
   ngOnDestroy(): void {
     // Cancela la suscripción para evitar fugas de memoria
-    if (this.authSubscription) {
-      this.authSubscription.unsubscribe();
-    }
+    this.authSubscription.unsubscribe();
   }
 
   onSubmit(): void {
@@ -46,7 +50,7 @@ export class MessageComponent implements OnInit, OnDestroy {
       // Crear el mensaje y enviarlo si el usuario está logueado
       const newMessage: Message = {
         id: Date.now(),
-        user: this.username,
+        user: this.username!,
         content: this.content,
         date: new Date(),
         formattedDate: '',
@@ -64,9 +68,9 @@ export class MessageComponent implements OnInit, OnDestroy {
       });
     } else {
       // Si el usuario no está logueado, redirige a la página de inicio de sesión
-      this.router
-        .navigate(['/login'])
-        .catch((err) => console.error('Error de navegación:', err));
+      this.router.navigate(['/login']).catch((err) => {
+        console.error('Error de navegación:', err);
+      });
     }
   }
 }
