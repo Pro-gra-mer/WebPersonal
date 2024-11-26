@@ -27,9 +27,11 @@ public class AuthController {
     if ("admin@example.com".equals(request.getEmail()) && "password".equals(request.getPassword())) {
       long expirationTime = 3600000; // 1 hora en milisegundos
       long currentTimeMillis = System.currentTimeMillis();
+      String username = request.getEmail().split("@")[0];
 
       return Jwts.builder()
               .setSubject(request.getEmail()) // Usa email como subject
+              .claim("username", username)    // Añadimos el "username" al JWT
               .claim("role", "ADMIN")         // Añade el rol como claim
               .setIssuedAt(new Date(currentTimeMillis)) // Fecha de emisión
               .setExpiration(new Date(currentTimeMillis + expirationTime)) // Fecha de expiración
@@ -38,4 +40,5 @@ public class AuthController {
     }
     throw new RuntimeException("Credenciales inválidas");
   }
+}
 

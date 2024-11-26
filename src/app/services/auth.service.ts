@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode'; // Importación corregida de jwt-decode
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class AuthService {
   private email = new BehaviorSubject<string | null>(null); // Estado del email
   private username = new BehaviorSubject<string | null>(null); // Estado del nombre de usuario para registro/mensajes
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public isLoggedIn$: Observable<boolean> = this.loggedIn.asObservable();
   public isAdmin$: Observable<boolean> = this.admin.asObservable();
@@ -48,10 +49,12 @@ export class AuthService {
             }
             localStorage.setItem('token', token);
 
+            // Decodificar el token y actualizar el estado
             const payload: any = jwtDecode(token);
             this.loggedIn.next(true);
             this.admin.next(payload.role === 'ADMIN');
-            this.email.next(payload.sub); // Usa el email como identificador principal
+            this.email.next(payload.sub); // Suponiendo que el email es el `sub` en el JWT
+            this.username.next(payload.username); // Asumiendo que el nombre de usuario está en el campo 'username'
           } catch (error) {
             console.error('Error durante el proceso de login:', error);
             throw error;
@@ -79,6 +82,7 @@ export class AuthService {
     this.admin.next(false);
     this.email.next(null); // Limpia el email
     this.username.next(null); // Limpia el username
+    this.router.navigate(['/']); // Redirige a la página de inicio (home)
   }
 
   isAdmin(): boolean {
