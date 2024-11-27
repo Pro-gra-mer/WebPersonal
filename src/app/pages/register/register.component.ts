@@ -70,12 +70,14 @@ export class RegisterComponent {
 
     this.authService.register(this.registerForm.value).subscribe({
       next: (response) => {
+        console.log('Registro exitoso, respuesta:', response); // Verifica la respuesta
         this.message = 'Registro exitoso. Redirigiendo...';
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login']); // Redirige al login
         }, 2000);
       },
       error: (error) => {
+        console.error('Error en el registro:', error);
         this.message = 'Error en el registro: ' + error.message;
       },
     });

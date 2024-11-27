@@ -33,11 +33,10 @@ public class AuthController {
 
   @PostMapping("/register")
   public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-    // Verificar si el email o el nombre de usuario ya existen usando la instancia de userService
+    // Verificar si el email o el nombre de usuario ya existen
     if (userService.emailExists(request.getEmail())) {
       return new ResponseEntity<>("El correo electrónico ya está en uso.", HttpStatus.BAD_REQUEST);
     }
-
     if (userService.usernameExists(request.getUsername())) {
       return new ResponseEntity<>("El nombre de usuario ya está en uso.", HttpStatus.BAD_REQUEST);
     }
@@ -53,9 +52,10 @@ public class AuthController {
       .signWith(secretKey)
       .compact();
 
-    // Devolver el token JWT en la respuesta
+    // Devolver el token en la respuesta
     return new ResponseEntity<>(token, HttpStatus.CREATED);
   }
+
 
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody LoginRequest request) {
