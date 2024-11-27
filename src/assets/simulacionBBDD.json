@@ -153,12 +153,20 @@
       "formatteddate": "2024-11-18T17:18:31.087Z"
     },
     {
-      "id": 1732639341998,
+      "id": "1732639341998",
       "user": "admin",
       "content": "backend",
       "date": "2024-11-26T16:42:21.998Z",
       "formattedDate": "",
       "formatteddate": "2024-11-26T16:42:21.998Z"
+    },
+    {
+      "id": 1732723733558,
+      "user": "rebeca",
+      "content": "He iniciado sesión con token",
+      "date": "2024-11-27T16:08:53.558Z",
+      "formattedDate": "",
+      "formatteddate": "2024-11-27T16:08:53.558Z"
     }
   ],
   "users": [
