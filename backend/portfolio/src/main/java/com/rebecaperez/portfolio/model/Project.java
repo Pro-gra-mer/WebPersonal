@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Table(name = "projects")  // Especificamos el nombre de la tabla como 'projects'
 public class Project {
 
   @Id

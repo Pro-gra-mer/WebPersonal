@@ -3,6 +3,7 @@ package com.rebecaperez.portfolio.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")  // Especificamos el nombre de la tabla como 'users'
 public class User {
 
   @Id
