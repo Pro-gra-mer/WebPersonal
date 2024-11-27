@@ -34,7 +34,14 @@ export class AuthService {
   }
 
   register(userData: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+    return this.http
+      .post(`${this.apiUrl}/register`, userData, { responseType: 'text' })
+      .pipe(
+        tap((response: any) => {
+          // Log para verificar que la respuesta es un string (JWT)
+          console.log('Respuesta del backend (token JWT):', response);
+        })
+      );
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
