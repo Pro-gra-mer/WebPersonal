@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RestController
 @RequestMapping("/auth")
@@ -21,12 +22,15 @@ public class AuthController {
 
   private final UserService userService;
   private final SecretKey secretKey;
+  private final BCryptPasswordEncoder passwordEncoder;
 
-  // Constructor para inicializar la clave secreta
+  // Constructor para inicializar la clave secreta y el encoder de contraseñas
   @Autowired
   public AuthController(UserService userService) {
     this.userService = userService;
-    // Usa una clave suficientemente larga y segura
+    this.passwordEncoder = new BCryptPasswordEncoder();  // Inicializar el BCryptPasswordEncoder
+
+    // Usa una clave suficientemente larga y segura para JWT
     String encodedKey = Base64.getEncoder().encodeToString("mySuperSecretKey1234567890".getBytes());
     this.secretKey = Keys.hmacShaKeyFor(encodedKey.getBytes());
   }
@@ -41,8 +45,11 @@ public class AuthController {
       return new ResponseEntity<>("El nombre de usuario ya está en uso.", HttpStatus.BAD_REQUEST);
     }
 
-    // Registrar al nuevo usuario, cifrando su contraseña
-    User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), request.getPassword());
+    // Cifrar la contraseña antes de almacenarla en la base de datos
+    String encodedPassword = passwordEncoder.encode(request.getPassword()); // Cifrado de la contraseña
+
+    // Registrar al nuevo usuario, pasando la contraseña cifrada
+    User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), encodedPassword);
 
     // Generar el JWT para el nuevo usuario
     String token = Jwts.builder()
@@ -55,7 +62,6 @@ public class AuthController {
     // Devolver el token en la respuesta
     return new ResponseEntity<>(token, HttpStatus.CREATED);
   }
-
 
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody LoginRequest request) {

@@ -3,8 +3,8 @@ package com.rebecaperez.portfolio.service;
 import com.rebecaperez.portfolio.model.User;
 import com.rebecaperez.portfolio.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -12,11 +12,15 @@ import java.util.Optional;
 public class UserService {
 
   private final UserRepository userRepository;
-  private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+  private final BCryptPasswordEncoder passwordEncoder;
+
+  // Definimos una constante para el rol
+  public static final String USER_ROLE = "USER";
 
   @Autowired
-  public UserService(UserRepository userRepository) {
+  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   // Método para registrar un nuevo usuario
@@ -35,17 +39,16 @@ public class UserService {
 
     // Crear un nuevo usuario y asignar los valores
     User user = new User();
-    user.setUsername(username);  // Asegúrate de que el username se está asignando correctamente
-    user.setEmail(email);        // Asegúrate de que el email se está asignando correctamente
-    user.setPassword(encodedPassword);  // Asegúrate de que la contraseña se está cifrando correctamente
+    user.setUsername(username);  // Asignar nombre de usuario
+    user.setEmail(email);        // Asignar correo electrónico
+    user.setPassword(encodedPassword);  // Asignar la contraseña cifrada
 
     // Asigna un valor por defecto para el rol si es necesario
-    user.setRole("USER");  // El rol puede ser "USER" por defecto
+    user.setRole(USER_ROLE);  // El rol por defecto será "USER"
 
     // Guardar el usuario en la base de datos
-    return userRepository.save(user);  // Este método guardará el usuario en la base de datos
+    return userRepository.save(user);  // Guardamos el usuario en la base de datos
   }
-
 
   // Método para verificar si el email ya está registrado
   public boolean emailExists(String email) {
@@ -57,16 +60,16 @@ public class UserService {
     return userRepository.findByUsername(username).isPresent();
   }
 
+  // Método de autenticación para verificar la contraseña
   public User authenticate(String email, String password) {
     Optional<User> userOptional = userRepository.findByEmail(email);
     if (userOptional.isPresent()) {
       User user = userOptional.get();
       // Verificar la contraseña con BCryptPasswordEncoder
       if (passwordEncoder.matches(password, user.getPassword())) {
-        return user;
+        return user;  // Si la contraseña es correcta, retornamos el usuario
       }
     }
     return null; // Si no existe o la contraseña no coincide, retornamos null
   }
-
 }
