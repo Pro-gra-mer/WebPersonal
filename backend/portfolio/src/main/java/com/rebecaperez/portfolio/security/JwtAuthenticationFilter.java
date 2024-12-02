@@ -10,16 +10,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.util.Collections;
 
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-  // The secret key should be stored in environment variables
-  private final String secretKey = System.getenv("JWT_SECRET_KEY");
+  private final SecretKey secretKey;
+
+  public JwtAuthenticationFilter() {
+    // Carga la clave secreta directamente de las variables de entorno
+    String encodedKey = System.getenv("JWT_SECRET_KEY");
+    if (encodedKey == null || encodedKey.isEmpty()) {
+      throw new IllegalStateException("JWT_SECRET_KEY no está configurada en las variables de entorno.");
+    }
+    this.secretKey = Keys.hmacShaKeyFor(encodedKey.getBytes());
+  }
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -29,26 +39,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
       String token = authorizationHeader.substring(7);
       try {
-        // Create a secure key from the secret
-        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
-
-        // Use the new parser builder pattern
         Claims claims = Jwts.parserBuilder()
-          .setSigningKey(key)
+          .setSigningKey(secretKey)
           .build()
           .parseClaimsJws(token)
           .getBody();
 
-        String email = claims.getSubject(); // Use email as the subject
+        String email = claims.getSubject();
         String role = claims.get("role", String.class);
 
         if (email != null && role != null) {
           UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-            email, // Use email as the principal
-            null,
-            Collections.singleton(() -> "ROLE_" + role) // Assign role as authority
-          );
-          authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            email, null, Collections.singleton(() -> "ROLE_" + role));
           SecurityContextHolder.getContext().setAuthentication(authToken);
         }
       } catch (Exception e) {
