@@ -10,6 +10,9 @@ import { ProjectDetailComponent } from './pages/project-detail/project-detail.co
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 
+import { adminGuard } from './guards/admin.guard';
+import { authGuard } from './guards/auth.guard';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'aboutme', component: AboutmeComponent },
@@ -20,6 +23,12 @@ export const routes: Routes = [
   { path: 'articles/:id', component: ArticleDetailComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  // Ruta protegida: Solo usuarios autenticados
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [authGuard, adminGuard],
+  },
+  // Redirección en caso de rutas no encontradas
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
