@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar archivos de configuración de Spring
+application.properties
+application.yml
+.env  # Si usas un archivo .env para las variables de entorno
+
