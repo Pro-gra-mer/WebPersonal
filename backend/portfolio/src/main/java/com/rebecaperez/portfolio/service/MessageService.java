@@ -32,6 +32,6 @@ public class MessageService {
 
   // Método para obtener todos los mensajes
   public List<Message> getAllMessages() {
-    return messageRepository.findAll();
+    return messageRepository.findAllWithUser();
   }
 }

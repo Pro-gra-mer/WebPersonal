@@ -32,6 +32,7 @@ public class MessageController {
       message.getId(),
       message.getContent(),
       message.getDate(),
+      message.getUser().getUsername(),
       message.getUser().getEmail()
     );
 
@@ -48,6 +49,7 @@ public class MessageController {
         message.getId(),
         message.getContent(),
         message.getDate(),
+        message.getUser().getUsername(),
         message.getUser().getEmail()
       ))
       .collect(Collectors.toList());

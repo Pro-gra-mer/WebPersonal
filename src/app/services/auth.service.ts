@@ -50,46 +50,61 @@ export class AuthService {
       .pipe(
         tap((token: string) => {
           try {
-            console.log('Token recibido:', token);
+            // Si el token es válido, lo guardamos en localStorage
             if (this.isTokenExpired(token)) {
               throw new Error('Token expirado');
             }
-            localStorage.setItem('token', token);
+
+            localStorage.setItem('token', token); // Guardamos el token en localStorage
 
             // Decodificar el token y actualizar el estado
             const payload: any = jwtDecode(token);
             this.loggedIn.next(true);
             this.admin.next(payload.role === 'ADMIN');
-            this.email.next(payload.sub); // Suponiendo que el email es el `sub` en el JWT
-            this.username.next(payload.username); // Asumiendo que el nombre de usuario está en el campo 'username'
+            this.email.next(payload.sub); // El email se extrae del 'sub' en el JWT
+            this.username.next(payload.username); // El nombre de usuario se extrae del JWT
           } catch (error) {
             console.error('Error durante el proceso de login:', error);
-            throw error;
+            this.logout();
+            throw error; // Lanzamos el error para manejarlo en el componente
           }
         })
       );
   }
 
   getToken(): string | null {
+    if (typeof window === 'undefined' || !window.localStorage) {
+      console.warn('localStorage no está disponible.');
+      return null;
+    }
+
     const token = localStorage.getItem('token');
-    if (token && this.isTokenExpired(token)) {
+    if (!token) {
+      console.warn('Token no encontrado en localStorage.');
+      return null;
+    }
+
+    if (this.isTokenExpired(token)) {
+      console.warn('Token expirado. Realizando logout...');
       this.logout();
       return null;
     }
+
     return token;
   }
 
   isLoggedIn(): boolean {
     return this.loggedIn.getValue();
   }
-
   logout(): void {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
     this.admin.next(false);
     this.email.next(null); // Limpia el email
     this.username.next(null); // Limpia el username
-    this.router.navigate(['/']); // Redirige a la página de inicio (home)
+    this.router.navigate(['/']).then(() => {
+      window.scrollTo(0, 0); // Desplaza la página al principio
+    });
   }
 
   isAdmin(): boolean {

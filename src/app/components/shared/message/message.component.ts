@@ -46,31 +46,32 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.isLoggedIn) {
-      // Crear el mensaje y enviarlo si el usuario está logueado
-      const newMessage: Message = {
-        id: Date.now(),
-        user: this.username!,
-        content: this.content,
-        date: new Date(),
-        formattedDate: '',
-        formatteddate: new Date(),
-      };
-
-      this.messageService.sendMessage(newMessage).subscribe({
-        next: (response) => {
-          console.log('Mensaje enviado:', response);
-          this.content = ''; // Limpia el campo de mensaje después de enviar
-        },
-        error: (error) => {
-          console.error('Error al enviar el mensaje:', error);
-        },
-      });
-    } else {
-      // Si el usuario no está logueado, redirige a la página de inicio de sesión
-      this.router.navigate(['/login']).catch((err) => {
-        console.error('Error de navegación:', err);
-      });
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/login']);
+      return;
     }
+
+    if (this.content.trim() === '') {
+      console.error('El contenido del mensaje no puede estar vacío.');
+      return;
+    }
+
+    const newMessage: Message = {
+      id: Date.now(),
+      content: this.content,
+      date: new Date(),
+      username: this.username!,
+      formattedDate: new Date().toLocaleString(),
+    };
+
+    this.messageService.sendMessage(newMessage).subscribe({
+      next: (response) => {
+        console.log('Mensaje enviado:', response);
+        this.content = '';
+      },
+      error: (error) => {
+        console.error('Error al enviar el mensaje:', error.message || error);
+      },
+    });
   }
 }

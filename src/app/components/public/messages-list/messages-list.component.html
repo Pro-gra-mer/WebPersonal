@@ -2,7 +2,7 @@
   <h2 class="text-left mb-4">Mensajes de usuarios</h2>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let message of displayedMessages">
-      <strong>{{ message.user }}:</strong> {{ message.content }}
+      <strong>{{ message.username }}:</strong> {{ message.content }}
       <span class="text-muted float-end date-separator">{{
         message.formattedDate
       }}</span>
