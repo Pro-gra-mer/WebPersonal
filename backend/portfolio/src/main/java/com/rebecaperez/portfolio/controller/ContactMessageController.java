@@ -5,6 +5,9 @@ import com.rebecaperez.portfolio.service.EmailService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/contact-messages")
 public class ContactMessageController {
@@ -16,8 +19,7 @@ public class ContactMessageController {
   }
 
   @PostMapping
-  public ResponseEntity<String> sendContactMessage(@RequestBody ContactMessage contactMessage) {
-
+  public ResponseEntity<Map<String, String>> sendContactMessage(@RequestBody ContactMessage contactMessage) {
     // Llamar al servicio con los datos del mensaje
     emailService.sendContactMessage(
       contactMessage.getName(),      // Nombre del remitente
@@ -26,6 +28,9 @@ public class ContactMessageController {
       contactMessage.getMessage()    // Cuerpo del mensaje
     );
 
-    return ResponseEntity.ok("Mensaje enviado exitosamente.");
+    // Devuelve una respuesta en formato JSON
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Mensaje enviado exitosamente.");
+    return ResponseEntity.ok(response);
   }
 }

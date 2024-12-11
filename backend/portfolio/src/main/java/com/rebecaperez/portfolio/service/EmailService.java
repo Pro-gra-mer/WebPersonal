@@ -24,7 +24,7 @@ public class EmailService {
 
       // Configurar el correo
       message.setTo(adminEmail); // Destinatario es el administrador
-      message.setSubject("Consulta de contacto: " + subject);
+      message.setSubject(subject);
       message.setText(
         "Has recibido un nuevo mensaje de contacto desde tu portfolio.\n\n" +
           "Nombre: " + name + "\n" +

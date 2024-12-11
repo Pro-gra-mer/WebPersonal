@@ -1,6 +1,13 @@
 <div class="container-fluid px-5 py-3">
   <h2 class="text-center">Contacto</h2>
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
     <div class="mb-3">
       <label for="name" class="form-label">Nombre</label>
       <input
