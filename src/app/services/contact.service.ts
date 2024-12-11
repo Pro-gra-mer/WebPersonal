@@ -1,4 +1,3 @@
-// src/app/services/contact.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,15 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:3000/contactMessages';
+  private apiUrl = 'http://localhost:8080/api/contact'; // Cambia la URL según tu backend
 
   constructor(private http: HttpClient) {}
 
-  // Método para enviar el mensaje de contacto
-  sendContactMessage(messageData: any): Observable<any> {
-    return this.http.post(this.apiUrl, {
-      ...messageData,
-      date: new Date().toISOString(), // Agrega la fecha actual
-    });
+  sendContactMessage(data: any): Observable<any> {
+    return this.http.post(this.apiUrl, data);
   }
 }
