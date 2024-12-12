@@ -1,6 +1,6 @@
 <div class="container mt-4 p-4 bg-light rounded">
   <h3 class="text-center mb-4">Enviar Mensaje</h3>
-  <form (ngSubmit)="onSubmit()">
+  <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
     <!-- Campo Usuario, solo visible si el usuario está logueado -->
     <div class="mb-3" *ngIf="isLoggedIn">
       <label for="username" class="form-label">Usuario</label>
@@ -8,8 +8,8 @@
         type="text"
         class="form-control"
         id="username"
-        [(ngModel)]="username"
-        name="username"
+        [value]="username"
+        readonly
       />
     </div>
 
@@ -21,11 +21,27 @@
         id="message"
         rows="5"
         placeholder="Escriba su mensaje aquí"
-        [(ngModel)]="content"
-        name="message"
+        formControlName="content"
         [readonly]="!isLoggedIn"
         required
       ></textarea>
+      <div class="d-flex justify-content-between mt-1">
+        <small
+          class="text-danger"
+          *ngIf="
+            messageForm.get('content')?.invalid &&
+            messageForm.get('content')?.touched
+          "
+        >
+          El mensaje es requerido y no puede exceder 500 caracteres
+        </small>
+        <small
+          [class.text-danger]="messageForm.get('content')?.value?.length > 500"
+          class="ms-auto"
+        >
+          {{ messageForm.get("content")?.value?.length || 0 }}/500
+        </small>
+      </div>
     </div>
 
     <!-- Botón Enviar o Iniciar Sesión -->
@@ -34,6 +50,11 @@
       class="btn w-50"
       [class.btn-primary]="isLoggedIn"
       [class.btn-secondary]="!isLoggedIn"
+      [disabled]="
+        messageForm.invalid ||
+        messageForm.get('content')?.value?.length > 500 ||
+        !isLoggedIn
+      "
     >
       {{ isLoggedIn ? "Enviar" : "Inicia sesión para comentar" }}
     </button>
