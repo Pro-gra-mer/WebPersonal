@@ -132,4 +132,8 @@ export class AuthService {
   setUsername(username: string): void {
     this.username.next(username);
   }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/forgot-password`, { email });
+  }
 }

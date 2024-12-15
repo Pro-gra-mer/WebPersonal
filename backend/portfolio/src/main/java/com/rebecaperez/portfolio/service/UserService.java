@@ -13,14 +13,16 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final BCryptPasswordEncoder passwordEncoder;
+  private final EmailService emailService;
 
   // Definimos una constante para el rol
   public static final String USER_ROLE = "USER";
 
   @Autowired
-  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, EmailService emailService) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
+    this.emailService = emailService;
   }
 
   // Método para registrar un nuevo usuario
@@ -72,4 +74,6 @@ public class UserService {
     }
     return null; // Si no existe o la contraseña no coincide, retornamos null
   }
+
+  
 }

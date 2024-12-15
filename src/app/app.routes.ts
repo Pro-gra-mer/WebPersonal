@@ -12,6 +12,7 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,4 +32,5 @@ export const routes: Routes = [
   },
   // Redirección en caso de rutas no encontradas
   { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
 ];
