@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -37,13 +38,13 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+  public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest request) {
     // Verificar si el email o el nombre de usuario ya existen
     if (userService.emailExists(request.getEmail())) {
-      return new ResponseEntity<>("El correo electrónico ya está en uso.", HttpStatus.BAD_REQUEST);
+      return ResponseEntity.badRequest().body(Map.of("message", "El correo electrónico ya está en uso."));
     }
     if (userService.usernameExists(request.getUsername())) {
-      return new ResponseEntity<>("El nombre de usuario ya está en uso.", HttpStatus.BAD_REQUEST);
+      return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario ya está en uso."));
     }
 
     // Cifrar la contraseña antes de almacenarla en la base de datos
@@ -62,15 +63,15 @@ public class AuthController {
       .signWith(secretKey)
       .compact();
 
-    return new ResponseEntity<>(token, HttpStatus.CREATED);
+    return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("token", token));
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+  public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
     // Verificar las credenciales del usuario
     User user = userService.authenticate(request.getEmail(), request.getPassword());
     if (user == null) {
-      return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Credenciales inválidas"));
     }
 
     // Generar el JWT para el usuario autenticado
@@ -83,6 +84,56 @@ public class AuthController {
       .signWith(secretKey)
       .compact();
 
-    return new ResponseEntity<>(token, HttpStatus.OK);
+    return ResponseEntity.ok(Map.of("token", token));
   }
+
+  @PostMapping("/request-password-reset")
+  public ResponseEntity<Map<String, String>> requestPasswordReset(@RequestBody Map<String, String> payload) {
+    if (payload == null || !payload.containsKey("email") || payload.get("email").isEmpty()) {
+      return ResponseEntity.badRequest().body(Map.of("message", "Debes proporcionar un correo válido."));
+    }
+
+    String email = payload.get("email");
+
+    try {
+      userService.sendPasswordResetLink(email); // Envía el correo con el enlace
+      return ResponseEntity.ok(Map.of("message", "Enlace de recuperación enviado al correo."));
+    } catch (RuntimeException e) {
+      return ResponseEntity.badRequest().body(Map.of("message", "Error al enviar el enlace: " + e.getMessage()));
+    }
+  }
+
+  @GetMapping("/validate-reset-token")
+  public ResponseEntity<Map<String, String>> validateResetToken(@RequestParam String token) {
+    try {
+      userService.validatePasswordResetToken(token);
+      return ResponseEntity.ok(Map.of("message", "Token válido. Puedes proceder a cambiar tu contraseña."));
+    } catch (RuntimeException e) {
+      return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+    }
+  }
+
+  @PostMapping("/reset-password")
+  public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> payload) {
+    String token = payload.get("token");
+    String newPassword = payload.get("newPassword");
+
+    if (token == null || token.isEmpty()) {
+      return ResponseEntity.badRequest().body(Map.of("message", "El token es requerido."));
+    }
+
+    if (newPassword == null || newPassword.isEmpty()) {
+      return ResponseEntity.badRequest().body(Map.of("message", "La nueva contraseña es requerida."));
+    }
+
+    try {
+      userService.validatePasswordResetToken(token); // Valida el token
+      userService.resetPassword(token, newPassword); // Actualiza la contraseña
+      userService.invalidateToken(token); // Invalida el token
+      return ResponseEntity.ok(Map.of("message", "Contraseña actualizada exitosamente."));
+    } catch (RuntimeException e) {
+      return ResponseEntity.badRequest().body(Map.of("message", "Error: " + e.getMessage()));
+    }
+  }
+
 }

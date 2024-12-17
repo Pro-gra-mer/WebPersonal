@@ -1,19 +1,20 @@
 package com.rebecaperez.portfolio.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
 
   private final JavaMailSender mailSender;
-
   @Value("${spring.mail.username}")
   private String adminEmail; // El correo del administrador
 
+  @Autowired
   public EmailService(JavaMailSender mailSender) {
     this.mailSender = mailSender;
   }
@@ -39,5 +40,14 @@ public class EmailService {
     } catch (MailException e) {
       throw new RuntimeException("Error al enviar el correo", e);
     }
+  }
+
+  public void sendEmail(String to, String subject, String message) {
+    SimpleMailMessage mailMessage = new SimpleMailMessage();
+    mailMessage.setTo(to);
+    mailMessage.setSubject(subject);
+    mailMessage.setText(message);
+
+    mailSender.send(mailMessage);
   }
 }

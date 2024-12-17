@@ -12,7 +12,8 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RequestPasswordComponent } from './request-password/request-password.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,9 @@ export const routes: Routes = [
   { path: 'articles/:id', component: ArticleDetailComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
+  { path: 'request-password', component: RequestPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: '', redirectTo: '/request-password', pathMatch: 'full' },
   // Ruta protegida: Solo usuarios autenticados
   {
     path: 'admin-dashboard',
@@ -32,5 +36,4 @@ export const routes: Routes = [
   },
   // Redirección en caso de rutas no encontradas
   { path: '**', redirectTo: '', pathMatch: 'full' },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
 ];

@@ -2,6 +2,9 @@ package com.rebecaperez.portfolio.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")  // Especificamos el nombre de la tabla como 'users'
 public class User {
@@ -14,6 +17,9 @@ public class User {
   private String email;
   private String password;  // Deberías almacenar la contraseña en un formato seguro (con hash)
   private String role; // Agregar el campo para el rol del usuario
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Message> messages = new ArrayList<>();
 
   // Getters y setters
   public Long getId() {

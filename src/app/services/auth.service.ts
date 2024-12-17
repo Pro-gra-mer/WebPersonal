@@ -74,23 +74,36 @@ export class AuthService {
 
   getToken(): string | null {
     if (typeof window === 'undefined' || !window.localStorage) {
-      console.warn('localStorage no está disponible.');
+      console.log('localStorage no está disponible.');
       return null;
     }
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.warn('Token no encontrado en localStorage.');
+    const storedToken = localStorage.getItem('token');
+    if (!storedToken) {
+      console.log('Token no encontrado en localStorage.');
       return null;
     }
 
-    if (this.isTokenExpired(token)) {
-      console.warn('Token expirado. Realizando logout...');
+    try {
+      const parsedToken = JSON.parse(storedToken); // Parseamos el objeto JSON
+      if (!parsedToken.token) {
+        console.log('La propiedad token no existe en localStorage.');
+        return null;
+      }
+
+      if (this.isTokenExpired(parsedToken.token)) {
+        // Validar si el token está expirado
+        console.log('Token expirado. Realizando logout...');
+        this.logout();
+        return null;
+      }
+
+      return parsedToken.token; // Retornar solo el valor del token
+    } catch (error) {
+      console.error('Error al parsear el token:', error);
       this.logout();
       return null;
     }
-
-    return token;
   }
 
   isLoggedIn(): boolean {
@@ -134,6 +147,13 @@ export class AuthService {
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/forgot-password`, { email });
+    return this.http.post(`${this.apiUrl}/request-password-reset`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, {
+      token,
+      newPassword,
+    });
   }
 }

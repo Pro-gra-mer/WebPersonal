@@ -1,79 +1,157 @@
 package com.rebecaperez.portfolio.service;
 
+import com.rebecaperez.portfolio.model.PasswordResetToken;
 import com.rebecaperez.portfolio.model.User;
+import com.rebecaperez.portfolio.repository.PasswordResetTokenRepository;
 import com.rebecaperez.portfolio.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
 
   private final UserRepository userRepository;
+  private final PasswordResetTokenRepository tokenRepository;
   private final BCryptPasswordEncoder passwordEncoder;
   private final EmailService emailService;
 
-  // Definimos una constante para el rol
   public static final String USER_ROLE = "USER";
 
   @Autowired
-  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, EmailService emailService) {
+  public UserService(UserRepository userRepository, PasswordResetTokenRepository tokenRepository,
+                     BCryptPasswordEncoder passwordEncoder, EmailService emailService) {
     this.userRepository = userRepository;
+    this.tokenRepository = tokenRepository;
     this.passwordEncoder = passwordEncoder;
     this.emailService = emailService;
   }
 
-  // Método para registrar un nuevo usuario
   public User registerNewUser(String username, String email, String password) {
-    // Verificar si el email o el nombre de usuario ya existen
     if (emailExists(email)) {
       throw new RuntimeException("El correo electrónico ya está en uso.");
     }
-
     if (usernameExists(username)) {
       throw new RuntimeException("El nombre de usuario ya está en uso.");
     }
 
-    // Cifrar la contraseña antes de almacenarla
     String encodedPassword = passwordEncoder.encode(password);
 
-    // Crear un nuevo usuario y asignar los valores
     User user = new User();
-    user.setUsername(username);  // Asignar nombre de usuario
-    user.setEmail(email);        // Asignar correo electrónico
-    user.setPassword(encodedPassword);  // Asignar la contraseña cifrada
+    user.setUsername(username);
+    user.setEmail(email);
+    user.setPassword(encodedPassword);
+    user.setRole(USER_ROLE);
 
-    // Asigna un valor por defecto para el rol si es necesario
-    user.setRole(USER_ROLE);  // El rol por defecto será "USER"
-
-    // Guardar el usuario en la base de datos
-    return userRepository.save(user);  // Guardamos el usuario en la base de datos
+    return userRepository.save(user);
   }
 
-  // Método para verificar si el email ya está registrado
   public boolean emailExists(String email) {
     return userRepository.findByEmail(email).isPresent();
   }
 
-  // Método para verificar si el username ya está registrado
   public boolean usernameExists(String username) {
     return userRepository.findByUsername(username).isPresent();
   }
 
-  // Método de autenticación para verificar la contraseña
   public User authenticate(String email, String password) {
     Optional<User> userOptional = userRepository.findByEmail(email);
     if (userOptional.isPresent()) {
       User user = userOptional.get();
-      // Verificar la contraseña con BCryptPasswordEncoder
       if (passwordEncoder.matches(password, user.getPassword())) {
-        return user;  // Si la contraseña es correcta, retornamos el usuario
+        return user;
       }
     }
-    return null; // Si no existe o la contraseña no coincide, retornamos null
+    return null;
   }
 
-  
+  // Enviar enlace de recuperación
+  public void sendPasswordResetLink(String email) {
+    Optional<User> userOptional = userRepository.findByEmail(email);
+    if (userOptional.isEmpty()) {
+      throw new RuntimeException("No se encontró un usuario con el correo proporcionado.");
+    }
+
+    User user = userOptional.get();
+
+    // Eliminar tokens existentes para este usuario
+    tokenRepository.deleteByUser(user);
+
+    String resetToken = UUID.randomUUID().toString();
+    LocalDateTime expirationTime = LocalDateTime.now().plusHours(1);
+
+    PasswordResetToken passwordResetToken = new PasswordResetToken();
+    passwordResetToken.setUser(user);
+    passwordResetToken.setToken(resetToken);
+    passwordResetToken.setExpirationTime(expirationTime);
+    tokenRepository.save(passwordResetToken);
+
+    String resetLink = "http://localhost:4200/reset-password?token=" + resetToken;
+
+    String subject = "Restablecimiento de contraseña";
+    String message = "Hola, " + user.getUsername() + ",\n\n"
+      + "Haz clic en el siguiente enlace para restablecer tu contraseña:\n"
+      + resetLink + "\n\n"
+      + "Si no solicitaste este cambio, ignora este mensaje.\n\n"
+      + "Atentamente,\nTu equipo.";
+
+    emailService.sendEmail(email, subject, message);
+  }
+
+
+  // Validar token
+  @Transactional
+  public void validatePasswordResetToken(String token) {
+    Optional<PasswordResetToken> tokenOptional = tokenRepository.findByToken(token);
+    if (tokenOptional.isEmpty()) {
+      throw new RuntimeException("Token inválido o no encontrado.");
+    }
+
+    PasswordResetToken passwordResetToken = tokenOptional.get();
+
+    // Verificar si el token ha expirado
+    if (passwordResetToken.getExpirationTime().isBefore(LocalDateTime.now())) {
+      tokenRepository.delete(passwordResetToken); // Eliminar token expirado
+      throw new RuntimeException("El token ha expirado.");
+    }
+  }
+
+
+  // Cambiar contraseña
+  public void resetPassword(String token, String newPassword) {
+    Optional<PasswordResetToken> tokenOptional = tokenRepository.findByToken(token);
+    if (tokenOptional.isEmpty()) {
+      throw new RuntimeException("Token inválido.");
+    }
+
+    PasswordResetToken passwordResetToken = tokenOptional.get();
+
+    // Verificar nuevamente la validez del token antes de cambiar la contraseña
+    if (passwordResetToken.getExpirationTime().isBefore(LocalDateTime.now())) {
+      tokenRepository.delete(passwordResetToken); // Eliminar token expirado
+      throw new RuntimeException("El token ha expirado.");
+    }
+
+    User user = passwordResetToken.getUser();
+
+    // Cambiar la contraseña
+    String encodedPassword = passwordEncoder.encode(newPassword);
+    user.setPassword(encodedPassword);
+    userRepository.save(user);
+
+    // Invalidar el token
+    tokenRepository.deleteByToken(token);
+  }
+
+  @Transactional
+  public void invalidateToken(String token) {
+    tokenRepository.deleteByToken(token); // Eliminar el token de la base de datos
+  }
+
+
 }

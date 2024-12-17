@@ -13,6 +13,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  // Manejo de excepciones de validación
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
     Map<String, String> errors = new HashMap<>();
@@ -20,5 +21,13 @@ public class GlobalExceptionHandler {
       errors.put(error.getField(), error.getDefaultMessage());
     }
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+  }
+
+  // Manejo de excepciones genéricas
+  @ExceptionHandler(RuntimeException.class)
+  public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
+    Map<String, String> response = new HashMap<>();
+    response.put("message", ex.getMessage());
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
 }

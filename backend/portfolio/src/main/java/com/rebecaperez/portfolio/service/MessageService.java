@@ -32,6 +32,7 @@ public class MessageService {
 
   // Método para obtener todos los mensajes
   public List<Message> getAllMessages() {
-    return messageRepository.findAllWithUser();
+    List<Message> messages = messageRepository.findAllWithUser(); // Consulta optimizada con JOIN FETCH
+    return messages;
   }
 }
