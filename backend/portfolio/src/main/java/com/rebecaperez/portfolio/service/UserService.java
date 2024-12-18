@@ -66,23 +66,19 @@ public class UserService {
   public User authenticate(String email, String password) {
     User user = userRepository.findByEmail(email)
       .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
-    System.out.println("Usuario encontrado: " + user.getEmail());
-    System.out.println("Contraseña plana ingresada: " + password);
-    System.out.println("Hash almacenado en la base de datos: " + user.getPassword());
-    System.out.println("¿Coinciden?: " + passwordEncoder.matches(password, user.getPassword()));
 
-    if (!passwordEncoder.matches(password, user.getPassword())) {
-      System.out.println("Contraseña inválida para el usuario: " + email);
-      String plainPassword = "q1234567";
-      String newHash = passwordEncoder.encode(plainPassword);
-      System.out.println("Nuevo hash generado: " + newHash);
-      System.out.println("¿Coinciden?: " + passwordEncoder.matches(plainPassword, newHash));
-
-      return null;
+    // Verificar si la cuenta está habilitada
+    if (!user.isEnabled()) {
+      throw new RuntimeException("La cuenta no está confirmada. Por favor, verifica tu correo.");
     }
+
+    // Verificar si la contraseña es válida
+    if (!passwordEncoder.matches(password, user.getPassword())) {
+      throw new RuntimeException("Credenciales inválidas.");
+    }
+
     return user;
   }
-
 
 
   // Enviar enlace de recuperación
@@ -167,6 +163,52 @@ public class UserService {
   public void invalidateToken(String token) {
     tokenRepository.deleteByToken(token); // Eliminar el token de la base de datos
   }
+
+  public void sendAccountConfirmationEmail(User user) {
+    String confirmationToken = UUID.randomUUID().toString();
+    LocalDateTime expirationTime = LocalDateTime.now().plusHours(24);
+
+    PasswordResetToken accountToken = new PasswordResetToken();
+    accountToken.setUser(user);
+    accountToken.setToken(confirmationToken);
+    accountToken.setExpirationTime(expirationTime);
+    tokenRepository.save(accountToken);
+
+    String confirmationLink = "http://localhost:8080/auth/confirm-account?token=" + confirmationToken;
+
+
+    String subject = "Confirma tu cuenta";
+    String message = "Hola, " + user.getUsername() + ",\n\n"
+      + "Al hacer clic en el siguiente enlace se activará tu cuenta y se te redirigirá al inicio de sesión:\n"
+      + confirmationLink + "\n\n"
+      + "Este enlace será válido por 24 horas.\n\n"
+      + "Atentamente,\nRebeca Pérez.";
+
+    emailService.sendEmail(user.getEmail(), subject, message);
+  }
+
+  @Transactional
+  public void confirmAccount(String token) {
+    Optional<PasswordResetToken> tokenOptional = tokenRepository.findByToken(token);
+    if (tokenOptional.isEmpty()) {
+      throw new RuntimeException("Token inválido o no encontrado.");
+    }
+
+    PasswordResetToken accountToken = tokenOptional.get();
+
+    // Verificar si el token ha expirado
+    if (accountToken.getExpirationTime().isBefore(LocalDateTime.now())) {
+      tokenRepository.delete(accountToken); // Eliminar token expirado
+      throw new RuntimeException("El token ha expirado.");
+    }
+
+    User user = accountToken.getUser();
+    user.setEnabled(true); // Activar la cuenta
+    userRepository.save(user); // Persistir el cambio en la base de datos
+
+    tokenRepository.delete(accountToken); // Eliminar token usado
+  }
+
 
 
 }

@@ -6,6 +6,7 @@ import com.rebecaperez.portfolio.model.User;
 import com.rebecaperez.portfolio.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.SecretKey;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -52,6 +54,9 @@ public class AuthController {
 
     // Pasa la contraseña sin codificar
     User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), request.getPassword());
+
+    // Enviar el correo de confirmación
+    userService.sendAccountConfirmationEmail(newUser);
 
     // Generar el JWT para el nuevo usuario
     String token = Jwts.builder()
@@ -136,5 +141,24 @@ public class AuthController {
       return ResponseEntity.badRequest().body(Map.of("message", "Error: " + e.getMessage()));
     }
   }
+
+  @GetMapping("/confirm-account")
+  public void confirmAccount(@RequestParam String token, HttpServletResponse response) throws IOException, IOException {
+    if (token == null || token.isEmpty()) {
+      response.sendRedirect("http://localhost:4200/login?error=token_required");
+      return;
+    }
+
+    try {
+      userService.confirmAccount(token);
+      response.sendRedirect("http://localhost:4200/login?confirmed=true");
+    } catch (RuntimeException e) {
+      response.sendRedirect("http://localhost:4200/login?error=" + e.getMessage());
+    }
+  }
+
+
+
+
 
 }

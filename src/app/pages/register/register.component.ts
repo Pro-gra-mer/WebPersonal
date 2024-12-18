@@ -71,10 +71,10 @@ export class RegisterComponent {
     this.authService.register(this.registerForm.value).subscribe({
       next: (response) => {
         console.log('Registro exitoso, respuesta:', response); // Verifica la respuesta
-        this.message = 'Registro exitoso. Redirigiendo...';
-        setTimeout(() => {
-          this.router.navigate(['/login']); // Redirige al login
-        }, 2000);
+        this.message =
+          'Registro exitoso. Te hemos enviado un enlace de confirmación a tu correo. Por favor, verifica tu cuenta.';
+        this.registerForm.reset(); // Limpia los campos del formulario
+        this.submitted = false; // Restablece el estado de envío
       },
       error: (error) => {
         console.error('Error en el registro:', error);

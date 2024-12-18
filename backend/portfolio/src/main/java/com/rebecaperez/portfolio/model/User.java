@@ -18,6 +18,9 @@ public class User {
   private String password;  // Deberías almacenar la contraseña en un formato seguro (con hash)
   private String role; // Agregar el campo para el rol del usuario
 
+  @Column(nullable = false)
+  private boolean enabled = false;
+
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Message> messages = new ArrayList<>();
 
@@ -60,5 +63,13 @@ public class User {
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 }
