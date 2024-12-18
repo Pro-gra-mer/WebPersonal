@@ -94,6 +94,18 @@
     </button>
   </form>
 
+  <!-- Mensaje dinámico de éxito -->
+  <div
+    *ngIf="message"
+    class="alert mt-3"
+    [ngClass]="{
+      'alert-success': !message.includes('Error'),
+      'alert-danger': message.includes('Error')
+    }"
+  >
+    {{ message }}
+  </div>
+
   <div class="text-center mt-3">
     <span
       >¿Ya tienes cuenta? <a routerLink="/login">Inicia Sesión aquí</a></span
