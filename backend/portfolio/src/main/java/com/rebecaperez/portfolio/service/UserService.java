@@ -6,7 +6,8 @@ import com.rebecaperez.portfolio.repository.PasswordResetTokenRepository;
 import com.rebecaperez.portfolio.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,14 +19,17 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final PasswordResetTokenRepository tokenRepository;
-  private final BCryptPasswordEncoder passwordEncoder;
+
+  @Autowired
+  private final PasswordEncoder passwordEncoder;
+
   private final EmailService emailService;
 
   public static final String USER_ROLE = "USER";
 
   @Autowired
   public UserService(UserRepository userRepository, PasswordResetTokenRepository tokenRepository,
-                     BCryptPasswordEncoder passwordEncoder, EmailService emailService) {
+                     PasswordEncoder passwordEncoder, EmailService emailService) {
     this.userRepository = userRepository;
     this.tokenRepository = tokenRepository;
     this.passwordEncoder = passwordEncoder;
@@ -60,15 +64,26 @@ public class UserService {
   }
 
   public User authenticate(String email, String password) {
-    Optional<User> userOptional = userRepository.findByEmail(email);
-    if (userOptional.isPresent()) {
-      User user = userOptional.get();
-      if (passwordEncoder.matches(password, user.getPassword())) {
-        return user;
-      }
+    User user = userRepository.findByEmail(email)
+      .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
+    System.out.println("Usuario encontrado: " + user.getEmail());
+    System.out.println("Contraseña plana ingresada: " + password);
+    System.out.println("Hash almacenado en la base de datos: " + user.getPassword());
+    System.out.println("¿Coinciden?: " + passwordEncoder.matches(password, user.getPassword()));
+
+    if (!passwordEncoder.matches(password, user.getPassword())) {
+      System.out.println("Contraseña inválida para el usuario: " + email);
+      String plainPassword = "q1234567";
+      String newHash = passwordEncoder.encode(plainPassword);
+      System.out.println("Nuevo hash generado: " + newHash);
+      System.out.println("¿Coinciden?: " + passwordEncoder.matches(plainPassword, newHash));
+
+      return null;
     }
-    return null;
+    return user;
   }
+
+
 
   // Enviar enlace de recuperación
   public void sendPasswordResetLink(String email) {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.SecretKey;
@@ -22,12 +23,15 @@ public class AuthController {
 
   private final UserService userService;
   private final SecretKey secretKey;
-  private final BCryptPasswordEncoder passwordEncoder;
 
   @Autowired
-  public AuthController(UserService userService) {
+  private final PasswordEncoder passwordEncoder;
+
+
+  @Autowired
+  public AuthController(UserService userService, PasswordEncoder passwordEncoder) {
     this.userService = userService;
-    this.passwordEncoder = new BCryptPasswordEncoder();
+    this.passwordEncoder = passwordEncoder;
 
     // Cargar la clave secreta desde la variable de entorno
     String encodedKey = System.getenv("JWT_SECRET_KEY");
@@ -39,7 +43,6 @@ public class AuthController {
 
   @PostMapping("/register")
   public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest request) {
-    // Verificar si el email o el nombre de usuario ya existen
     if (userService.emailExists(request.getEmail())) {
       return ResponseEntity.badRequest().body(Map.of("message", "El correo electrónico ya está en uso."));
     }
@@ -47,24 +50,22 @@ public class AuthController {
       return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario ya está en uso."));
     }
 
-    // Cifrar la contraseña antes de almacenarla en la base de datos
-    String encodedPassword = passwordEncoder.encode(request.getPassword());
-
-    // Registrar al nuevo usuario
-    User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), encodedPassword);
+    // Pasa la contraseña sin codificar
+    User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), request.getPassword());
 
     // Generar el JWT para el nuevo usuario
     String token = Jwts.builder()
       .setSubject(newUser.getEmail())
       .claim("username", newUser.getUsername())
-      .claim("role", "USER") // Rol predeterminado
+      .claim("role", "USER")
       .setIssuedAt(new Date())
-      .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // Expiración de 1 hora
+      .setExpiration(new Date(System.currentTimeMillis() + 3600000))
       .signWith(secretKey)
       .compact();
 
     return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("token", token));
   }
+
 
   @PostMapping("/login")
   public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
