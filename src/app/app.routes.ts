@@ -14,6 +14,7 @@ import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RequestPasswordComponent } from './request-password/request-password.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'request-password', component: RequestPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: '', redirectTo: '/request-password', pathMatch: 'full' },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
   // Ruta protegida: Solo usuarios autenticados
   {
     path: 'admin-dashboard',

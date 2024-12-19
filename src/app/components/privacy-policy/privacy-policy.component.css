@@ -1,0 +1,11 @@
+/* Aplica color blanco a todo el contenido del componente */
+.container {
+  background-color: azure;
+  width: 900px;
+  padding: 35px;
+}
+
+/* Opcional: Cambia el color de los enlaces al pasar el cursor */
+a:hover {
+  color: gray; /* Un tono más claro al pasar el cursor */
+}
