@@ -32,7 +32,7 @@ export class ContactComponent {
     });
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.contactForm.invalid) {
@@ -42,20 +42,20 @@ export class ContactComponent {
 
     const contactMessage: ContactMessage = this.contactForm.value;
 
-    try {
-      const response = await firstValueFrom(
-        this.contactService.sendContactMessage(contactMessage)
-      );
-      console.log('Mensaje enviado con éxito:', response);
-      this.successMessage = 'Mensaje enviado con éxito.';
-      this.errorMessage = '';
-      this.contactForm.reset();
-      this.submitted = false;
-    } catch (error) {
-      console.error('Error al enviar el mensaje:', error);
-      this.errorMessage =
-        'Hubo un error al enviar el mensaje. Intenta de nuevo.';
-      this.successMessage = '';
-    }
+    this.contactService.sendContactMessage(contactMessage).subscribe({
+      next: (response) => {
+        console.log('Mensaje enviado con éxito:', response);
+        this.successMessage = 'Mensaje enviado con éxito.';
+        this.errorMessage = '';
+        this.contactForm.reset();
+        this.submitted = false;
+      },
+      error: (error) => {
+        console.error('Error al enviar el mensaje:', error);
+        this.errorMessage =
+          'Hubo un error al enviar el mensaje. Intenta de nuevo.';
+        this.successMessage = '';
+      },
+    });
   }
 }

@@ -21,6 +21,16 @@ public class ProjectController {
   @Autowired
   private ProjectService projectService;
 
+  @PostMapping
+  public Project createProject(@RequestBody Project project) {
+    return projectService.createProject(project);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deleteProject(@PathVariable Long id) {
+    projectService.deleteProject(id);
+  }
+
   @GetMapping
   public List<Project> getAllProjects() {
     return projectService.getAllProjects();
@@ -31,13 +41,4 @@ public class ProjectController {
     return projectService.getProjectById(id);
   }
 
-  @PostMapping
-  public Project createProject(@RequestBody Project project) {
-    return projectService.createProject(project);
-  }
-
-  @DeleteMapping("/{id}")
-  public void deleteProject(@PathVariable Long id) {
-    projectService.deleteProject(id);
-  }
 }

@@ -19,12 +19,9 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final PasswordResetTokenRepository tokenRepository;
-
   @Autowired
   private final PasswordEncoder passwordEncoder;
-
   private final EmailService emailService;
-
   public static final String USER_ROLE = "USER";
 
   @Autowired
@@ -109,7 +106,7 @@ public class UserService {
       + "Haz clic en el siguiente enlace para restablecer tu contraseña:\n"
       + resetLink + "\n\n"
       + "Si no solicitaste este cambio, ignora este mensaje.\n\n"
-      + "Atentamente,\nTu equipo.";
+      + "Atentamente,\nRebeca Pérez.";
 
     emailService.sendEmail(email, subject, message);
   }
@@ -205,7 +202,6 @@ public class UserService {
     User user = accountToken.getUser();
     user.setEnabled(true); // Activar la cuenta
     userRepository.save(user); // Persistir el cambio en la base de datos
-
     tokenRepository.delete(accountToken); // Eliminar token usado
   }
 

@@ -4,8 +4,6 @@ import { AboutmeComponent } from './pages/aboutme/aboutme.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { ArticlesComponent } from './pages/articles/articles.component';
-import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
@@ -22,8 +20,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'articles', component: ArticlesComponent },
-  { path: 'articles/:id', component: ArticleDetailComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
   { path: 'request-password', component: RequestPasswordComponent },

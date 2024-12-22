@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class ProjectService {
   /*
-   ProjectService uriliza ProjectRepository para realizar las operaciones CRUD llamando a sus métodos
+   ProjectService utiliza ProjectRepository para realizar las operaciones CRUD llamando a sus métodos
    como findAll(), findById(), save(), y deleteById() sin necesidad de implementar su lógica.
    Spring se encarga de implementar estos métodos detrás de escenas.
  */

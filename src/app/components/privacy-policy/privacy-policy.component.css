@@ -1,6 +1,6 @@
 /* Aplica color blanco a todo el contenido del componente */
 .container {
-  background-color: azure;
+  background-color: ghostwhite;
   width: 900px;
   padding: 35px;
 }
