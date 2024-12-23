@@ -1,6 +1,7 @@
 <div class="container-fluid px-5 py-3">
   <h2 class="text-center">Subir Proyecto</h2>
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <!-- Título del Proyecto -->
     <div class="mb-3">
       <label for="title" class="form-label">Título del Proyecto</label>
       <input
@@ -12,6 +13,8 @@
         required
       />
     </div>
+
+    <!-- Descripción breve -->
     <div class="mb-3">
       <label for="description" class="form-label">Descripción</label>
       <textarea
@@ -23,17 +26,19 @@
         required
       ></textarea>
     </div>
+
+    <!-- Contenido enriquecido con Quill -->
     <div class="mb-3">
       <label for="content" class="form-label">Contenido</label>
-      <textarea
-        id="content"
-        formControlName="content"
-        class="form-control"
-        rows="5"
-        placeholder="Ingrese el contenido completo del proyecto"
-        required
-      ></textarea>
+      <div class="quill-editor-container">
+        <quill-editor
+          formControlName="content"
+          placeholder="Ingrese el contenido completo del proyecto"
+        ></quill-editor>
+      </div>
     </div>
+
+    <!-- Fecha de Publicación -->
     <div class="mb-3">
       <label for="publishDate" class="form-label">Fecha de Publicación</label>
       <input
@@ -44,6 +49,8 @@
         required
       />
     </div>
+
+    <!-- URL de la Imagen -->
     <div class="mb-3">
       <label for="imageUrl" class="form-label">URL de la Imagen</label>
       <input
@@ -55,7 +62,11 @@
         required
       />
     </div>
+
+    <!-- Botón para enviar -->
     <button type="submit" class="btn btn-primary w-100">Subir Proyecto</button>
   </form>
+
+  <!-- Mensaje de confirmación o error -->
   <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
 </div>

@@ -5,9 +5,10 @@
       [src]="project.imageUrl"
       alt="{{ project.title }}"
     />
-    <div class="card-body">
+    <div class="card-body py-5 px-5">
       <h2 class="card-title">{{ project.title }}</h2>
-      <p class="card-text">{{ project.content }}</p>
+      <!-- Renderizar contenido enriquecido -->
+      <div class="card-text" [innerHTML]="project.content"></div>
     </div>
   </div>
   <a class="btn btn-primary" [routerLink]="'/projects'">Todos los Proyectos</a>

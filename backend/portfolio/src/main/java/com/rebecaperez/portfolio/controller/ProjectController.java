@@ -26,11 +26,6 @@ public class ProjectController {
     return projectService.createProject(project);
   }
 
-  @DeleteMapping("/{id}")
-  public void deleteProject(@PathVariable Long id) {
-    projectService.deleteProject(id);
-  }
-
   @GetMapping
   public List<Project> getAllProjects() {
     return projectService.getAllProjects();
@@ -39,6 +34,11 @@ public class ProjectController {
   @GetMapping("/{id}")
   public Optional<Project> getProjectById(@PathVariable Long id) {
     return projectService.getProjectById(id);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deleteProject(@PathVariable Long id) {
+    projectService.deleteProject(id);
   }
 
 }
