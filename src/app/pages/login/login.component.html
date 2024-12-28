@@ -1,62 +1,73 @@
-<div class="container-fluid px-5 py-3">
-  <h2 class="text-center">Iniciar Sesión</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="email" class="form-label">Correo Electrónico</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        formControlName="email"
-        placeholder="Ingrese su correo electrónico"
-      />
-      <div
-        *ngIf="submitted && loginForm.controls['email'].errors"
-        class="text-danger"
-      >
-        <small *ngIf="loginForm.controls['email'].errors['required']"
-          >El correo es requerido.</small
-        >
-        <small *ngIf="loginForm.controls['email'].errors['email']"
-          >Formato de correo inválido.</small
+<div class="container py-5 mt-5 d-flex justify-content-center">
+  <div
+    class="card shadow-lg border-0 bg-light"
+    style="max-width: 500px; width: 100%"
+  >
+    <div class="card-body p-5">
+      <h2 class="text-center mb-4">Iniciar Sesión</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Ingrese su correo electrónico"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls['email'].errors"
+            class="text-danger"
+          >
+            <small *ngIf="loginForm.controls['email'].errors['required']">
+              El correo es requerido.
+            </small>
+            <small *ngIf="loginForm.controls['email'].errors['email']">
+              Formato de correo inválido.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            placeholder="Ingrese su contraseña"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls['password'].errors"
+            class="text-danger"
+          >
+            <small *ngIf="loginForm.controls['password'].errors['required']">
+              La contraseña es requerida.
+            </small>
+            <small *ngIf="loginForm.controls['password'].errors['minlength']">
+              Mínimo 8 caracteres.
+            </small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+          Iniciar Sesión
+        </button>
+      </form>
+
+      <!-- Mensaje de error de autenticación -->
+      <div *ngIf="loginError" class="text-danger text-center mt-3">
+        {{ loginError }}
+      </div>
+
+      <div class="text-center mt-3">
+        <a href="request-password">¿Olvidaste tu contraseña?</a>
+      </div>
+      <div class="text-center mt-2">
+        <span
+          >No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></span
         >
       </div>
     </div>
-
-    <div class="mb-3">
-      <label for="password" class="form-label">Contraseña</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        formControlName="password"
-        placeholder="Ingrese su contraseña"
-      />
-      <div
-        *ngIf="submitted && loginForm.controls['password'].errors"
-        class="text-danger"
-      >
-        <small *ngIf="loginForm.controls['password'].errors['required']"
-          >La contraseña es requerida.</small
-        >
-        <small *ngIf="loginForm.controls['password'].errors['minlength']"
-          >Mínimo 8 caracteres.</small
-        >
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
-  </form>
-
-  <!-- Mensaje de error de autenticación -->
-  <div *ngIf="loginError" class="text-danger text-center mt-3">
-    {{ loginError }}
-  </div>
-
-  <div class="text-center mt-3">
-    <a href="request-password">¿Olvidaste tu contraseña?</a>
-  </div>
-  <div class="text-center mt-2">
-    <span>No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></span>
   </div>
 </div>

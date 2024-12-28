@@ -1,28 +1,25 @@
-.table {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.container {
-  margin-bottom: 50px;
-  width: 70%; /* Ocupa el 70% del ancho en pantallas grandes */
-  float: left; /* Alinea el contenedor a la izquierda */
-}
-
 .list-group-item {
-  display: inline-block;
-  overflow-wrap: break-word; /* Permite que el texto se divida en múltiples líneas si es muy largo */
-  word-break: break-word; /* Evita que palabras largas se salgan del contenedor */
+  border: none;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
 }
 
-h2 {
-  color: white;
-  text-align: left; /* Alinea el <h2> a la izquierda */
+.list-group-item p {
+  font-size: 1rem; /* Aumenta ligeramente el tamaño del mensaje */
+  line-height: 1.5; /* Mejora la legibilidad */
 }
 
-.date-separator {
-  margin-top: 20px; /* Separación del span de la fecha */
-  font-size: 0.9em;
+.list-group-item:last-child {
+  border-bottom: none; /* Elimina el borde inferior del último elemento */
+}
+
+h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.text-muted {
+  font-size: 0.9rem;
 }
 
 /* Estilos para pantallas pequeñas */

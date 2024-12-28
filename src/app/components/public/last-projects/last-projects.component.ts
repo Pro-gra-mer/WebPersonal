@@ -18,9 +18,12 @@ export class LastProjectsComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe((projects) => {
+    this.projectService.projects$.subscribe((projects) => {
       // Filtra los tres últimos proyectos
       this.projects = projects.slice(-3).reverse();
     });
+
+    // Inicializa los proyectos si aún no se han cargado
+    this.projectService.getProjects().subscribe();
   }
 }

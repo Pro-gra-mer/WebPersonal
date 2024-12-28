@@ -1,4 +1,13 @@
 <div class="container py-5" *ngIf="project">
+  <!-- Botón Editar visible solo para el administrador -->
+  <a
+    class="btn btn-warning mb-3"
+    *ngIf="isAdmin"
+    [routerLink]="'/projects/edit/' + project.id"
+  >
+    Editar Proyecto
+  </a>
+
   <div class="card mb-5">
     <img
       class="card-img-top"
@@ -15,13 +24,5 @@
     <a class="btn btn-primary" [routerLink]="'/projects'"
       >Todos los Proyectos</a
     >
-    <!-- Botón Editar visible solo para el administrador -->
-    <a
-      class="btn btn-warning"
-      *ngIf="isAdmin"
-      [routerLink]="'/projects/edit/' + project.id"
-    >
-      Editar Proyecto
-    </a>
   </div>
 </div>

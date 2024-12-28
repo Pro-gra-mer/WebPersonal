@@ -1,39 +1,59 @@
-// src/app/services/article.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  private apiUrl = 'http://localhost:8080/api/projects'; // URL base de tu API backend
+  private apiUrl = 'http://localhost:8080/api/projects';
+  private projectsSubject = new BehaviorSubject<Project[]>([]); // Estado centralizado
+  projects$ = this.projectsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  // Método para obtener todos los proyectos
+  // Obtener proyectos y actualizar el estado centralizado
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.apiUrl);
+    return this.http.get<Project[]>(this.apiUrl).pipe(
+      tap((projects) => this.projectsSubject.next(projects)) // Actualiza el estado
+    );
   }
 
-  // Método para obtener un solo proyecto por ID
+  // Obtener un proyecto por ID
   getProject(id: number): Observable<Project> {
     return this.http.get<Project>(`${this.apiUrl}/${id}`);
   }
 
-  // Método para crear un nuevo proyecto
+  // Crear un proyecto y actualizar el estado
   createProject(project: Project): Observable<Project> {
-    const projectWithId = { ...project, id: Date.now() }; // Genera ID aquí
-    return this.http.post<Project>(this.apiUrl, projectWithId);
-  }
-  // Método para actualizar un proyecto existente
-  updateProject(id: number, project: Project): Observable<Project> {
-    return this.http.put<Project>(`${this.apiUrl}/${id}`, project);
+    return this.http.post<Project>(this.apiUrl, project).pipe(
+      tap(() => this.refreshProjects()) // Refresca los proyectos
+    );
   }
 
-  // Método para eliminar un proyecto por ID
+  // Actualizar un proyecto y refrescar el estado
+  updateProject(id: number, project: Project): Observable<Project> {
+    return this.http.put<Project>(`${this.apiUrl}/${id}`, project).pipe(
+      tap(() => this.refreshProjects()) // Refresca los proyectos
+    );
+  }
+
+  // Eliminar un proyecto y actualizar el estado
   deleteProject(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => {
+        const updatedProjects = this.projectsSubject
+          .getValue()
+          .filter((project) => project.id !== id);
+        this.projectsSubject.next(updatedProjects); // Actualiza el estado
+      })
+    );
+  }
+
+  // Método para refrescar la lista de proyectos
+  private refreshProjects(): void {
+    this.getProjects().subscribe();
   }
 }

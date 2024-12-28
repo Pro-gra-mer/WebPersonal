@@ -1,105 +1,112 @@
-<div class="container-fluid px-5 py-3">
-  <h2 class="text-center">Contacto</h2>
-  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="successMessage" class="alert alert-success">
-      {{ successMessage }}
-    </div>
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
+<div class="container py-5 mt-5 d-flex justify-content-center">
+  <div
+    class="card shadow-lg border-0 bg-light"
+    style="max-width: 600px; width: 100%"
+  >
+    <div class="card-body p-5">
+      <h2 class="text-center mb-4">Contacto</h2>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="successMessage" class="alert alert-success">
+          {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
 
-    <div class="mb-3">
-      <label for="name" class="form-label">Nombre</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        formControlName="name"
-        placeholder="Ingrese su nombre"
-        required
-      />
-      <div
-        *ngIf="submitted && contactForm.controls['name'].errors"
-        class="text-danger"
-      >
-        <small *ngIf="contactForm.controls['name'].errors['required']"
-          >El nombre es requerido.</small
-        >
-        <small *ngIf="contactForm.controls['name'].errors['minlength']"
-          >Mínimo 3 caracteres.</small
-        >
-      </div>
-    </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            placeholder="Ingrese su nombre"
+            required
+          />
+          <div
+            *ngIf="submitted && contactForm.controls['name'].errors"
+            class="text-danger"
+          >
+            <small *ngIf="contactForm.controls['name'].errors['required']">
+              El nombre es requerido.
+            </small>
+            <small *ngIf="contactForm.controls['name'].errors['minlength']">
+              Mínimo 3 caracteres.
+            </small>
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Correo Electrónico</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        formControlName="email"
-        placeholder="Ingrese su correo electrónico"
-        required
-      />
-      <div
-        *ngIf="submitted && contactForm.controls['email'].errors"
-        class="text-danger"
-      >
-        <small *ngIf="contactForm.controls['email'].errors['required']"
-          >El correo es requerido.</small
-        >
-        <small *ngIf="contactForm.controls['email'].errors['email']"
-          >Formato de correo inválido.</small
-        >
-      </div>
-    </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Ingrese su correo electrónico"
+            required
+          />
+          <div
+            *ngIf="submitted && contactForm.controls['email'].errors"
+            class="text-danger"
+          >
+            <small *ngIf="contactForm.controls['email'].errors['required']">
+              El correo es requerido.
+            </small>
+            <small *ngIf="contactForm.controls['email'].errors['email']">
+              Formato de correo inválido.
+            </small>
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label for="subject" class="form-label">Asunto</label>
-      <input
-        type="text"
-        class="form-control"
-        id="subject"
-        formControlName="subject"
-        placeholder="Escriba el asunto"
-        required
-      />
-      <div
-        *ngIf="submitted && contactForm.controls['subject'].errors"
-        class="text-danger"
-      >
-        <small *ngIf="contactForm.controls['subject'].errors['required']"
-          >El asunto es requerido.</small
-        >
-        <small *ngIf="contactForm.controls['subject'].errors['minlength']"
-          >Mínimo 5 caracteres.</small
-        >
-      </div>
-    </div>
+        <div class="mb-3">
+          <label for="subject" class="form-label">Asunto</label>
+          <input
+            type="text"
+            class="form-control"
+            id="subject"
+            formControlName="subject"
+            placeholder="Escriba el asunto"
+            required
+          />
+          <div
+            *ngIf="submitted && contactForm.controls['subject'].errors"
+            class="text-danger"
+          >
+            <small *ngIf="contactForm.controls['subject'].errors['required']">
+              El asunto es requerido.
+            </small>
+            <small *ngIf="contactForm.controls['subject'].errors['minlength']">
+              Mínimo 5 caracteres.
+            </small>
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label for="message" class="form-label">Mensaje</label>
-      <textarea
-        class="form-control"
-        id="message"
-        formControlName="message"
-        rows="4"
-        placeholder="Escriba su mensaje aquí..."
-        required
-      ></textarea>
-      <div
-        *ngIf="submitted && contactForm.controls['message'].errors"
-        class="text-danger"
-      >
-        <small *ngIf="contactForm.controls['message'].errors['required']"
-          >El mensaje es requerido.</small
-        >
-        <small *ngIf="contactForm.controls['message'].errors['minlength']"
-          >Mínimo 10 caracteres.</small
-        >
-      </div>
-    </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Mensaje</label>
+          <textarea
+            class="form-control"
+            id="message"
+            formControlName="message"
+            rows="4"
+            placeholder="Escriba su mensaje aquí..."
+            required
+          ></textarea>
+          <div
+            *ngIf="submitted && contactForm.controls['message'].errors"
+            class="text-danger"
+          >
+            <small *ngIf="contactForm.controls['message'].errors['required']">
+              El mensaje es requerido.
+            </small>
+            <small *ngIf="contactForm.controls['message'].errors['minlength']">
+              Mínimo 10 caracteres.
+            </small>
+          </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary w-100">Enviar</button>
-  </form>
+        <button type="submit" class="btn btn-primary w-100">Enviar</button>
+      </form>
+    </div>
+  </div>
 </div>
