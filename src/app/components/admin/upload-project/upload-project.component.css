@@ -1,13 +1,3 @@
-/* Estilos generales del contenedor */
-.container-fluid {
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
 /* Título del formulario */
 h2.text-center {
   font-size: 1.8rem;
@@ -16,28 +6,12 @@ h2.text-center {
   color: #343a40;
 }
 
-/* Estilos generales de los campos de entrada */
-.form-control {
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1rem;
-}
-
 .form-control:focus {
-  border-color: #80bdff;
   box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
-}
-
-/* Espaciado entre los campos */
-.mb-3 {
-  margin-bottom: 1.5rem;
 }
 
 /* Botón de enviar */
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
   padding: 10px 20px;
   font-size: 1.1rem;
   border-radius: 5px;
@@ -51,12 +25,12 @@ h2.text-center {
 /* Mensaje de alerta */
 .alert {
   font-size: 1rem;
-  padding: 10px;
-  border-radius: 5px;
 }
 
 /* Estilo del editor Quill */
 .quill-editor-container {
+  max-width: 100%; /* Limita el ancho al 100% del contenedor */
+  max-height: 400px; /* Altura máxima para evitar desbordamiento */
   border: 1px solid #ced4da;
   border-radius: 5px;
   padding: 0;
