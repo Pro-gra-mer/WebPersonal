@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
+import { AuthService } from '../../services/auth.service'; // Importa AuthService
 import { Project } from '../../models/project.model';
 import { CommonModule } from '@angular/common';
 
@@ -14,10 +15,12 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project | null = null;
+  isAdmin: boolean = false; // Control de visibilidad del botón "Editar"
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService // Inyecta AuthService
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +33,8 @@ export class ProjectDetailComponent implements OnInit {
     } else {
       console.error('Project ID not found in route parameters');
     }
+
+    // Verifica si el usuario actual es administrador
+    this.isAdmin = this.authService.isAdmin();
   }
 }

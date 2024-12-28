@@ -11,5 +11,17 @@
       <div class="card-text" [innerHTML]="project.content"></div>
     </div>
   </div>
-  <a class="btn btn-primary" [routerLink]="'/projects'">Todos los Proyectos</a>
+  <div class="d-flex justify-content-between">
+    <a class="btn btn-primary" [routerLink]="'/projects'"
+      >Todos los Proyectos</a
+    >
+    <!-- Botón Editar visible solo para el administrador -->
+    <a
+      class="btn btn-warning"
+      *ngIf="isAdmin"
+      [routerLink]="'/projects/edit/' + project.id"
+    >
+      Editar Proyecto
+    </a>
+  </div>
 </div>

@@ -1,42 +1,39 @@
 <div class="container py-5">
   <div class="card shadow bg-light">
     <div class="card-body p-5">
-      <h2 class="text-center">Subir Proyecto</h2>
-      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-        <!-- Título del Proyecto -->
+      <h2 class="text-center mb-4">Editar Proyecto</h2>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <!-- Título -->
         <div class="mb-3">
-          <label for="title" class="form-label">Título del Proyecto</label>
+          <label for="title" class="form-label">Título</label>
           <input
             type="text"
             id="title"
             formControlName="title"
             class="form-control"
-            placeholder="Ingrese el título del proyecto"
-            required
+            placeholder="Título del proyecto"
           />
         </div>
 
-        <!-- Descripción breve -->
+        <!-- Descripción -->
         <div class="mb-3">
           <label for="description" class="form-label">Descripción</label>
           <textarea
             id="description"
             formControlName="description"
             class="form-control"
-            rows="4"
-            placeholder="Ingrese una descripción breve del proyecto"
-            required
+            rows="3"
+            placeholder="Descripción breve del proyecto"
           ></textarea>
         </div>
 
-        <!-- Contenido enriquecido con Quill -->
+        <!-- Contenido enriquecido -->
         <div class="mb-3">
           <label for="content" class="form-label">Contenido</label>
           <quill-editor
             #quillEditor
             class="form-control"
             formControlName="content"
-            placeholder="Ingrese el contenido completo del proyecto"
             (onEditorCreated)="onEditorCreated($event)"
           ></quill-editor>
         </div>
@@ -51,7 +48,6 @@
             id="publishDate"
             formControlName="publishDate"
             class="form-control"
-            required
           />
         </div>
 
@@ -63,14 +59,17 @@
             id="imageUrl"
             formControlName="imageUrl"
             class="form-control"
-            placeholder="Ingrese la URL de la imagen del proyecto"
-            required
+            placeholder="URL de la imagen de portada"
           />
         </div>
 
         <!-- Botón para enviar -->
-        <button type="submit" class="btn btn-primary w-100">
-          Subir Proyecto
+        <button
+          type="submit"
+          class="btn btn-primary w-100"
+          [disabled]="editForm.invalid"
+        >
+          Guardar Cambios
         </button>
       </form>
 

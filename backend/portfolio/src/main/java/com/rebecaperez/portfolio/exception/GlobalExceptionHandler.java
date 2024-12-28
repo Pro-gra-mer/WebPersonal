@@ -27,7 +27,8 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(RuntimeException.class)
   public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
     Map<String, String> response = new HashMap<>();
+    response.put("error", "Recurso no encontrado");
     response.put("message", ex.getMessage());
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response); // Cambiar a 404
   }
 }
