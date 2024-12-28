@@ -28,10 +28,13 @@ public class ProjectService {
 
   // Crear un proyecto con contenido limpio y sanitizado
   public Project createProject(Project project) {
-    // Limpia y sanitiza el contenido antes de guardar
-    project.setContent(cleanHtmlContent(project.getContent()));
+    if (project.getContent() == null || project.getContent().isEmpty()) {
+      throw new IllegalArgumentException("El contenido del proyecto no puede estar vacío.");
+    }
+    System.out.println("Guardando proyecto con contenido: " + project.getContent());
     return projectRepository.save(project);
   }
+
 
   public List<Project> getAllProjects() {
     return projectRepository.findAll();

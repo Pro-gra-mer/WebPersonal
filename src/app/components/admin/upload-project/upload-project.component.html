@@ -31,9 +31,11 @@
     <div class="mb-3">
       <label for="content" class="form-label">Contenido</label>
       <quill-editor
+        #quillEditor
         class="form-control"
         formControlName="content"
         placeholder="Ingrese el contenido completo del proyecto"
+        (onEditorCreated)="onEditorCreated($event)"
       ></quill-editor>
     </div>
 

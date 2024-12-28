@@ -23,8 +23,10 @@ public class ProjectController {
 
   @PostMapping
   public Project createProject(@RequestBody Project project) {
+    System.out.println("Contenido recibido: " + project.getContent()); // Depuración
     return projectService.createProject(project);
   }
+
 
   @GetMapping
   public List<Project> getAllProjects() {
