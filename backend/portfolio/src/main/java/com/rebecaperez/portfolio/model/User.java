@@ -1,7 +1,7 @@
 package com.rebecaperez.portfolio.model;
 
 import jakarta.persistence.*;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +21,17 @@ public class User {
   @Column(nullable = false)
   private boolean enabled = false;
 
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Message> messages = new ArrayList<>();
+
+  // Este método se ejecuta automáticamente al persistir el usuario
+  @PrePersist
+  protected void onCreate() {
+    this.createdAt = LocalDateTime.now();
+  }
 
   // Getters y setters
   public Long getId() {
@@ -71,5 +80,21 @@ public class User {
 
   public void setEnabled(boolean enabled) {
     this.enabled = enabled;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public List<Message> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(List<Message> messages) {
+    this.messages = messages;
   }
 }

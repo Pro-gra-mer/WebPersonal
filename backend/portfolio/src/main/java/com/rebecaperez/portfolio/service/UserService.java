@@ -1,13 +1,18 @@
 package com.rebecaperez.portfolio.service;
 
+import com.rebecaperez.portfolio.exception.AccountNotActivatedException;
+import com.rebecaperez.portfolio.exception.CredentialsException;
+import com.rebecaperez.portfolio.exception.GlobalExceptionHandler;
 import com.rebecaperez.portfolio.model.PasswordResetToken;
 import com.rebecaperez.portfolio.model.User;
 import com.rebecaperez.portfolio.repository.PasswordResetTokenRepository;
 import com.rebecaperez.portfolio.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,7 +24,6 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final PasswordResetTokenRepository tokenRepository;
-  @Autowired
   private final PasswordEncoder passwordEncoder;
   private final EmailService emailService;
   public static final String USER_ROLE = "USER";
@@ -64,21 +68,28 @@ public class UserService {
     User user = userRepository.findByEmail(email)
       .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
 
-    // Verificar si la cuenta está habilitada
+    // Verificar si la cuenta está activada
     if (!user.isEnabled()) {
-      throw new RuntimeException("La cuenta no está confirmada. Por favor, verifica tu correo.");
+      throw new AccountNotActivatedException("Cuenta no activada. Verifica tu correo para activarla.");
     }
 
-    // Verificar si la contraseña es válida
+    // Verificar si la contraseña es correcta
     if (!passwordEncoder.matches(password, user.getPassword())) {
-      throw new RuntimeException("Credenciales inválidas.");
+      throw new CredentialsException("Credenciales inválidas.");
     }
 
     return user;
   }
 
 
-  // Enviar enlace de recuperación
+  // Método para eliminar usuarios inactivos después de 24 horas
+  @Transactional
+  public void deleteInactiveUsers() {
+    LocalDateTime expirationTime = LocalDateTime.now().minusHours(24);
+    userRepository.deleteInactiveUsersBefore(expirationTime);
+  }
+
+  // Enviar enlace de recuperación de contraseña
   public void sendPasswordResetLink(String email) {
     Optional<User> userOptional = userRepository.findByEmail(email);
     if (userOptional.isEmpty()) {
@@ -87,7 +98,6 @@ public class UserService {
 
     User user = userOptional.get();
 
-    // Eliminar tokens existentes para este usuario
     tokenRepository.deleteByUser(user);
 
     String resetToken = UUID.randomUUID().toString();
@@ -111,8 +121,7 @@ public class UserService {
     emailService.sendEmail(email, subject, message);
   }
 
-
-  // Validar token
+  // Validar token de recuperación de contraseña
   @Transactional
   public void validatePasswordResetToken(String token) {
     Optional<PasswordResetToken> tokenOptional = tokenRepository.findByToken(token);
@@ -122,13 +131,11 @@ public class UserService {
 
     PasswordResetToken passwordResetToken = tokenOptional.get();
 
-    // Verificar si el token ha expirado
     if (passwordResetToken.getExpirationTime().isBefore(LocalDateTime.now())) {
-      tokenRepository.delete(passwordResetToken); // Eliminar token expirado
+      tokenRepository.delete(passwordResetToken);
       throw new RuntimeException("El token ha expirado.");
     }
   }
-
 
   // Cambiar contraseña
   public void resetPassword(String token, String newPassword) {
@@ -139,26 +146,23 @@ public class UserService {
 
     PasswordResetToken passwordResetToken = tokenOptional.get();
 
-    // Verificar nuevamente la validez del token antes de cambiar la contraseña
     if (passwordResetToken.getExpirationTime().isBefore(LocalDateTime.now())) {
-      tokenRepository.delete(passwordResetToken); // Eliminar token expirado
+      tokenRepository.delete(passwordResetToken);
       throw new RuntimeException("El token ha expirado.");
     }
 
     User user = passwordResetToken.getUser();
 
-    // Cambiar la contraseña
     String encodedPassword = passwordEncoder.encode(newPassword);
     user.setPassword(encodedPassword);
     userRepository.save(user);
 
-    // Invalidar el token
     tokenRepository.deleteByToken(token);
   }
 
   @Transactional
   public void invalidateToken(String token) {
-    tokenRepository.deleteByToken(token); // Eliminar el token de la base de datos
+    tokenRepository.deleteByToken(token);
   }
 
   public void sendAccountConfirmationEmail(User user) {
@@ -172,7 +176,6 @@ public class UserService {
     tokenRepository.save(accountToken);
 
     String confirmationLink = "http://localhost:8080/auth/confirm-account?token=" + confirmationToken;
-
 
     String subject = "Confirma tu cuenta";
     String message = "Hola, " + user.getUsername() + ",\n\n"
@@ -193,18 +196,31 @@ public class UserService {
 
     PasswordResetToken accountToken = tokenOptional.get();
 
-    // Verificar si el token ha expirado
     if (accountToken.getExpirationTime().isBefore(LocalDateTime.now())) {
-      tokenRepository.delete(accountToken); // Eliminar token expirado
+      tokenRepository.delete(accountToken);
       throw new RuntimeException("El token ha expirado.");
     }
 
     User user = accountToken.getUser();
-    user.setEnabled(true); // Activar la cuenta
-    userRepository.save(user); // Persistir el cambio en la base de datos
-    tokenRepository.delete(accountToken); // Eliminar token usado
+    user.setEnabled(true);
+    userRepository.save(user);
+    tokenRepository.delete(accountToken);
   }
 
+  @Component
+  public class UserCleanupScheduler {
 
+    private final UserService userService;
 
+    public UserCleanupScheduler(UserService userService) {
+      this.userService = userService;
+    }
+
+    // Ejecutar cada 24 horas
+    @Scheduled(cron = "0 0 0 * * ?") // Medianoche todos los días
+    public void cleanupInactiveUsers() {
+      userService.deleteInactiveUsers();
+      System.out.println("Usuarios inactivos eliminados.");
+    }
+  }
 }

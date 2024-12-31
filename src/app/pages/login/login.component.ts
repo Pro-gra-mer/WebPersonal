@@ -36,19 +36,27 @@ export class LoginComponent {
     this.submitted = true;
     this.loginError = null; // Reinicia el mensaje de error
 
-    // Valida el formulario
     if (this.loginForm.invalid) {
       return;
     }
 
-    // Llama al servicio de autenticación
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
-        // Redirige al usuario después del inicio de sesión exitoso
         this.router.navigate(['/home']);
       },
-      error: () => {
-        this.loginError = 'Credenciales inválidas o error en el servidor.';
+      error: (errorResponse) => {
+        // Maneja los códigos de estado HTTP y los mensajes
+        if (errorResponse.status === 404) {
+          this.loginError = 'El usuario no existe.';
+        } else if (errorResponse.status === 401) {
+          this.loginError = 'La contraseña es incorrecta.';
+        } else if (errorResponse.status === 403) {
+          this.loginError =
+            'Tu cuenta no está activada. Por favor, verifica tu correo.';
+        } else {
+          this.loginError =
+            'Error en el servidor. Por favor, intenta nuevamente.';
+        }
       },
     });
   }
