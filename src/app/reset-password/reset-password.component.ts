@@ -16,7 +16,7 @@ export class ResetPasswordComponent {
   newPassword: string = '';
   isSuccess: boolean = false;
   isError: boolean = false;
-  errorMessage: string = '';
+  errorMessage: string | null = null;
 
   constructor(
     private authService: AuthService,

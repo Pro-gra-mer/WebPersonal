@@ -17,6 +17,7 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
+  // Configura las reglas de seguridad HTTP, incluyendo CSRF, CORS, permisos y el filtro JWT
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
     http.csrf(csrf -> csrf.disable()) // Desactiva CSRF (solo para APIs públicas o desarrollo)
@@ -31,11 +32,13 @@ public class SecurityConfig {
     return http.build();
   }
 
+  // Configura un codificador de contraseñas utilizando BCrypt
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
+  // Configura el origen de CORS para permitir solicitudes desde el frontend local
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();

@@ -2,7 +2,6 @@ package com.rebecaperez.portfolio.service;
 
 import com.rebecaperez.portfolio.exception.AccountNotActivatedException;
 import com.rebecaperez.portfolio.exception.CredentialsException;
-import com.rebecaperez.portfolio.exception.GlobalExceptionHandler;
 import com.rebecaperez.portfolio.model.PasswordResetToken;
 import com.rebecaperez.portfolio.model.User;
 import com.rebecaperez.portfolio.repository.PasswordResetTokenRepository;
@@ -80,7 +79,6 @@ public class UserService {
 
     return user;
   }
-
 
   // Método para eliminar usuarios inactivos después de 24 horas
   @Transactional
@@ -220,7 +218,6 @@ public class UserService {
     @Scheduled(cron = "0 0 0 * * ?") // Medianoche todos los días
     public void cleanupInactiveUsers() {
       userService.deleteInactiveUsers();
-      System.out.println("Usuarios inactivos eliminados.");
     }
   }
 }

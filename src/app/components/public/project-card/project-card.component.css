@@ -1,41 +1,12 @@
-h5 {
-  color: black;
-  font-size: 2em;
-  font-weight: 700;
-}
-
-p {
-  color: black;
-}
-
-/* project-card.component.css */
 .card {
-  height: 100%;
-  max-height: 400px; /* Limita la altura de cada tarjeta */
-  overflow: hidden; /* Oculta cualquier contenido que desborde */
   transition: transform 0.3s, box-shadow 0.3s; /* Efecto de transición */
   cursor: pointer;
-  margin-bottom: 70px;
-}
-
-.card-body {
-  padding: 15px; /* Ajusta el padding interno para reducir altura */
 }
 
 .card-img-top {
   max-height: 200px; /* Limita la altura de la imagen */
   object-fit: cover; /* Mantiene la proporción de la imagen y recorta si es necesario */
   width: 100%;
-}
-
-.card-title {
-  font-size: 1.2em;
-  margin-bottom: 10px; /* Ajusta el margen inferior del título */
-}
-
-.card-text {
-  font-size: 0.9em;
-  color: #666;
 }
 
 /* Efecto de hover */

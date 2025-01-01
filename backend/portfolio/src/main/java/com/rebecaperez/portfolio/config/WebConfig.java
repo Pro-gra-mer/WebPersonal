@@ -9,6 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    // Configura el manejador de recursos para servir archivos estáticos desde el directorio 'uploads'
     registry.addResourceHandler("/uploads/**")
       .addResourceLocations("file:uploads/");
   }

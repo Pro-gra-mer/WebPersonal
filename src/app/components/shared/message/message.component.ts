@@ -110,7 +110,6 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.errorMessage = null;
 
     if (!this.isLoggedIn) {
-      console.log('User not logged in, redirecting to login');
       this.router.navigate(['/login']);
       return;
     }
@@ -160,7 +159,6 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   private handleError(error: unknown): void {
-    console.error('Detailed error:', error);
     this.errorMessage =
       error instanceof Error ? error.message : 'An unexpected error occurred';
   }

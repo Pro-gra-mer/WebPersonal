@@ -1,4 +1,4 @@
-h4 {
+h2 {
   color: white;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -24,9 +24,12 @@ h5 {
     max-width: 700px;
   }
 }
+
 @media (max-width: 767px) {
+  .carousel {
+    margin-bottom: 400px;
+  }
   .carousel-item .card {
-    max-width: 280px;
-    margin-bottom: 0;
+    max-width: 300px;
   }
 }

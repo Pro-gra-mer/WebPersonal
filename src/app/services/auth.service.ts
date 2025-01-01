@@ -28,19 +28,12 @@ export class AuthService {
       const payload: any = jwtDecode(token);
       return payload.exp * 1000 < Date.now();
     } catch (error) {
-      console.error('Error al decodificar el token:', error);
       return true;
     }
   }
 
   register(userData: User): Observable<any> {
-    return this.http
-      .post(`${this.apiUrl}/register`, userData) // Quitar `responseType: 'text'`
-      .pipe(
-        tap((response: any) => {
-          console.log('Respuesta del backend:', response); // Respuesta para casos exitosos
-        })
-      );
+    return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
@@ -63,7 +56,6 @@ export class AuthService {
             this.email.next(payload.sub); // El email se extrae del 'sub' en el JWT
             this.username.next(payload.username); // El nombre de usuario se extrae del JWT
           } catch (error) {
-            console.error('Error durante el proceso de login:', error);
             this.logout();
             throw error; // Lanzamos el error para manejarlo en el componente
           }
@@ -73,33 +65,29 @@ export class AuthService {
 
   getToken(): string | null {
     if (typeof window === 'undefined' || !window.localStorage) {
-      console.log('localStorage no está disponible.');
       return null;
     }
 
     const storedToken = localStorage.getItem('token');
     if (!storedToken) {
-      console.log('Token no encontrado en localStorage.');
       return null;
     }
 
     try {
       const parsedToken = JSON.parse(storedToken); // Parseamos el objeto JSON
       if (!parsedToken.token) {
-        console.log('La propiedad token no existe en localStorage.');
         return null;
       }
 
       if (this.isTokenExpired(parsedToken.token)) {
         // Validar si el token está expirado
-        console.log('Token expirado. Realizando logout...');
+
         this.logout();
         return null;
       }
 
       return parsedToken.token; // Retornar solo el valor del token
     } catch (error) {
-      console.error('Error al parsear el token:', error);
       this.logout();
       return null;
     }

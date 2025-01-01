@@ -62,7 +62,6 @@ export class EditProjectComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.error('Error al cargar el proyecto:', err);
         this.message = 'Error al cargar los datos del proyecto.';
       },
     });
@@ -80,7 +79,6 @@ export class EditProjectComponent implements OnInit {
 
         const token = this.authService.getToken(); // Obtén el token desde AuthService
         if (!token) {
-          console.error('No estás autenticado. Por favor, inicia sesión.');
           this.message = 'Error: No estás autenticado.';
           return;
         }
@@ -94,7 +92,6 @@ export class EditProjectComponent implements OnInit {
           .subscribe({
             next: (response: any) => {
               const imageUrl = `http://localhost:8080${response.imageUrl}`;
-              console.log('Imagen subida correctamente:', imageUrl);
 
               // Inserta la imagen en el contenido del editor
               const range = this.quillEditor.quillEditor.getSelection();
@@ -109,7 +106,6 @@ export class EditProjectComponent implements OnInit {
               this.message = 'Imagen subida exitosamente.';
             },
             error: (err) => {
-              console.error('Error al subir la imagen:', err);
               this.message = `Error al subir la imagen: ${
                 err.status === 401 ? 'No autorizado.' : err.message
               }`;
@@ -146,10 +142,14 @@ export class EditProjectComponent implements OnInit {
             this.router.navigate(['/projects', this.projectId]);
           },
           error: (err) => {
-            console.error('Error al actualizar el proyecto:', err);
             this.message = 'Error al actualizar el proyecto.';
           },
         });
     }
+  }
+
+  onCancel(): void {
+    // Redirige al inicio o a la página deseada
+    this.router.navigate(['/home']);
   }
 }

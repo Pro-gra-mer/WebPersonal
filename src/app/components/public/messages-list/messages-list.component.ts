@@ -18,6 +18,7 @@ export class MessagesListComponent implements OnInit, OnDestroy {
   messages: Message[] = []; // Arreglo para almacenar todos los mensajes.
   displayedMessages: Message[] = []; // Arreglo para almacenar los mensajes que se mostrarán.
   messagesLimit = 5; // Límite inicial de mensajes a mostrar.
+  errorMessage: string | null = null; // Propiedad para errores visibles
   private destroy$ = new Subject<void>(); // Subject utilizado para completar suscripciones en ngOnDestroy.
   private isLoading = false; // Indicador de estado de carga.
 
@@ -38,7 +39,9 @@ export class MessagesListComponent implements OnInit, OnDestroy {
         this.updateDisplayedMessages(); // Actualizar la lista de mensajes a mostrar.
         this.cd.detectChanges(); // Detectar cambios manualmente para actualizar la vista.
       },
-      error: (error) => console.error('Error in messages subscription:', error), // Manejo de errores.
+      error: () => {
+        this.errorMessage = 'Error al cargar los mensajes. Intenta nuevamente.';
+      },
     });
   }
 
@@ -61,7 +64,7 @@ export class MessagesListComponent implements OnInit, OnDestroy {
       this.messagesLimit += 5; // Incrementa el límite de mensajes a mostrar.
       this.updateDisplayedMessages(); // Actualiza la lista de mensajes a mostrar.
     } catch (error) {
-      console.error('Error loading more messages:', error); // Manejo de errores.
+      this.errorMessage = 'Error al cargar más mensajes. Intenta nuevamente.';
     } finally {
       this.isLoading = false; // Restablece el estado de carga.
     }

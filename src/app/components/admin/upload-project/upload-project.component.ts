@@ -44,9 +44,6 @@ export class UploadProjectComponent {
     const content = this.quillEditor.quillEditor.root.innerHTML;
     this.projectForm.patchValue({ content });
 
-    // Imprime el contenido antes de enviarlo
-    console.log('Contenido antes de enviar:', this.projectForm.value.content);
-
     // Enviar el formulario al backend
     this.projectService.createProject(this.projectForm.value).subscribe({
       next: () => {
@@ -71,7 +68,6 @@ export class UploadProjectComponent {
 
         const token = this.authService.getToken(); // Obtén el token desde AuthService
         if (!token) {
-          console.error('No estás autenticado. Por favor, inicia sesión.');
           this.message = 'Error: No estás autenticado.';
           return;
         }
@@ -85,7 +81,6 @@ export class UploadProjectComponent {
           .subscribe({
             next: (response: any) => {
               const imageUrl = `http://localhost:8080${response.imageUrl}`;
-              console.log('Imagen subida correctamente:', imageUrl);
 
               // Inserta la imagen en el contenido del editor
               const range = this.quillEditor.quillEditor.getSelection();
@@ -101,7 +96,6 @@ export class UploadProjectComponent {
               this.message = 'Imagen subida exitosamente.';
             },
             error: (err) => {
-              console.error('Error al subir la imagen:', err);
               this.message = `Error al subir la imagen: ${
                 err.status === 401 ? 'No autorizado.' : err.message
               }`;

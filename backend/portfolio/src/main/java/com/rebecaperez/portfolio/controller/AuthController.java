@@ -156,9 +156,4 @@ public class AuthController {
       response.sendRedirect("http://localhost:4200/login?error=" + e.getMessage());
     }
   }
-
-
-
-
-
 }

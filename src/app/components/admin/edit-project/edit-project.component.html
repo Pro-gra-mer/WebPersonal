@@ -63,14 +63,22 @@
           />
         </div>
 
-        <!-- Botón para enviar -->
-        <button
-          type="submit"
-          class="btn btn-primary w-100"
-          [disabled]="editForm.invalid"
-        >
-          Guardar Cambios
-        </button>
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-between">
+          <!-- Botón Cancelar -->
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">
+            Cancelar
+          </button>
+
+          <!-- Botón Guardar -->
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="editForm.invalid"
+          >
+            Guardar Cambios
+          </button>
+        </div>
       </form>
 
       <!-- Mensaje de confirmación o error -->

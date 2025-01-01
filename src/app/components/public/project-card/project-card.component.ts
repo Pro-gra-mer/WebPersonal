@@ -4,7 +4,6 @@ import { DateService } from '../../../services/date.service';
 import { AuthService } from '../../../services/auth.service';
 import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-project-card',
@@ -28,6 +27,7 @@ export class ProjectCardComponent implements OnInit {
   @Output() projectDeleted = new EventEmitter<number>();
 
   confirmingDelete: boolean = false; // Estado de confirmación
+  errorMessage: string | null = null; // Mensaje de error para el usuario
 
   constructor(
     private dateService: DateService,
@@ -57,14 +57,18 @@ export class ProjectCardComponent implements OnInit {
     this.confirmingDelete = false; // Cancelar estado de confirmación
   }
 
-  async deleteProject(): Promise<void> {
-    try {
-      await firstValueFrom(this.projectService.deleteProject(this.id));
-      this.projectDeleted.emit(this.id); // Emitir ID del proyecto eliminado
-    } catch (error) {
-      console.error('Error al eliminar el proyecto', error);
-    } finally {
-      this.confirmingDelete = false; // Restablecer estado
-    }
+  deleteProject(): void {
+    this.projectService.deleteProject(this.id).subscribe({
+      next: () => {
+        this.projectDeleted.emit(this.id); // Emitir ID del proyecto eliminado
+      },
+      error: (err) => {
+        this.errorMessage =
+          'Error al eliminar el proyecto. Por favor, intenta nuevamente.';
+      },
+      complete: () => {
+        this.confirmingDelete = false; // Restablecer estado
+      },
+    });
   }
 }

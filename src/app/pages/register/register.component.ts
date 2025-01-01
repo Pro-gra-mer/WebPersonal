@@ -69,15 +69,13 @@ export class RegisterComponent {
     }
 
     this.authService.register(this.registerForm.value).subscribe({
-      next: (response) => {
-        console.log('Registro exitoso, respuesta:', response);
+      next: () => {
         this.message =
           'Registro exitoso. Te hemos enviado un enlace de confirmación a tu correo. Por favor, verifica tu cuenta.';
         this.registerForm.reset(); // Limpia los campos del formulario
         this.submitted = false; // Restablece el estado de envío
       },
       error: (error) => {
-        console.error('Error en el registro:', error);
         if (error.status === 400 && error.error.message) {
           // Captura y muestra el mensaje del backend
           this.message = 'Error en el registro: ' + error.error.message;

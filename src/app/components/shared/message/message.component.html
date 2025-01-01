@@ -1,7 +1,10 @@
-<div class="container mt-4 p-4 bg-light rounded">
-  <h3 class="text-center mb-4">Enviar Mensaje</h3>
+<div
+  class="container mt-4 p-4 bg-light rounded"
+  style="max-width: 500px; margin-left: 0"
+>
+  <h4 class="mb-4">Enviar Mensaje</h4>
   <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
-    <!-- Campo Usuario, solo visible si el usuario está logueado -->
+    <!-- Campo Usuario -->
     <div class="mb-3" *ngIf="isLoggedIn">
       <label for="username" class="form-label">Usuario</label>
       <input
@@ -47,7 +50,7 @@
     <!-- Botón Enviar o Iniciar Sesión -->
     <button
       type="submit"
-      class="btn w-50"
+      class="btn w-100"
       [class.btn-primary]="isLoggedIn"
       [class.btn-secondary]="!isLoggedIn"
       [disabled]="

@@ -20,8 +20,8 @@ import { firstValueFrom } from 'rxjs';
 export class ContactComponent {
   contactForm: FormGroup;
   submitted = false;
-  successMessage = '';
-  errorMessage = '';
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private contactService: ContactService) {
     this.contactForm = this.fb.group({
@@ -44,17 +44,15 @@ export class ContactComponent {
 
     this.contactService.sendContactMessage(contactMessage).subscribe({
       next: (response) => {
-        console.log('Mensaje enviado con éxito:', response);
         this.successMessage = 'Mensaje enviado con éxito.';
-        this.errorMessage = '';
+        this.errorMessage = null;
         this.contactForm.reset();
         this.submitted = false;
       },
       error: (error) => {
-        console.error('Error al enviar el mensaje:', error);
         this.errorMessage =
           'Hubo un error al enviar el mensaje. Intenta de nuevo.';
-        this.successMessage = '';
+        this.successMessage = null;
       },
     });
   }

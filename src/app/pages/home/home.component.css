@@ -1,32 +1,103 @@
-h1 {
-  font-size: 2.6em;
-  margin-top: 80px;
-  margin-bottom: 20px;
-  color: white;
-  text-align: center;
-}
-
+/* Imagen de cabecera */
 .header-img {
+  position: relative;
   width: 100%;
-  height: 400px;
-  background-image: url("/assets/images/dalle.webp");
-  background-size: cover;
-  background-position: bottom;
+  height: 550px;
+  background-image: linear-gradient(
+      135deg,
+      rgba(44, 62, 80, 0.8),
+      rgba(76, 161, 175, 0.8)
+    ),
+    url("/assets/images/miescritorio.jpg");
+  background-size: cover; /* Escala la imagen para cubrir todo el área */
+  background-position: top;
   background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  filter: blur(1px);
+  z-index: 0; /* Asegura que está detrás del contenido */
 }
 
-.size-s {
-  max-width: 500px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  margin-bottom: 30px;
+/* Contenedor del contenido */
+.header-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
 }
 
-@media (max-width: 576px) {
-  h1 {
-    font-size: 1.8em;
+.header-subtitle {
+  text-shadow: 4px 4px 2px rgba(0, 0, 0, 1);
+}
+
+.title-underline {
+  font-size: 3.4rem;
+  font-weight: 400;
+  color: white;
+  margin: 0;
+  text-shadow: 4px 2px 2px rgba(0, 0, 0, 1);
+  position: relative;
+  display: inline-block;
+
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Fondo animado del título */
+.title-with-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* Comienza con 0 de ancho */
+  height: 100%;
+  background: rgba(44, 62, 80, 0.8); /* Fondo semi-transparente */
+  z-index: -1;
+  animation: slide-grow 1s ease-in-out forwards; /* Usamos el keyframe compartido */
+}
+
+/* Subrayado animado */
+.title-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px; /* Espaciado desde el texto */
+  width: 0; /* Comienza con 0 de ancho */
+  height: 4px;
+  background-color: #65d9eb;
+  animation: slide-grow 1s ease-out forwards; /* Usamos el keyframe compartido */
+}
+
+@keyframes slide-grow {
+  from {
+    width: 0;
   }
+  to {
+    width: 100%; /* Crece hasta cubrir todo */
+  }
+}
+
+/* Subtítulo */
+.header-subtitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9); /* Blanco con opacidad */
+  margin-top: 15px;
+}
+
+/* Responsividad */
+@media (max-width: 576px) {
   .header-img {
-    height: 250px;
+    height: 350x;
+  }
+  .title-underline {
+    font-size: 1.6rem;
+  }
+  .header-subtitle {
+    font-size: 1.2rem;
   }
 }

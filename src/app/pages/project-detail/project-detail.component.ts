@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ProjectDetailComponent implements OnInit {
   project: Project | null = null;
   isAdmin: boolean = false; // Control de visibilidad del botón "Editar"
+  errorMessage: string | null = null; // Mensaje de error para el usuario
 
   constructor(
     private projectService: ProjectService,
@@ -28,10 +29,14 @@ export class ProjectDetailComponent implements OnInit {
     if (id) {
       this.projectService.getProject(id).subscribe({
         next: (project) => (this.project = project),
-        error: (error) => console.error('Error loading project:', error),
+        error: () => {
+          this.errorMessage =
+            'Error al cargar el proyecto. Por favor, intenta nuevamente.';
+        },
       });
     } else {
-      console.error('Project ID not found in route parameters');
+      this.errorMessage =
+        'No se encontró el ID del proyecto en los parámetros de la ruta.';
     }
 
     // Verifica si el usuario actual es administrador

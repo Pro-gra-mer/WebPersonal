@@ -47,7 +47,6 @@ export class MessageService {
           this.messagesSubject.next(formattedMessages)
         ),
         catchError((error) => {
-          console.error('Error loading messages:', error);
           throw error;
         })
       );
@@ -89,10 +88,8 @@ export class MessageService {
             ]);
             this.messagesSubject.next(updatedMessages);
           },
-          error: (error) => console.error('Error in tap operator:', error),
         }),
         catchError((error) => {
-          console.error('Error sending message:', error);
           throw error;
         })
       );
