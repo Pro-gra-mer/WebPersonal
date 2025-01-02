@@ -1,4 +1,4 @@
-<div class="container py-5" *ngIf="project">
+<div class="container mt-5 py-5" *ngIf="project">
   <!-- Botón Editar visible solo para el administrador -->
   <a
     class="btn btn-warning mb-3"
@@ -10,12 +10,13 @@
 
   <div class="card mb-5">
     <img
-      class="card-img-top"
+      class="card-img-top w-100"
       [src]="project.imageUrl"
       alt="{{ project.title }}"
+      style="max-height: 500px; object-fit: cover"
     />
     <div class="card-body py-5 px-5">
-      <h2 class="card-title">{{ project.title }}</h2>
+      <h2 class="card-title mb-5">{{ project.title }}</h2>
       <!-- Renderizar contenido enriquecido -->
       <div class="card-text" [innerHTML]="project.content"></div>
     </div>
