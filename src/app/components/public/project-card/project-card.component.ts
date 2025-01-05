@@ -21,13 +21,12 @@ export class ProjectCardComponent implements OnInit {
   @Input() publishDate!: Date;
   @Input() link!: string;
 
-  formattedDate: string = '';
-  isAdmin: boolean = false;
-
   @Output() projectDeleted = new EventEmitter<number>();
 
-  confirmingDelete: boolean = false; // Estado de confirmación
-  errorMessage: string | null = null; // Mensaje de error para el usuario
+  formattedDate: string = '';
+  isAdmin: boolean = false;
+  confirmingDelete: boolean = false;
+  errorMessage: string | null = null;
 
   constructor(
     private dateService: DateService,
@@ -36,6 +35,7 @@ export class ProjectCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Formatea la fecha y verifica el rol del usuario
     this.formattedDate = this.dateService.transformDate(
       this.publishDate,
       'es-ES',
@@ -45,30 +45,26 @@ export class ProjectCardComponent implements OnInit {
         day: 'numeric',
       }
     );
-
     this.isAdmin = this.authService.isAdmin();
   }
 
   confirmDelete(): void {
-    this.confirmingDelete = true; // Activar estado de confirmación
+    this.confirmingDelete = true;
   }
 
   cancelDelete(): void {
-    this.confirmingDelete = false; // Cancelar estado de confirmación
+    this.confirmingDelete = false;
   }
 
   deleteProject(): void {
+    // Llama al servicio y emite el evento al eliminar el proyecto
     this.projectService.deleteProject(this.id).subscribe({
-      next: () => {
-        this.projectDeleted.emit(this.id); // Emitir ID del proyecto eliminado
-      },
-      error: (err) => {
+      next: () => this.projectDeleted.emit(this.id),
+      error: () => {
         this.errorMessage =
-          'Error al eliminar el proyecto. Por favor, intenta nuevamente.';
+          'Error al eliminar el proyecto. Intenta nuevamente.';
       },
-      complete: () => {
-        this.confirmingDelete = false; // Restablecer estado
-      },
+      complete: () => (this.confirmingDelete = false),
     });
   }
 }

@@ -1,9 +1,13 @@
 <div class="container py-5">
+  <!-- Contenedor principal con espacio vertical -->
   <div class="card shadow bg-light">
     <div class="card-body p-5">
+      <!-- Título de la página -->
       <h2 class="text-center mb-4">Editar Proyecto</h2>
+
+      <!-- Formulario para editar un proyecto -->
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <!-- Título -->
+        <!-- Título del proyecto -->
         <div class="mb-3">
           <label for="title" class="form-label">Título</label>
           <input
@@ -15,7 +19,7 @@
           />
         </div>
 
-        <!-- Descripción -->
+        <!-- Descripción breve -->
         <div class="mb-3">
           <label for="description" class="form-label">Descripción</label>
           <textarea
@@ -27,7 +31,7 @@
           ></textarea>
         </div>
 
-        <!-- Contenido enriquecido -->
+        <!-- Editor de contenido enriquecido -->
         <div class="mb-3">
           <label for="content" class="form-label">Contenido</label>
           <quill-editor
@@ -38,7 +42,7 @@
           ></quill-editor>
         </div>
 
-        <!-- Fecha de Publicación -->
+        <!-- Fecha de publicación -->
         <div class="mb-3">
           <label for="publishDate" class="form-label"
             >Fecha de Publicación</label
@@ -51,7 +55,7 @@
           />
         </div>
 
-        <!-- URL de la Imagen -->
+        <!-- URL de la imagen de portada -->
         <div class="mb-3">
           <label for="imageUrl" class="form-label">URL de la Imagen</label>
           <input
@@ -65,12 +69,12 @@
 
         <!-- Botones de acción -->
         <div class="d-flex justify-content-between">
-          <!-- Botón Cancelar -->
+          <!-- Cancelar cambios -->
           <button type="button" class="btn btn-secondary" (click)="onCancel()">
             Cancelar
           </button>
 
-          <!-- Botón Guardar -->
+          <!-- Guardar cambios; desactivado si el formulario es inválido -->
           <button
             type="submit"
             class="btn btn-primary"
@@ -81,7 +85,7 @@
         </div>
       </form>
 
-      <!-- Mensaje de confirmación o error -->
+      <!-- Mensaje informativo (éxito o error) -->
       <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
     </div>
   </div>

@@ -47,17 +47,13 @@
       </div>
     </div>
 
-    <!-- Botón Enviar o Iniciar Sesión -->
+    <!-- Botón Enviar o Iniciar Sesión dependiendo de si el usuario está logueado o no -->
     <button
-      type="submit"
+      type="button"
       class="btn w-100"
       [class.btn-primary]="isLoggedIn"
       [class.btn-secondary]="!isLoggedIn"
-      [disabled]="
-        messageForm.invalid ||
-        messageForm.get('content')?.value?.length > 500 ||
-        !isLoggedIn
-      "
+      (click)="onSubmit()"
     >
       {{ isLoggedIn ? "Enviar" : "Inicia sesión para comentar" }}
     </button>

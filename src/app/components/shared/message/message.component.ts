@@ -22,14 +22,14 @@ import { takeUntil, finalize, map } from 'rxjs/operators';
   styleUrls: ['./message.component.css'],
 })
 export class MessageComponent implements OnInit, OnDestroy {
-  readonly MAX_CONTENT_LENGTH = 500;
+  readonly MAX_CONTENT_LENGTH = 500; // Máxima longitud permitida para el mensaje
   messageForm: FormGroup = this.fb.group({
     content: [
       '',
       [
         Validators.required,
         Validators.maxLength(this.MAX_CONTENT_LENGTH),
-        Validators.pattern(/^(?!\s*$).+/),
+        Validators.pattern(/^(?!\s*$).+/), // Valida que no sea solo espacios en blanco
       ],
     ],
   });
@@ -51,6 +51,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   private setupFormSubscription(): void {
+    // Actualiza el contador de caracteres restantes al cambiar el contenido
     this.messageForm
       .get('content')
       ?.valueChanges.pipe(takeUntil(this.destroy$))
@@ -58,6 +59,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Combina los estados de sesión y nombre de usuario
     combineLatest([this.authService.isLoggedIn$, this.authService.username$])
       .pipe(
         takeUntil(this.destroy$),
@@ -67,41 +69,31 @@ export class MessageComponent implements OnInit, OnDestroy {
         next: ({ isLoggedIn, username }) => {
           this.isLoggedIn = isLoggedIn;
           this.username = username;
-          if (!isLoggedIn) {
-            console.log('User not logged in');
-          }
         },
         error: (error) => this.handleError(error),
       });
   }
 
   ngOnDestroy(): void {
+    // Limpia las suscripciones para evitar fugas de memoria
     this.destroy$.next();
     this.destroy$.complete();
   }
 
+  // Calcula y actualiza el número de caracteres restantes permitidos para el contenido del mensaje
   private updateCharactersRemaining(content: string): void {
     this.charactersRemaining = this.MAX_CONTENT_LENGTH - (content?.length || 0);
   }
 
   getErrorMessage(): string {
     const contentControl = this.messageForm.get('content');
+    if (!contentControl?.errors) return '';
 
-    if (!contentControl?.errors) {
-      return '';
-    }
-
-    if (contentControl.errors['required']) {
-      return 'Message content is required';
-    }
-
-    if (contentControl.errors['maxlength']) {
+    if (contentControl.errors['required']) return 'Message content is required';
+    if (contentControl.errors['maxlength'])
       return `Message cannot exceed ${this.MAX_CONTENT_LENGTH} characters`;
-    }
-
-    if (contentControl.errors['pattern']) {
+    if (contentControl.errors['pattern'])
       return 'Message cannot be empty or contain only whitespace';
-    }
 
     return 'Invalid message content';
   }
@@ -138,17 +130,11 @@ export class MessageComponent implements OnInit, OnDestroy {
       .sendMessage(newMessage)
       .pipe(
         takeUntil(this.destroy$),
-        finalize(() => {
-          this.isSubmitting = false;
-        })
+        finalize(() => (this.isSubmitting = false))
       )
       .subscribe({
-        next: () => {
-          this.resetForm();
-        },
-        error: (error) => {
-          this.handleError(error);
-        },
+        next: () => this.resetForm(),
+        error: (error) => this.handleError(error),
       });
   }
 

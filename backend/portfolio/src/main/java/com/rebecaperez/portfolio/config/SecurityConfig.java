@@ -17,35 +17,46 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
-  // Configura las reglas de seguridad HTTP, incluyendo CSRF, CORS, permisos y el filtro JWT
+  // Configura reglas de seguridad HTTP para la aplicación
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
-    http.csrf(csrf -> csrf.disable()) // Desactiva CSRF (solo para APIs públicas o desarrollo)
-      .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Configura CORS
+    http
+      // Desactiva CSRF para facilitar las solicitudes desde clientes externos
+      .csrf(csrf -> csrf.disable())
+
+      // Configura CORS para permitir solicitudes desde dominios específicos
+      .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
+      // Define reglas de acceso para diferentes rutas
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/images/upload").hasRole("ADMIN") // Solo admin puede subir imágenes
-        .requestMatchers("/messages/**").authenticated() // Protege rutas de mensajes
-        .anyRequest().permitAll() // Permite acceso público a otras rutas
+        .requestMatchers("/api/images/upload").hasRole("ADMIN") // Solo administradores pueden subir imágenes
+        .requestMatchers("/messages/**").authenticated() // Solo usuarios autenticados pueden acceder a mensajes
+        .anyRequest().permitAll() // Permite el acceso público a las demás rutas
       )
-      .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sin sesiones
-      .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Añade el filtro JWT
+
+      // Configura la política de sesión como STATELESS (sin mantener sesiones en el servidor)
+      .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+      // Añade el filtro JWT antes del filtro de autenticación de usuario y contraseña
+      .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
     return http.build();
   }
 
-  // Configura un codificador de contraseñas utilizando BCrypt
+  // Configura BCrypt como codificador de contraseñas para mayor seguridad
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
-  // Configura el origen de CORS para permitir solicitudes desde el frontend local
+  // Configura CORS para permitir solicitudes desde el frontend (modificar para producción)
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Permite el frontend local
-    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Métodos permitidos
-    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Headers permitidos
-    configuration.setExposedHeaders(List.of("Authorization")); // Opcional, si necesitas exponer algún header
+    configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Cambiar a dominios de producción
+    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Métodos HTTP permitidos
+    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Headers permitidos en solicitudes
+    configuration.setExposedHeaders(List.of("Authorization")); // Headers expuestos en respuestas
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;

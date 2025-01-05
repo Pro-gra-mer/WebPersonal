@@ -43,6 +43,9 @@ public class UserService {
     if (usernameExists(username)) {
       throw new RuntimeException("El nombre de usuario ya está en uso.");
     }
+    if (username.toLowerCase().contains("admin")) { // Verifica si el nombre contiene "admin"
+      throw new RuntimeException("El nombre de usuario no puede contener la palabra 'admin'.");
+    }
 
     String encodedPassword = passwordEncoder.encode(password);
 
@@ -177,7 +180,7 @@ public class UserService {
 
     String subject = "Confirma tu cuenta";
     String message = "Hola, " + user.getUsername() + ",\n\n"
-      + "Al hacer clic en el siguiente enlace se activará tu cuenta y se te redirigirá al inicio de sesión:\n"
+      + "Gracias por registrarte. Al hacer clic en el siguiente enlace se activará tu cuenta y se te redirigirá al inicio de sesión:\n"
       + confirmationLink + "\n\n"
       + "Este enlace será válido por 24 horas.\n\n"
       + "Atentamente,\nRebeca Pérez.";

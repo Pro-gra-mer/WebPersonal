@@ -17,10 +17,10 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./edit-project.component.css'],
 })
 export class EditProjectComponent implements OnInit {
-  @ViewChild('quillEditor', { static: false }) quillEditor: any;
-  editForm: FormGroup;
-  projectId: number | null = null;
-  message: string | null = null;
+  @ViewChild('quillEditor', { static: false }) quillEditor: any; // Referencia al editor Quill
+  editForm: FormGroup; // Formulario reactivo para edición
+  projectId: number | null = null; // ID del proyecto obtenido de la URL
+  message: string | null = null; // Mensaje para el usuario
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,29 +30,31 @@ export class EditProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    // Configuración inicial del formulario con validaciones
     this.editForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(250)]],
-      content: ['', [Validators.required]], // Para el editor Quill
+      content: ['', [Validators.required]], // Contenido enriquecido
       publishDate: [null, Validators.required],
-      imageUrl: ['', [Validators.required, Validators.pattern('https?://.+')]], // Imagen de portada
+      imageUrl: ['', [Validators.required, Validators.pattern('https?://.+')]],
     });
   }
 
   ngOnInit(): void {
-    // Obtén el ID del proyecto desde la URL
+    // Obtiene el ID del proyecto desde la URL
     this.projectId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.projectId) {
-      this.loadProject(this.projectId);
+      this.loadProject(this.projectId); // Carga datos si hay un ID válido
     } else {
       this.message = 'Error: No se encontró el ID del proyecto.';
     }
   }
 
   loadProject(id: number): void {
+    // Carga los datos del proyecto desde el servicio
     this.projectService.getProject(id).subscribe({
       next: (project: Project) => {
-        // Rellena el formulario con los datos del proyecto
+        // Llena el formulario con los datos recibidos
         this.editForm.patchValue({
           title: project.title,
           description: project.description,
@@ -61,23 +63,25 @@ export class EditProjectComponent implements OnInit {
           imageUrl: project.imageUrl,
         });
       },
-      error: (err) => {
+      error: () => {
         this.message = 'Error al cargar los datos del proyecto.';
       },
     });
   }
 
   handleImageUpload() {
+    // Manejador para la carga de imágenes en el editor
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
+
     input.onchange = () => {
       const file = input.files ? input.files[0] : null;
       if (file) {
         const formData = new FormData();
         formData.append('image', file);
 
-        const token = this.authService.getToken(); // Obtén el token desde AuthService
+        const token = this.authService.getToken(); // Token de autenticación
         if (!token) {
           this.message = 'Error: No estás autenticado.';
           return;
@@ -85,15 +89,13 @@ export class EditProjectComponent implements OnInit {
 
         this.http
           .post('http://localhost:8080/api/images/upload', formData, {
-            headers: {
-              Authorization: `Bearer ${token}`, // Agrega el token al encabezado
-            },
+            headers: { Authorization: `Bearer ${token}` },
           })
           .subscribe({
             next: (response: any) => {
               const imageUrl = `http://localhost:8080${response.imageUrl}`;
 
-              // Inserta la imagen en el contenido del editor
+              // Inserta la imagen en el editor Quill
               const range = this.quillEditor.quillEditor.getSelection();
               if (range) {
                 this.quillEditor.quillEditor.insertEmbed(
@@ -119,8 +121,9 @@ export class EditProjectComponent implements OnInit {
   }
 
   onEditorCreated(quillInstance: any) {
-    const toolbar = quillInstance.getModule('toolbar'); // Obtén el módulo de toolbar
-    toolbar.addHandler('image', this.handleImageUpload.bind(this)); // Vincula el manejador
+    // Configura un manejador personalizado para la opción de cargar imágenes
+    const toolbar = quillInstance.getModule('toolbar');
+    toolbar.addHandler('image', this.handleImageUpload.bind(this));
   }
 
   onSubmit(): void {
@@ -129,11 +132,12 @@ export class EditProjectComponent implements OnInit {
       return;
     }
 
-    // Actualiza el contenido del editor antes de enviar
+    // Actualiza el contenido del editor Quill antes de enviar
     const content = this.quillEditor.quillEditor.root.innerHTML;
     this.editForm.patchValue({ content });
 
     if (this.projectId) {
+      // Envía los datos actualizados al servidor
       this.projectService
         .updateProject(this.projectId, this.editForm.value)
         .subscribe({
@@ -141,7 +145,7 @@ export class EditProjectComponent implements OnInit {
             this.message = 'Proyecto actualizado exitosamente.';
             this.router.navigate(['/projects', this.projectId]);
           },
-          error: (err) => {
+          error: () => {
             this.message = 'Error al actualizar el proyecto.';
           },
         });
@@ -149,7 +153,7 @@ export class EditProjectComponent implements OnInit {
   }
 
   onCancel(): void {
-    // Redirige al inicio o a la página deseada
+    // Redirige al usuario al inicio u otra página
     this.router.navigate(['/home']);
   }
 }

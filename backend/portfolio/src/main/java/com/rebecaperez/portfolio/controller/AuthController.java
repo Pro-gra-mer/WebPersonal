@@ -45,31 +45,39 @@ public class AuthController {
 
   @PostMapping("/register")
   public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest request) {
+    // Verificar si el email ya existe
     if (userService.emailExists(request.getEmail())) {
       return ResponseEntity.badRequest().body(Map.of("message", "El correo electrónico ya está en uso."));
     }
+    // Verificar si el nombre de usuario ya existe
     if (userService.usernameExists(request.getUsername())) {
       return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario ya está en uso."));
     }
 
-    // Pasa la contraseña sin codificar
-    User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), request.getPassword());
+    try {
+      // Intentar registrar al nuevo usuario
+      User newUser = userService.registerNewUser(request.getUsername(), request.getEmail(), request.getPassword());
 
-    // Enviar el correo de confirmación
-    userService.sendAccountConfirmationEmail(newUser);
+      // Enviar el correo de confirmación
+      userService.sendAccountConfirmationEmail(newUser);
 
-    // Generar el JWT para el nuevo usuario
-    String token = Jwts.builder()
-      .setSubject(newUser.getEmail())
-      .claim("username", newUser.getUsername())
-      .claim("role", "USER")
-      .setIssuedAt(new Date())
-      .setExpiration(new Date(System.currentTimeMillis() + 3600000))
-      .signWith(secretKey)
-      .compact();
+      // Generar el JWT para el nuevo usuario
+      String token = Jwts.builder()
+        .setSubject(newUser.getEmail())
+        .claim("username", newUser.getUsername())
+        .claim("role", "USER")
+        .setIssuedAt(new Date())
+        .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // Expiración de 1 hora
+        .signWith(secretKey)
+        .compact();
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("token", token));
+      return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("token", token));
+    } catch (RuntimeException e) {
+      // Manejar cualquier excepción lanzada desde el servicio
+      return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+    }
   }
+
 
 
   @PostMapping("/login")

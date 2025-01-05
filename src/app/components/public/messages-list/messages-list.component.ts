@@ -1,43 +1,43 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core'; // Importación de módulos necesarios para el componente y manejo de cambios.
-import { CommonModule } from '@angular/common'; // Módulo común de Angular.
-import { DateService } from '../../../services/date.service'; // Servicio personalizado para manejo de fechas.
-import { Message } from '../../../models/message.model'; // Modelo de datos para mensajes.
-import { MessageService } from '../../../services/message.service'; // Servicio de manejo de mensajes.
-import { Subject } from 'rxjs'; // Clase Subject de RxJS para manejo de suscripciones.
-import { takeUntil } from 'rxjs/operators'; // Operador para completar suscripciones automáticamente.
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DateService } from '../../../services/date.service';
+import { Message } from '../../../models/message.model';
+import { MessageService } from '../../../services/message.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-messages-list', // Selector del componente.
-  standalone: true, // Indica que este es un componente independiente.
-  imports: [CommonModule], // Importación de módulos necesarios para este componente.
-  providers: [DateService], // Proveedor del servicio de fecha.
-  templateUrl: './messages-list.component.html', // Ruta de la plantilla HTML del componente.
-  styleUrls: ['./messages-list.component.css'], // Ruta de los estilos CSS del componente.
+  selector: 'app-messages-list',
+  standalone: true,
+  imports: [CommonModule],
+  providers: [DateService],
+  templateUrl: './messages-list.component.html',
+  styleUrls: ['./messages-list.component.css'],
 })
 export class MessagesListComponent implements OnInit, OnDestroy {
-  messages: Message[] = []; // Arreglo para almacenar todos los mensajes.
-  displayedMessages: Message[] = []; // Arreglo para almacenar los mensajes que se mostrarán.
-  messagesLimit = 5; // Límite inicial de mensajes a mostrar.
-  errorMessage: string | null = null; // Propiedad para errores visibles
-  private destroy$ = new Subject<void>(); // Subject utilizado para completar suscripciones en ngOnDestroy.
-  private isLoading = false; // Indicador de estado de carga.
+  messages: Message[] = []; // Todos los mensajes cargados desde el servicio
+  displayedMessages: Message[] = []; // Mensajes visibles en la interfaz
+  messagesLimit = 5; // Límite de mensajes mostrados inicialmente
+  errorMessage: string | null = null; // Mensaje de error para mostrar al usuario
+  private destroy$ = new Subject<void>(); // Permite limpiar suscripciones al destruir el componente
+  private isLoading = false; // Indica si se está cargando más contenido
 
   constructor(
-    private dateService: DateService, // Servicio de fecha inyectado.
-    private messageService: MessageService, // Servicio de mensajes inyectado.
-    private cd: ChangeDetectorRef // ChangeDetectorRef inyectado para detectar cambios manualmente.
+    private dateService: DateService,
+    private messageService: MessageService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    // Suscripción al observable de mensajes del servicio MessageService.
+    // Escucha los mensajes del servicio y formatea la fecha de cada uno
     this.messageService.messages$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (messages) => {
         this.messages = messages.map((msg) => ({
           ...msg,
-          formattedDate: this.dateService.transformDate(msg.date), // Formatear la fecha usando el servicio DateService.
+          formattedDate: this.dateService.transformDate(msg.date),
         }));
-        this.updateDisplayedMessages(); // Actualizar la lista de mensajes a mostrar.
-        this.cd.detectChanges(); // Detectar cambios manualmente para actualizar la vista.
+        this.updateDisplayedMessages(); // Actualiza los mensajes visibles
+        this.cd.detectChanges(); // Fuerza la detección de cambios
       },
       error: () => {
         this.errorMessage = 'Error al cargar los mensajes. Intenta nuevamente.';
@@ -46,27 +46,27 @@ export class MessagesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(); // Emite un valor para completar las suscripciones.
-    this.destroy$.complete(); // Completa el Subject para limpiar las suscripciones.
+    // Limpia las suscripciones para evitar fugas de memoria
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private updateDisplayedMessages(): void {
-    // Actualiza la lista de mensajes a mostrar basado en el límite de mensajes.
+    // Actualiza los mensajes visibles según el límite
     this.displayedMessages = this.messages.slice(0, this.messagesLimit);
   }
 
   loadMoreMessages(): void {
-    // Si ya se está cargando, no hace nada.
-    if (this.isLoading) return;
+    if (this.isLoading) return; // Evita múltiples cargas simultáneas
 
     try {
-      this.isLoading = true; // Establece el estado de carga.
-      this.messagesLimit += 5; // Incrementa el límite de mensajes a mostrar.
-      this.updateDisplayedMessages(); // Actualiza la lista de mensajes a mostrar.
+      this.isLoading = true;
+      this.messagesLimit += 5; // Incrementa el límite de mensajes
+      this.updateDisplayedMessages(); // Muestra más mensajes
     } catch (error) {
       this.errorMessage = 'Error al cargar más mensajes. Intenta nuevamente.';
     } finally {
-      this.isLoading = false; // Restablece el estado de carga.
+      this.isLoading = false; // Restablece el estado de carga
     }
   }
 }

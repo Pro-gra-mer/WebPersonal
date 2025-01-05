@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { jwtDecode } from 'jwt-decode'; // Importación corregida de jwt-decode
+import { jwtDecode } from 'jwt-decode';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 
@@ -18,11 +18,13 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  // Observables para compartir estados con los componentes
   public isLoggedIn$: Observable<boolean> = this.loggedIn.asObservable();
   public isAdmin$: Observable<boolean> = this.admin.asObservable();
   public email$: Observable<string | null> = this.email.asObservable();
   public username$: Observable<string | null> = this.username.asObservable();
 
+  // Verifica si un token está expirado
   private isTokenExpired(token: string): boolean {
     try {
       const payload: any = jwtDecode(token);
@@ -53,11 +55,11 @@ export class AuthService {
             const payload: any = jwtDecode(token);
             this.loggedIn.next(true);
             this.admin.next(payload.role === 'ADMIN');
-            this.email.next(payload.sub); // El email se extrae del 'sub' en el JWT
-            this.username.next(payload.username); // El nombre de usuario se extrae del JWT
+            this.email.next(payload.sub);
+            this.username.next(payload.username);
           } catch (error) {
-            this.logout();
-            throw error; // Lanzamos el error para manejarlo en el componente
+            this.logout(); // Desloguea en caso de error
+            throw error;
           }
         })
       );
@@ -82,7 +84,7 @@ export class AuthService {
       if (this.isTokenExpired(parsedToken.token)) {
         // Validar si el token está expirado
 
-        this.logout();
+        this.logout(); // Invalida el token si está expirado
         return null;
       }
 
@@ -133,10 +135,12 @@ export class AuthService {
     this.username.next(username);
   }
 
+  // Solicita restablecimiento de contraseña
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/request-password-reset`, { email });
   }
 
+  // Restablece la contraseña con un token
   resetPassword(token: string, newPassword: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/reset-password`, {
       token,

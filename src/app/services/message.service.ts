@@ -9,49 +9,51 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class MessageService {
-  private apiUrl = 'http://localhost:8080/api/messages';
-  private messagesSubject = new BehaviorSubject<Message[]>([]);
-  public messages$ = this.messagesSubject.asObservable();
+  private apiUrl = 'http://localhost:8080/api/messages'; // Endpoint para manejar mensajes
+  private messagesSubject = new BehaviorSubject<Message[]>([]); // Estado reactivo para los mensajes
+  public messages$ = this.messagesSubject.asObservable(); // Observable para exponer los mensajes
 
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private router: Router
   ) {
-    this.initializeMessages();
+    this.initializeMessages(); // Carga inicial de mensajes
   }
 
+  // Genera encabezados de autorización con el token del usuario
   private getAuthHeaders(): HttpHeaders {
     const token = this.authService.getToken();
     if (!token) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/']); // Redirige si no hay token
       return new HttpHeaders();
     }
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
+  // Carga los mensajes desde la API al iniciar el servicio
   private initializeMessages(): void {
     this.loadMessages().subscribe({
       error: (error) => console.error('Failed to initialize messages:', error),
     });
   }
 
+  // Solicita los mensajes al servidor y actualiza el estado local
   private loadMessages(): Observable<Message[]> {
     return this.http
-      .get<Message[]>(this.apiUrl, {
-        headers: this.getAuthHeaders(),
-      })
+      .get<Message[]>(this.apiUrl, { headers: this.getAuthHeaders() })
       .pipe(
-        map((messages) => this.formatAndSortMessages(messages)),
-        tap((formattedMessages) =>
-          this.messagesSubject.next(formattedMessages)
+        map((messages) => this.formatAndSortMessages(messages)), // Formatea y ordena los mensajes
+        tap(
+          (formattedMessages) => this.messagesSubject.next(formattedMessages) // Actualiza el estado
         ),
         catchError((error) => {
-          throw error;
+          throw error; // Manejo de errores
         })
       );
   }
 
+  // Formatea las fechas y ordena los mensajes por fecha descendente
   private formatAndSortMessages(messages: Message[]): Message[] {
     return messages
       .map((message) => ({
@@ -62,11 +64,11 @@ export class MessageService {
       .sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 
+  // Envía un mensaje al servidor y actualiza el estado local
   sendMessage(message: Message): Observable<Message> {
-    // Ensure the message has the correct date format before sending
     const messageToSend = {
       ...message,
-      date: new Date().toISOString(), // Ensure we send an ISO string to the backend
+      date: new Date().toISOString(), // Fecha en formato ISO para el servidor
     };
 
     return this.http
@@ -81,6 +83,7 @@ export class MessageService {
         })),
         tap({
           next: (formattedNewMessage) => {
+            // Actualiza el estado local con el nuevo mensaje
             const currentMessages = this.messagesSubject.value;
             const updatedMessages = this.formatAndSortMessages([
               ...currentMessages,
@@ -95,6 +98,7 @@ export class MessageService {
       );
   }
 
+  // Permite refrescar los mensajes desde la API
   refreshMessages(): Observable<Message[]> {
     return this.loadMessages();
   }

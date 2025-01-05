@@ -38,6 +38,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authService.logout(); // Llamar a logout del servicio
+    this.authService.logout();
   }
 }
