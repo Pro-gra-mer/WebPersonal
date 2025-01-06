@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CarouselComponent } from './carousel.component';
 
-describe('CardsComponent', () => {
+describe('CarouselComponent', () => {
   let component: CarouselComponent;
   let fixture: ComponentFixture<CarouselComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CarouselComponent],
+      imports: [
+        CarouselComponent, // Importar el componente como standalone
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CarouselComponent);

@@ -14,6 +14,7 @@
             id="email"
             formControlName="email"
             placeholder="Ingrese su correo electrónico"
+            autocomplete="email"
           />
           <div
             *ngIf="submitted && loginForm.controls['email'].errors"
@@ -36,6 +37,7 @@
             id="password"
             formControlName="password"
             placeholder="Ingrese su contraseña"
+            autocomplete="current-password"
           />
           <div
             *ngIf="submitted && loginForm.controls['password'].errors"

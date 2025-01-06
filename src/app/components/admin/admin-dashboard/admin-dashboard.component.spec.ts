@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { UploadProjectComponent } from '../upload-project/upload-project.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AdminDashboardComponent', () => {
   let component: AdminDashboardComponent;
@@ -8,7 +9,11 @@ describe('AdminDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminDashboardComponent, UploadProjectComponent],
+      imports: [
+        AdminDashboardComponent, // Standalone component
+        UploadProjectComponent, // Standalone component
+        HttpClientTestingModule, // Necesario si AdminDashboard usa servicios con HttpClient
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminDashboardComponent);

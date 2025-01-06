@@ -43,9 +43,11 @@ public class UserService {
     if (usernameExists(username)) {
       throw new RuntimeException("El nombre de usuario ya está en uso.");
     }
-    if (username.toLowerCase().contains("admin")) { // Verifica si el nombre contiene "admin"
-      throw new RuntimeException("El nombre de usuario no puede contener la palabra 'admin'.");
+    if (username.toLowerCase().contains("admin") ||
+      username.equalsIgnoreCase("Rebeca Pérez")) {
+      throw new RuntimeException("El nombre de usuario no puede contener 'admin' ni ser igual a 'Rebeca Pérez'.");
     }
+
 
     String encodedPassword = passwordEncoder.encode(password);
 

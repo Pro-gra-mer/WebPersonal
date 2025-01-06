@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PrivacyPolicyComponent } from './privacy-policy.component';
 
 describe('PrivacyPolicyComponent', () => {
@@ -8,10 +7,11 @@ describe('PrivacyPolicyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PrivacyPolicyComponent]
-    })
-    .compileComponents();
-    
+      imports: [
+        PrivacyPolicyComponent, // Asegura que el componente standalone se importe correctamente
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PrivacyPolicyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

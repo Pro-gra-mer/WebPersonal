@@ -28,7 +28,7 @@ export class EditProjectComponent implements OnInit {
     private http: HttpClient,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    public router: Router
   ) {
     // Configuración inicial del formulario con validaciones
     this.editForm = this.formBuilder.group({
