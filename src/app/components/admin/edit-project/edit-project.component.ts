@@ -120,10 +120,16 @@ export class EditProjectComponent implements OnInit {
     input.click();
   }
 
-  onEditorCreated(quillInstance: any) {
-    // Configura un manejador personalizado para la opción de cargar imágenes
-    const toolbar = quillInstance.getModule('toolbar');
-    toolbar.addHandler('image', this.handleImageUpload.bind(this));
+  onEditorCreated(quillInstance: any): void {
+    import('quill')
+      .then(() => {
+        const toolbar = quillInstance.getModule('toolbar');
+        toolbar.addHandler('image', this.handleImageUpload.bind(this)); // Vincula el manejador de imágenes
+      })
+      .catch((error) => {
+        console.error('Error loading Quill:', error);
+        this.message = 'No se pudo inicializar el editor.';
+      });
   }
 
   onSubmit(): void {

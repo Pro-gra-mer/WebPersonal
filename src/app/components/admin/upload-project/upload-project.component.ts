@@ -108,9 +108,15 @@ export class UploadProjectComponent {
     input.click();
   }
 
-  onEditorCreated(quillInstance: any) {
-    // Vincula el manejador para la opción de subir imágenes
-    const toolbar = quillInstance.getModule('toolbar');
-    toolbar.addHandler('image', this.handleImageUpload.bind(this));
+  onEditorCreated(quillInstance: any): void {
+    import('quill')
+      .then(() => {
+        const toolbar = quillInstance.getModule('toolbar');
+        toolbar.addHandler('image', this.handleImageUpload.bind(this)); // Manejador para imágenes
+      })
+      .catch((error) => {
+        console.error('Error loading Quill:', error);
+        this.message = 'No se pudo inicializar el editor.';
+      });
   }
 }

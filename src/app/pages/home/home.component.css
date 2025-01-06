@@ -8,7 +8,7 @@
       rgba(44, 62, 80, 0.4),
       rgba(76, 161, 175, 0.4)
     ),
-    url("/assets/images/miescritorio.jpg");
+    url("/assets/images/miescritorio.webp");
   background-size: cover; /* Escala la imagen para cubrir todo el área */
   background-position: top;
   background-repeat: no-repeat;
