@@ -31,7 +31,7 @@ export class UploadProjectComponent {
       description: ['', [Validators.required, Validators.maxLength(250)]],
       content: ['', [Validators.required]], // Contenido del editor
       publishDate: [new Date(), Validators.required], // Fecha predeterminada actual
-      imageUrl: ['', [Validators.required, Validators.pattern('https?://.+')]], // URL de la imagen
+      imageUrl: ['', [Validators.required, Validators.pattern('https?://.+')]], // URL de la imagen (usada para Cloudinary o imagen directa)
     });
   }
 
@@ -58,7 +58,6 @@ export class UploadProjectComponent {
   }
 
   handleImageUpload() {
-    // Manejador de subida de imágenes desde el editor
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -66,6 +65,12 @@ export class UploadProjectComponent {
     input.onchange = () => {
       const file = input.files ? input.files[0] : null;
       if (file) {
+        // Validar que el archivo sea una imagen
+        if (!file.type.startsWith('image/')) {
+          this.message = 'Por favor, sube un archivo de imagen válido.';
+          return;
+        }
+
         const formData = new FormData();
         formData.append('image', file);
 
@@ -76,12 +81,16 @@ export class UploadProjectComponent {
         }
 
         this.http
-          .post('http://localhost:8080/api/images/upload', formData, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
+          .post(
+            'https://portfolio-backend-latest-veuz.onrender.com/api/images/upload',
+            formData,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
           .subscribe({
             next: (response: any) => {
-              const imageUrl = `http://localhost:8080${response.imageUrl}`;
+              const imageUrl = response.imageUrl; // URL de la imagen subida a Cloudinary
 
               // Inserta la imagen en el editor Quill
               const range = this.quillEditor.quillEditor.getSelection();
@@ -93,6 +102,7 @@ export class UploadProjectComponent {
                 );
                 this.quillEditor.quillEditor.setSelection(range.index + 1); // Posiciona el cursor
               }
+
               this.message = 'Imagen subida exitosamente.';
             },
             error: (err) => {

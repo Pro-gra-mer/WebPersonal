@@ -70,7 +70,6 @@ export class EditProjectComponent implements OnInit {
   }
 
   handleImageUpload() {
-    // Manejador para la carga de imágenes en el editor
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -88,12 +87,16 @@ export class EditProjectComponent implements OnInit {
         }
 
         this.http
-          .post('http://localhost:8080/api/images/upload', formData, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
+          .post(
+            'https://portfolio-backend-latest-veuz.onrender.com/api/images/upload',
+            formData,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
           .subscribe({
             next: (response: any) => {
-              const imageUrl = `http://localhost:8080${response.imageUrl}`;
+              const imageUrl = response.imageUrl; // URL de la imagen subida a Cloudinary
 
               // Inserta la imagen en el editor Quill
               const range = this.quillEditor.quillEditor.getSelection();
@@ -105,6 +108,7 @@ export class EditProjectComponent implements OnInit {
                 );
                 this.quillEditor.quillEditor.setSelection(range.index + 1);
               }
+
               this.message = 'Imagen subida exitosamente.';
             },
             error: (err) => {

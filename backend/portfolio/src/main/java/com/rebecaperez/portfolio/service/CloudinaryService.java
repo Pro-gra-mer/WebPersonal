@@ -14,20 +14,20 @@ public class CloudinaryService {
 
   private final Cloudinary cloudinary;
 
-  public CloudinaryService(
-    @Value("${CLOUDINARY_CLOUD_NAME}") String cloudName,
-    @Value("${CLOUDINARY_API_KEY}") String apiKey,
-    @Value("${CLOUDINARY_API_SECRET}") String apiSecret) {
-    this.cloudinary = new Cloudinary(ObjectUtils.asMap(
-      "cloud_name", cloudName,
-      "api_key", apiKey,
-      "api_secret", apiSecret
-    ));
+  public CloudinaryService(@Value("${CLOUDINARY_URL}") String cloudinaryUrl) {
+    // Usamos la URL completa de Cloudinary para configurar el cliente
+    this.cloudinary = new Cloudinary(cloudinaryUrl);
   }
 
-
   public String uploadFile(MultipartFile file) throws IOException {
-    Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-    return uploadResult.get("secure_url").toString(); // URL pública
+    try {
+      Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+      return uploadResult.get("secure_url").toString();
+    } catch (IOException e) {
+      throw new IOException("Error al subir la imagen: " + e.getMessage());
+    } catch (Exception e) {
+      throw new RuntimeException("Error desconocido al subir la imagen: " + e.getMessage());
+    }
+
   }
 }

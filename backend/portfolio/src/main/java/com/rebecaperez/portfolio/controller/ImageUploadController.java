@@ -18,8 +18,21 @@ public class ImageUploadController {
   @PostMapping("/upload")
   public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) {
     try {
+      // Validar que el archivo no sea mayor a 5 MB
+      if (file.getSize() > 5 * 1024 * 1024) {  // 5 MB
+        return ResponseEntity.badRequest().body("El archivo no puede exceder los 5 MB.");
+      }
+
+      // Validar que el archivo sea una imagen
+      if (!file.getContentType().startsWith("image")) {
+        return ResponseEntity.badRequest().body("El archivo debe ser una imagen.");
+      }
+
       // Subir imagen a Cloudinary
       String imageUrl = cloudinaryService.uploadFile(file);
+
+      // Imprimir en los logs la URL de Cloudinary
+      System.out.println("Cloudinary URL: " + imageUrl);
 
       // Devolver la URL pública en la respuesta
       return ResponseEntity.ok(Map.of("imageUrl", imageUrl));
@@ -27,4 +40,5 @@ public class ImageUploadController {
       return ResponseEntity.status(500).body("Error al subir la imagen: " + e.getMessage());
     }
   }
+
 }

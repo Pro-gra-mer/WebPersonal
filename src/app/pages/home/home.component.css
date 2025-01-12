@@ -5,8 +5,8 @@
   height: 550px;
   background-image: linear-gradient(
       135deg,
-      rgba(44, 62, 80, 0.4),
-      rgba(76, 161, 175, 0.4)
+      rgba(44, 62, 80, 0.2),
+      rgba(76, 161, 175, 0.2)
     ),
     url("/assets/images/miescritorio.webp");
   background-size: cover; /* Escala la imagen para cubrir todo el área */
@@ -109,17 +109,5 @@
   .header-subtitle {
     padding: 10px 10px;
     font-size: 1.2rem;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1280px) {
-  .header-content {
-    width: 90%; /* Reduce el ancho del contenido */
-  }
-  .title-underline {
-    font-size: 2.5rem; /* Escala el tamaño del título */
-  }
-  .header-subtitle {
-    font-size: 1.3rem; /* Ajusta el tamaño del subtítulo */
   }
 }

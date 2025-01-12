@@ -53,12 +53,14 @@ public class SecurityConfig {
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Cambiar a dominios de producción
+    configuration.setAllowedOrigins(List.of("https://rebecaperezportfolio.com", "http://localhost:8080")); // Dominios permitidos
     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Métodos HTTP permitidos
-    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Headers permitidos en solicitudes
-    configuration.setExposedHeaders(List.of("Authorization")); // Headers expuestos en respuestas
+    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Headers permitidos
+    configuration.setExposedHeaders(List.of("Authorization")); // Headers expuestos en las respuestas
+    configuration.setAllowCredentials(true); // Permitir el envío de cookies/autenticación
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
   }
+
 }

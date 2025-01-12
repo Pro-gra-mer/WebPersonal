@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:8080/api/contact-messages';
+  private apiUrl =
+    'https://portfolio-backend-latest-veuz.onrender.com/api/contact-messages';
 
   constructor(private http: HttpClient) {}
 

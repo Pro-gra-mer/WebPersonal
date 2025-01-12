@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/auth';
+  private apiUrl = 'https://portfolio-backend-latest-veuz.onrender.com/auth';
   private loggedIn = new BehaviorSubject<boolean>(false); // Estado de autenticación
   private admin = new BehaviorSubject<boolean>(false); // Estado de rol de administrador
   private email = new BehaviorSubject<string | null>(null); // Estado del email
