@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 export class ProjectService {
   private apiUrl =
     'https://portfolio-backend-latest-veuz.onrender.com/api/projects';
+
   private projectsSubject = new BehaviorSubject<Project[]>([]); // Estado centralizado
   projects$ = this.projectsSubject.asObservable();
 

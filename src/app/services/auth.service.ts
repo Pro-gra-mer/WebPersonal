@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl = 'https://portfolio-backend-latest-veuz.onrender.com/auth';
+
   private loggedIn = new BehaviorSubject<boolean>(false); // Estado de autenticación
   private admin = new BehaviorSubject<boolean>(false); // Estado de rol de administrador
   private email = new BehaviorSubject<string | null>(null); // Estado del email
@@ -146,5 +147,24 @@ export class AuthService {
       token,
       newPassword,
     });
+  }
+
+  private restoreSession(): void {
+    const token = localStorage.getItem('token'); // Recupera el token del localStorage
+
+    if (token && !this.isTokenExpired(token)) {
+      try {
+        const payload: any = jwtDecode(token); // Decodifica el token
+        this.loggedIn.next(true); // Actualiza el estado de autenticación
+        this.admin.next(payload.role === 'ADMIN'); // Actualiza el rol
+        this.email.next(payload.sub); // Actualiza el emailng build
+        this.username.next(payload.username); // Actualiza el username
+      } catch (error) {
+        console.error('Error al restaurar la sesión:', error);
+        this.logout(); // Si ocurre un error, limpia el estado
+      }
+    } else {
+      this.logout(); // Si no hay token o está expirado, limpia el estado
+    }
   }
 }

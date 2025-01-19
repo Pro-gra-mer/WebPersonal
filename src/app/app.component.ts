@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.isAdmin = admin;
       })
     );
+    (this.authService as any).restoreSession();
   }
 
   ngOnDestroy(): void {

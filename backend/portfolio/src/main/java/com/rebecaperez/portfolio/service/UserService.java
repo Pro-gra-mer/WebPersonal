@@ -112,7 +112,7 @@ public class UserService {
     passwordResetToken.setExpirationTime(expirationTime);
     tokenRepository.save(passwordResetToken);
 
-    String resetLink = "http://localhost:4200/reset-password?token=" + resetToken;
+    String resetLink = "http://rebecaperezportfolio.com/reset-password?token=" + resetToken;
 
     String subject = "Restablecimiento de contraseña";
     String message = "Hola, " + user.getUsername() + ",\n\n"
@@ -178,7 +178,7 @@ public class UserService {
     accountToken.setExpirationTime(expirationTime);
     tokenRepository.save(accountToken);
 
-    String confirmationLink = "http://localhost:8080/auth/confirm-account?token=" + confirmationToken;
+    String confirmationLink = "https://portfolio-backend-latest-veuz.onrender.com/auth/confirm-account?token=" + confirmationToken;
 
     String subject = "Confirma tu cuenta";
     String message = "Hola, " + user.getUsername() + ",\n\n"

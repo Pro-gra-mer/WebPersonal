@@ -153,15 +153,15 @@ public class AuthController {
   @GetMapping("/confirm-account")
   public void confirmAccount(@RequestParam String token, HttpServletResponse response) throws IOException, IOException {
     if (token == null || token.isEmpty()) {
-      response.sendRedirect("http://localhost:4200/login?error=token_required");
+      response.sendRedirect("http://rebecaperezportfolio.com/login?error=token_required");
       return;
     }
 
     try {
       userService.confirmAccount(token);
-      response.sendRedirect("http://localhost:4200/login?confirmed=true");
+      response.sendRedirect("http://rebecaperezportfolio.com/login?confirmed=true");
     } catch (RuntimeException e) {
-      response.sendRedirect("http://localhost:4200/login?error=" + e.getMessage());
+      response.sendRedirect("http://rebecaperezportfolio.com/login?error=" + e.getMessage());
     }
   }
 }

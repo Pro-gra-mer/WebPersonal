@@ -3,6 +3,7 @@ package com.rebecaperez.portfolio.config;
 import com.rebecaperez.portfolio.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,7 +31,8 @@ public class SecurityConfig {
       // Define reglas de acceso para diferentes rutas
       .authorizeHttpRequests(auth -> auth
         .requestMatchers("/api/images/upload").hasRole("ADMIN") // Solo administradores pueden subir imágenes
-        .requestMatchers("/messages/**").authenticated() // Solo usuarios autenticados pueden acceder a mensajes
+        .requestMatchers(HttpMethod.GET, "/api/messages/**").permitAll() // Permite GET público para mensajes
+        .requestMatchers(HttpMethod.POST,"/messages/**").authenticated() // Solo usuarios autenticados pueden acceder a mensajes
         .anyRequest().permitAll() // Permite el acceso público a las demás rutas
       )
 
@@ -53,9 +55,9 @@ public class SecurityConfig {
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("https://rebecaperezportfolio.com", "http://localhost:8080")); // Dominios permitidos
+    configuration.setAllowedOrigins(List.of("https://rebecaperezportfolio.com", "https://www.rebecaperezportfolio.com")); // Dominios permitidos
     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Métodos HTTP permitidos
-    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Headers permitidos
+    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With", "Origin", "Accept")); // Headers permitidos
     configuration.setExposedHeaders(List.of("Authorization")); // Headers expuestos en las respuestas
     configuration.setAllowCredentials(true); // Permitir el envío de cookies/autenticación
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

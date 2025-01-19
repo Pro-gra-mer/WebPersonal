@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class MessageService {
   private apiUrl =
     'https://portfolio-backend-latest-veuz.onrender.com/api/messages';
+
   // Endpoint para manejar mensajes
   private messagesSubject = new BehaviorSubject<Message[]>([]); // Estado reactivo para los mensajes
   public messages$ = this.messagesSubject.asObservable(); // Observable para exponer los mensajes
