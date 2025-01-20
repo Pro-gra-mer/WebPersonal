@@ -63,10 +63,12 @@
       </div>
 
       <div class="text-center mt-3">
-        <a href="request-password">¿Olvidaste tu contraseña?</a>
+        <a [routerLink]="'/request-password'">¿Olvidaste tu contraseña?</a>
       </div>
       <div class="text-center mt-2">
-        <span>No tienes cuenta? <a href="/register">Regístrate aquí</a></span>
+        <span
+          >No tienes cuenta? <a [routerLink]="'/register'">Regístrate aquí</a>
+        </span>
       </div>
     </div>
   </div>

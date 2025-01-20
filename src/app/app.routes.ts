@@ -17,27 +17,25 @@ import { EditProjectComponent } from './components/admin/edit-project/edit-proje
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'request-password', component: RequestPasswordComponent },
   { path: 'aboutme', component: AboutmeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'projects', component: ProjectsComponent },
-  { path: 'projects/:id', component: ProjectDetailComponent },
-  { path: 'request-password', component: RequestPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  { path: '', redirectTo: '/request-password', pathMatch: 'full' },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  // Ruta protegida: Solo usuarios autenticados y administradores
   {
     path: 'projects/edit/:id',
     component: EditProjectComponent,
-    canActivate: [authGuard, adminGuard], // Protegido por los guards
+    canActivate: [authGuard, adminGuard],
   },
+  { path: 'projects/:id', component: ProjectDetailComponent },
+  { path: 'projects', component: ProjectsComponent },
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
     canActivate: [authGuard, adminGuard],
   },
-  // Redirección en caso de rutas no encontradas
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

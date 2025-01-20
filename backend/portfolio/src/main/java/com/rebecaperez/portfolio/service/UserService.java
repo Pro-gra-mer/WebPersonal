@@ -141,6 +141,7 @@ public class UserService {
   }
 
   // Cambiar contraseña
+  @Transactional
   public void resetPassword(String token, String newPassword) {
     Optional<PasswordResetToken> tokenOptional = tokenRepository.findByToken(token);
     if (tokenOptional.isEmpty()) {

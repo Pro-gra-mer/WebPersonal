@@ -157,14 +157,23 @@ export class AuthService {
         const payload: any = jwtDecode(token); // Decodifica el token
         this.loggedIn.next(true); // Actualiza el estado de autenticación
         this.admin.next(payload.role === 'ADMIN'); // Actualiza el rol
-        this.email.next(payload.sub); // Actualiza el emailng build
+        this.email.next(payload.sub); // Actualiza el email
         this.username.next(payload.username); // Actualiza el username
       } catch (error) {
         console.error('Error al restaurar la sesión:', error);
-        this.logout(); // Si ocurre un error, limpia el estado
+        this.clearSessionState(); // Limpia el estado, pero no redirige
       }
     } else {
-      this.logout(); // Si no hay token o está expirado, limpia el estado
+      this.clearSessionState(); // Limpia el estado si no hay token o está expirado
     }
+  }
+
+  private clearSessionState(): void {
+    this.loggedIn.next(false);
+    this.admin.next(false);
+    this.email.next(null);
+    this.username.next(null);
+
+    // No redirigir automáticamente desde restoreSession
   }
 }
