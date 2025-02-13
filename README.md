@@ -43,7 +43,7 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 ## 🛠️ Herramientas y Tecnologías Utilizadas
 
 ### Backend
-- **Spring Boot 3.3.7: Desarrollo de backend escalable y de alto rendimiento.
+- **Spring Boot 3.3.7**: Desarrollo de backend escalable y de alto rendimiento.
 - **Java 21**: Lenguaje de programación robusto y seguro.
 - **Spring Security**: Autenticación y autorización con JWT.
 - **Spring JPA**: Interacción con la base de datos mediante JPA.
@@ -52,7 +52,7 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 
 ### Frontend
 - **Angular 17**: SPA con integración a APIs RESTful.
-- **Bootstrap**: Estilos y diseño responsivo.
+- **Bootstrap 5**: Estilos y diseño responsivo.
 - **Quill Editor**: Edición de contenido enriquecido.
 
 ### Otros
