@@ -1,4 +1,4 @@
-# 🌐 Portfolio de Proyectos Personales
+# 🌐 Portfolio 
 ![Portfolio Banner](https://res.cloudinary.com/dl7on9tjj/image/upload/v1737043147/CabeceraPortfolio-min_iec8fe.png)  
 
 ---
