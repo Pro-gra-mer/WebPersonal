@@ -10,43 +10,43 @@ Este proyecto es una aplicación web para la gestión de proyectos, desarrollada
 
 ✅ Autenticación de Usuarios
 
-Registro y autenticación obligatoria para acceder a funcionalidades avanzadas.
+  Registro y autenticación obligatoria para acceder a funcionalidades avanzadas.
 
-Confirmación de cuenta a través de correo electrónico con MailSender.
+  Confirmación de cuenta a través de correo electrónico con MailSender.
 
-Seguridad reforzada para garantizar acceso seguro a la aplicación.
+  Seguridad reforzada para garantizar acceso seguro a la aplicación.
 
 ✅ Mensajería Dinámica
 
-Usuarios autenticados pueden enviar mensajes.
+  Usuarios autenticados pueden enviar mensajes.
 
-El formulario captura automáticamente el nombre de usuario y habilita el botón "Enviar".
+  El formulario captura automáticamente el nombre de usuario y habilita el botón "Enviar".
 
 ✅ Restablecimiento de Contraseña
 
-Formulario para solicitar restablecimiento de contraseña.
+  Formulario para solicitar restablecimiento de contraseña.
 
-Enlace seguro enviado por correo con MailSender.
+  Enlace seguro enviado por correo con MailSender.
 
-Proceso seguro que impide modificaciones no autorizadas de la contraseña.
+  Proceso seguro que impide modificaciones no autorizadas de la contraseña.
 
 ✅ Formulario de Contacto
 
-Permite a los usuarios enviar mensajes al administrador.
+  Permite a los usuarios enviar mensajes al administrador.
 
-Envío de correos a través de MailSender para garantizar la entrega segura.
+  Envío de correos a través de MailSender para garantizar la entrega segura.
 
 ✅ Gestión de Proyectos
 
-La administradora puede crear, editar y eliminar proyectos.
+  La administradora puede crear, editar y eliminar proyectos.
 
-Acceso al Admin Dashboard desde la navbar.
+  Acceso al Admin Dashboard desde la navbar.
 
-Formulario de subida de proyectos con Quill Editor.
+  Formulario de subida de proyectos con Quill Editor.
 
 ✅ Persistencia en Base de Datos
 
-Datos almacenados en MySQL para garantizar gestión a largo plazo y escalabilidad.
+  Datos almacenados en MySQL para garantizar gestión a largo plazo y escalabilidad.
 
 ---
 
