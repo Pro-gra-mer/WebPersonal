@@ -1,4 +1,4 @@
-📚 Portfolio de Proyectos Personales
+## 🌐 Portfolio de Proyectos Personales
 
 📖 Introducción
 
@@ -88,7 +88,7 @@ Hostinger: Hosting del frontend y base de datos.
 
 ---
 
-## 🌐 Cómo Ejecutar el Proyecto
+## 📚 Cómo Ejecutar el Proyecto
 
 1. Clona el repositorio:
    ```bash
