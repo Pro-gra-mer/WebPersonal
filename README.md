@@ -60,7 +60,8 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 - **Postman**: Pruebas y validación de APIs RESTful.
 
 ### Frontend
-- **Angular 17.3.10**: SPA con integración a APIs RESTful. 
+- **Angular 17.3.10**: SPA con integración a APIs RESTful.
+- **HTML**: Estructura de plantillas.
 - **Bootstrap 5**: Estilos y diseño responsivo.
 - **Quill Editor**: Edición de contenido enriquecido.
 - **Cloudinary**: Almacenamiento y optimización de imágenes.
