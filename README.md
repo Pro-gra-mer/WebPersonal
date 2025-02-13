@@ -59,7 +59,7 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 - **MailSender**: Envío de correos para activación de cuenta y recuperación de contraseña.
 
 ### Frontend
-- **Angular 17**: SPA con integración a APIs RESTful. 
+- **Angular 17.3.10**: SPA con integración a APIs RESTful. 
 - **Bootstrap 5**: Estilos y diseño responsivo.
 - **Quill Editor**: Edición de contenido enriquecido.
 
