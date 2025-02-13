@@ -48,7 +48,7 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=spring-boot&logoColor=white) ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) ![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap&logoColor=white) ![Quill Editor](https://img.shields.io/badge/Quill-Editor-00B0FF?style=flat&logo=quill&logoColor=white) <br> ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat&logo=cloudinary&logoColor=white) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white) 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![Render](https://img.shields.io/badge/Render-00979D?style=flat&logo=render&logoColor=white) ![Hostinger](https://img.shields.io/badge/Hostinger-673AB7?style=flat&logo=hostinger&logoColor=white) ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=flat&logo=intellij-idea&logoColor=white)
 
-
+- **IntelliJ IDEA**: Editor de código.
 
 ### Backend
 - **Spring Boot 3.3.7**: Desarrollo de backend escalable y de alto rendimiento.
@@ -57,19 +57,18 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 - **Spring JPA**: Interacción con la base de datos mediante JPA.
 - **MySQL**: Base de datos para almacenamiento de proyectos y usuarios.
 - **MailSender**: Envío de correos para activación de cuenta y recuperación de contraseña.
+- - **Postman**: Pruebas y validación de APIs RESTful.
 
 ### Frontend
 - **Angular 17.3.10**: SPA con integración a APIs RESTful. 
 - **Bootstrap 5**: Estilos y diseño responsivo.
 - **Quill Editor**: Edición de contenido enriquecido.
-
-### Otros
 - **Cloudinary**: Almacenamiento y optimización de imágenes.
-- **Postman**: Pruebas y validación de APIs RESTful.
+
+### Despliegue
 - **Docker**: Contenerización para despliegue eficiente.
 - **Render**: Plataforma de despliegue gratuita para el backend.
 - **Hostinger**: Hosting del frontend y base de datos.
-- **IntelliJ IDEA**: Editor de código.
 
 ---
 
