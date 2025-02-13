@@ -126,7 +126,7 @@ Este proyecto está bajo la **licencia MIT**. Puedes utilizarlo, modificarlo y d
 
 ---
 
-## 🧑‍💻 Autor
+## ✍️ Autora
 
 Desarrollado por **Rebeca Pérez**.
 
