@@ -1,81 +1,90 @@
-# Mi Web Personal - Angular
+📚 Portfolio de Proyectos Personales
 
-Este proyecto es una aplicación web desarrollada en Angular que sirve como portafolio personal. Incluye funcionalidades para gestionar proyectos, artículos, mensajes, y formularios dinámicos para contacto y registro de usuarios.
+📖 Introducción
 
----
-
-## 🛠️ Tecnologías Utilizadas
-
-- **Angular 17.3.10**: Framework principal para el frontend.
-- **Bootstrap 5**: Para el diseño responsivo y estilización.
-- **TypeScript**: Lenguaje principal para el desarrollo.
-- **JSON Server**: Utilizado como backend simulado durante el desarrollo.
-- **MySQL** (planeado): Base de datos para almacenar información persistente en producción.
+Este proyecto es una aplicación web para la gestión de proyectos, desarrollada con Spring Boot 3 y Java 21 para el backend, y Angular 17 para el frontend. La aplicación permite a los usuarios autenticados enviar mensajes, mientras que solo la administradora tiene permisos para crear, editar y eliminar proyectos. El sistema está diseñado para garantizar seguridad y eficiencia, con una arquitectura robusta que facilita el manejo de roles y la administración de contenido de manera sencilla. A lo largo del desarrollo, se ha dado especial atención a la usabilidad, manteniendo un enfoque claro en la experiencia del usuario.
 
 ---
 
-## 🚀 Funcionalidades Principales
+✨ Características Clave
 
-### Gestión de Usuarios
-- Registro y login con validaciones en el frontend.
-- Diferenciación entre usuario estándar y administrador.
-- Manejo de sesiones simuladas con el `AuthService`.
+✅ Autenticación de Usuarios
 
-### Proyectos
-- Sección para mostrar proyectos con detalles individuales.
-- Subida de proyectos desde la **Admin Dashboard**.
-- Almacenamiento y visualización de proyectos usando un backend simulado.
+Registro y autenticación obligatoria para acceder a funcionalidades avanzadas.
 
-### Artículos
-- Visualización de artículos con detalles individuales.
-- Campos adicionales para SEO como slug, meta descripción, y palabra clave.
-- Subida de artículos desde la **Admin Dashboard**.
+Confirmación de cuenta a través de correo electrónico con MailSender.
 
-### Mensajes
-- Mensajería dinámica en tiempo real usando JSON Server.
-- Formulario de mensajes integrado en la página principal.
-- Lista de mensajes con opción de carga progresiva.
+Seguridad reforzada para garantizar acceso seguro a la aplicación.
 
-### Formulario de Contacto
-- Formulario con validaciones para nombre, asunto, correo y mensaje.
-- Planeado: Integración con **Nodemailer** para enviar mensajes por correo.
+✅ Mensajería Dinámica
+
+Usuarios autenticados pueden enviar mensajes.
+
+El formulario captura automáticamente el nombre de usuario y habilita el botón "Enviar".
+
+✅ Restablecimiento de Contraseña
+
+Formulario para solicitar restablecimiento de contraseña.
+
+Enlace seguro enviado por correo con MailSender.
+
+Proceso seguro que impide modificaciones no autorizadas de la contraseña.
+
+✅ Formulario de Contacto
+
+Permite a los usuarios enviar mensajes al administrador.
+
+Envío de correos a través de MailSender para garantizar la entrega segura.
+
+✅ Gestión de Proyectos
+
+La administradora puede crear, editar y eliminar proyectos.
+
+Acceso al Admin Dashboard desde la navbar.
+
+Formulario de subida de proyectos con Quill Editor.
+
+✅ Persistencia en Base de Datos
+
+Datos almacenados en MySQL para garantizar gestión a largo plazo y escalabilidad.
 
 ---
 
-## 📦 Estructura del Proyecto
-📦src
- ┣ 📂app
- ┃ ┣ 📂components
- ┃ ┃ ┣ 📂admin          # Componentes relacionados con la gestión administrativa
- ┃ ┃ ┃ ┣ 📂admin-dashboard
- ┃ ┃ ┃ ┣ 📂upload-article
- ┃ ┃ ┃ ┗ 📂upload-project
- ┃ ┃ ┣ 📂public         # Componentes accesibles públicamente
- ┃ ┃ ┃ ┣ 📂article-card
- ┃ ┃ ┃ ┣ 📂carousel
- ┃ ┃ ┃ ┣ 📂footer
- ┃ ┃ ┃ ┣ 📂last-articles
- ┃ ┃ ┃ ┣ 📂last-projects
- ┃ ┃ ┃ ┣ 📂messages-list
- ┃ ┃ ┃ ┗ 📂project-card
- ┃ ┃ ┗ 📂shared         # Componentes reutilizables en distintas partes de la aplicación
- ┃ ┃ ┃ ┗ 📂message
- ┃ ┣ 📂models           # Modelos de datos usados en el proyecto
- ┃ ┣ 📂pages            # Páginas principales de la aplicación
- ┃ ┃ ┣ 📂aboutme
- ┃ ┃ ┣ 📂article-detail
- ┃ ┃ ┣ 📂articles
- ┃ ┃ ┣ 📂contact
- ┃ ┃ ┣ 📂home
- ┃ ┃ ┣ 📂login
- ┃ ┃ ┣ 📂project-detail
- ┃ ┃ ┣ 📂projects
- ┃ ┃ ┗ 📂register
- ┃ ┣ 📂services         # Servicios para la comunicación con el backend
- ┃ ┗ 📜app.component.ts # Componente raíz del proyecto
- ┣ 📂assets             # Recursos estáticos como imágenes y JSON simulados
- ┃ ┗ 📜simulacionBBDD.json
- ┗ 📜styles.css         # Estilos globales
+🛠️ Herramientas y Tecnologías Utilizadas
+
+Backend
+
+Spring Boot 3: Desarrollo de backend escalable y de alto rendimiento.
+
+Java 21: Lenguaje de programación robusto y seguro.
+
+Spring Security: Autenticación y autorización con JWT.
+
+Spring JPA: Interacción con la base de datos mediante JPA.
+
+MySQL: Base de datos para almacenamiento de proyectos y usuarios.
+
+MailSender: Envío de correos para activación de cuenta y recuperación de contraseña.
+
+Frontend
+
+Angular 17: SPA con integración a APIs RESTful.
+
+Bootstrap: Estilos y diseño responsivo.
+
+Quill Editor: Edición de contenido enriquecido.
+
+Otros
+
+Cloudinary: Almacenamiento y optimización de imágenes.
+
+Postman: Pruebas y validación de APIs RESTful.
+
+Docker: Contenerización para despliegue eficiente.
+
+Render: Plataforma de despliegue gratuita para el backend.
+
+Hostinger: Hosting del frontend y base de datos.
 
 ---
 
