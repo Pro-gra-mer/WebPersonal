@@ -57,7 +57,7 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 - **Spring JPA**: Interacción con la base de datos mediante JPA.
 - **MySQL**: Base de datos para almacenamiento de proyectos y usuarios.
 - **MailSender**: Envío de correos para activación de cuenta y recuperación de contraseña.
-- - **Postman**: Pruebas y validación de APIs RESTful.
+- **Postman**: Pruebas y validación de APIs RESTful.
 
 ### Frontend
 - **Angular 17.3.10**: SPA con integración a APIs RESTful. 
