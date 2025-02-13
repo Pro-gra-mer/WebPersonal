@@ -1,12 +1,12 @@
-## 🌐 Portfolio de Proyectos Personales
+# 🌐 Portfolio de Proyectos Personales
 
-📖 Introducción
+## 📖 Introducción
 
 Este proyecto es una aplicación web para la gestión de proyectos, desarrollada con Spring Boot 3 y Java 21 para el backend, y Angular 17 para el frontend. La aplicación permite a los usuarios autenticados enviar mensajes, mientras que solo la administradora tiene permisos para crear, editar y eliminar proyectos. El sistema está diseñado para garantizar seguridad y eficiencia, con una arquitectura robusta que facilita el manejo de roles y la administración de contenido de manera sencilla. A lo largo del desarrollo, se ha dado especial atención a la usabilidad, manteniendo un enfoque claro en la experiencia del usuario.
 
 ---
 
-✨ Características Clave
+## ✨ Características Clave
 
 ✅ Autenticación de Usuarios
 
@@ -50,9 +50,9 @@ Este proyecto es una aplicación web para la gestión de proyectos, desarrollada
 
 ---
 
-🛠️ Herramientas y Tecnologías Utilizadas
+## 🛠️ Herramientas y Tecnologías Utilizadas
 
-Backend
+### Backend
 
 Spring Boot 3: Desarrollo de backend escalable y de alto rendimiento.
 
@@ -66,7 +66,7 @@ MySQL: Base de datos para almacenamiento de proyectos y usuarios.
 
 MailSender: Envío de correos para activación de cuenta y recuperación de contraseña.
 
-Frontend
+### Frontend
 
 Angular 17: SPA con integración a APIs RESTful.
 
@@ -74,7 +74,7 @@ Bootstrap: Estilos y diseño responsivo.
 
 Quill Editor: Edición de contenido enriquecido.
 
-Otros
+### Otros
 
 Cloudinary: Almacenamiento y optimización de imágenes.
 
@@ -88,9 +88,7 @@ Hostinger: Hosting del frontend y base de datos.
 
 ---
 
-## .
-
-🚀 Instalación y Ejecución
+## 🚀 Instalación y Ejecución
 
 1. Clona el repositorio:
    ```bash
@@ -122,14 +120,14 @@ jwt.secret=tu_secreto
 jecutar la aplicación backend:
 mvn spring-boot:run
 
-📄 Licencia
+## 📄 Licencia
 Este proyecto está bajo la licencia MIT. Puedes utilizarlo, modificarlo y distribuirlo libremente.
 
-🧑‍💻 Autor
+## 🧑‍💻 Autor
 Desarrollado por Rebeca Pérez.
 Si tienes dudas o sugerencias, ¡no dudes en contactarme!
 
-🌟 Agradecimientos
+## 🌟 Agradecimientos
 Angular
 Bootstrap
 JSON Server
