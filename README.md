@@ -88,28 +88,40 @@ Hostinger: Hosting del frontend y base de datos.
 
 ---
 
-## 📚 Cómo Ejecutar el Proyecto
+## .
+
+🚀 Instalación y Ejecución
 
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/tuusuario/mi-web-personal.git
    cd mi-web-personal
 Instala las dependencias:
-
 npm install
+
 Inicia el servidor de desarrollo:
-
 ng serve
-Inicia el backend simulado (JSON Server):
 
-npx json-server --watch src/assets/simulacionBBDD.json --port 3000
 Abre el proyecto en el navegador:
-
 http://localhost:4200
 ⚙️ Configuración para Producción
 Configura un backend real utilizando Java y Spring Boot.
 Conecta el frontend con el backend mediante una API REST.
 Configura MySQL como base de datos en el entorno de producción.
+
+Inicia el backend:
+Configurar las variables de entorno en archivo application.properties:
+spring.datasource.url=jdbc:mysql://localhost:3306/portfolio_db
+spring.datasource.username=root
+spring.datasource.password=tu_contraseña
+spring.mail.host=smtp.gmail.com
+spring.mail.username=tu_correo@gmail.com
+spring.mail.password=tu_contraseña
+jwt.secret=tu_secreto
+
+jecutar la aplicación backend:
+mvn spring-boot:run
+
 📄 Licencia
 Este proyecto está bajo la licencia MIT. Puedes utilizarlo, modificarlo y distribuirlo libremente.
 
