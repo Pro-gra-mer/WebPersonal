@@ -42,6 +42,17 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 
 ## 🛠️ Herramientas y Tecnologías Utilizadas
 
+### Tecnologías Principales
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=spring-boot&logoColor=white)  
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)  
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)  
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap&logoColor=white)  
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)  
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)  
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)  
+![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat&logo=cloudinary&logoColor=white)  
+![Render](https://img.shields.io/badge/Render-00979D?style=flat&logo=render&logoColor=white)
+
 ### Backend
 - **Spring Boot 3.3.7**: Desarrollo de backend escalable y de alto rendimiento.
 - **Java 21**: Lenguaje de programación robusto y seguro.
@@ -51,7 +62,7 @@ El sistema está diseñado para garantizar seguridad y eficiencia, con una arqui
 - **MailSender**: Envío de correos para activación de cuenta y recuperación de contraseña.
 
 ### Frontend
-- **Angular 17**: SPA con integración a APIs RESTful. ![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white)
+- **Angular 17**: SPA con integración a APIs RESTful. 
 - **Bootstrap 5**: Estilos y diseño responsivo.
 - **Quill Editor**: Edición de contenido enriquecido.
 
@@ -123,8 +134,10 @@ Desarrollado por **Rebeca Pérez**.
 
 Si tienes dudas o sugerencias, ¡no dudes en contactarme!
 
-📌 [LinkedIn](https://www.linkedin.com/in/rebecaperez)  
-🌐 [Mi Web](https://rebecaperezportfolio.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/rebecaperez)  
+[![Portfolio](https://img.shields.io/badge/Portfolio-Web-orange?style=flat&logo=google-chrome)](https://rebecaperezportfolio.com)
+
+Si tienes dudas o sugerencias, ¡no dudes en contactarme!
 
 ---
 
