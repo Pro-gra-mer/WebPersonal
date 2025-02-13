@@ -123,6 +123,9 @@ Desarrollado por **Rebeca Pérez**.
 
 Si tienes dudas o sugerencias, ¡no dudes en contactarme!
 
+📌 [LinkedIn](https://www.linkedin.com/in/rebecaperez)  
+🌐 [Mi Web](https://rebecaperezportfolio.com)
+
 ---
 
 ## 🌟 Agradecimientos
