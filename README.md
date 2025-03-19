@@ -1,142 +1,170 @@
-# Mi Web Personal - Angular
+# 🌐 Portfolio 
+![Portfolio Banner](https://res.cloudinary.com/dl7on9tjj/image/upload/v1737043147/CabeceraPortfolio-min_iec8fe.png)  
 
-Este proyecto es una aplicación web desarrollada en Angular que sirve como portafolio personal. Incluye funcionalidades para gestionar proyectos, artículos, mensajes, y formularios dinámicos para contacto y registro de usuarios.
-
----
-
-## 🛠️ Tecnologías Utilizadas
-
-- **Angular 17.3.10**: Framework principal para el frontend.
-- **Bootstrap 5**: Para el diseño responsivo y estilización.
-- **TypeScript**: Lenguaje principal para el desarrollo.
-- **JSON Server**: Utilizado como backend simulado durante el desarrollo.
-- **MySQL** (planeado): Base de datos para almacenar información persistente en producción.
+### Visita [![Portfolio](https://img.shields.io/badge/Portfolio-Web-orange?style=flat&logo=google-chrome)](https://rebecaperezportfolio.com)
 
 ---
 
-## 🚀 Funcionalidades Principales
+## 📖 Introducción
 
-### Gestión de Usuarios
-- Registro y login con validaciones en el frontend.
-- Diferenciación entre usuario estándar y administrador.
-- Manejo de sesiones simuladas con el `AuthService`.
+Este proyecto es una aplicación web para la gestión de proyectos, desarrollada con **Spring Boot 3** y **Java 21** para el backend, y **Angular 17** para el frontend. La aplicación permite a los usuarios autenticados enviar mensajes, mientras que solo la administradora tiene permisos para crear, editar y eliminar proyectos. 
 
-### Proyectos
-- Sección para mostrar proyectos con detalles individuales.
-- Subida de proyectos desde la **Admin Dashboard**.
-- Almacenamiento y visualización de proyectos usando un backend simulado.
-
-### Artículos
-- Visualización de artículos con detalles individuales.
-- Campos adicionales para SEO como slug, meta descripción, y palabra clave.
-- Subida de artículos desde la **Admin Dashboard**.
-
-### Mensajes
-- Mensajería dinámica en tiempo real usando JSON Server.
-- Formulario de mensajes integrado en la página principal.
-- Lista de mensajes con opción de carga progresiva.
-
-### Formulario de Contacto
-- Formulario con validaciones para nombre, asunto, correo y mensaje.
-- Planeado: Integración con **Nodemailer** para enviar mensajes por correo.
+El sistema está diseñado para garantizar seguridad y eficiencia, con una arquitectura robusta que facilita el manejo de roles y la administración de contenido de manera sencilla. A lo largo del desarrollo, se ha dado especial atención a la usabilidad, manteniendo un enfoque claro en la experiencia del usuario.
 
 ---
 
-## 📦 Estructura del Proyecto
-📦src
- ┣ 📂app
- ┃ ┣ 📂components
- ┃ ┃ ┣ 📂admin          # Componentes relacionados con la gestión administrativa
- ┃ ┃ ┃ ┣ 📂admin-dashboard
- ┃ ┃ ┃ ┣ 📂upload-article
- ┃ ┃ ┃ ┗ 📂upload-project
- ┃ ┃ ┣ 📂public         # Componentes accesibles públicamente
- ┃ ┃ ┃ ┣ 📂article-card
- ┃ ┃ ┃ ┣ 📂carousel
- ┃ ┃ ┃ ┣ 📂footer
- ┃ ┃ ┃ ┣ 📂last-articles
- ┃ ┃ ┃ ┣ 📂last-projects
- ┃ ┃ ┃ ┣ 📂messages-list
- ┃ ┃ ┃ ┗ 📂project-card
- ┃ ┃ ┗ 📂shared         # Componentes reutilizables en distintas partes de la aplicación
- ┃ ┃ ┃ ┗ 📂message
- ┃ ┣ 📂models           # Modelos de datos usados en el proyecto
- ┃ ┣ 📂pages            # Páginas principales de la aplicación
- ┃ ┃ ┣ 📂aboutme
- ┃ ┃ ┣ 📂article-detail
- ┃ ┃ ┣ 📂articles
- ┃ ┃ ┣ 📂contact
- ┃ ┃ ┣ 📂home
- ┃ ┃ ┣ 📂login
- ┃ ┃ ┣ 📂project-detail
- ┃ ┃ ┣ 📂projects
- ┃ ┃ ┗ 📂register
- ┃ ┣ 📂services         # Servicios para la comunicación con el backend
- ┃ ┗ 📜app.component.ts # Componente raíz del proyecto
- ┣ 📂assets             # Recursos estáticos como imágenes y JSON simulados
- ┃ ┗ 📜simulacionBBDD.json
- ┗ 📜styles.css         # Estilos globales
+## ✨ Características Clave
+
+### ✅ Autenticación de Usuarios
+- Registro y autenticación obligatoria para acceder a funcionalidades avanzadas.
+- Confirmación de cuenta a través de correo electrónico con MailSender.
+- Seguridad reforzada para garantizar acceso seguro a la aplicación.
+
+### ✅ Mensajería Dinámica
+- Usuarios autenticados pueden enviar mensajes.
+- El formulario captura automáticamente el nombre de usuario y habilita el botón "Enviar".
+
+### ✅ Restablecimiento de Contraseña
+- Formulario para solicitar restablecimiento de contraseña.
+- Enlace seguro enviado por correo con MailSender.
+- Proceso seguro que impide modificaciones no autorizadas de la contraseña.
+
+### ✅ Formulario de Contacto
+- Permite a los usuarios enviar mensajes al administrador.
+- Envío de correos a través de MailSender para garantizar la entrega segura.
+
+### ✅ Gestión de Proyectos
+- La administradora puede crear, editar y eliminar proyectos.
+- Acceso al Admin Dashboard desde la navbar.
+- Formulario de subida de proyectos con Quill Editor.
+
+### ✅ Persistencia en Base de Datos
+- Datos almacenados en **MySQL** para garantizar gestión a largo plazo y escalabilidad.
 
 ---
 
-## 🌐 Cómo Ejecutar el Proyecto
+## 🛠️ Herramientas y Tecnologías Utilizadas
 
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tuusuario/mi-web-personal.git
-   cd mi-web-personal
-Instala las dependencias:
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat&logo=spring-boot&logoColor=white) ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) ![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat&logo=angular&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap&logoColor=white) ![Quill Editor](https://img.shields.io/badge/Quill-Editor-00B0FF?style=flat&logo=quill&logoColor=white) <br> ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat&logo=cloudinary&logoColor=white) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white) 
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![Render](https://img.shields.io/badge/Render-00979D?style=flat&logo=render&logoColor=white) ![Hostinger](https://img.shields.io/badge/Hostinger-673AB7?style=flat&logo=hostinger&logoColor=white) ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=flat&logo=intellij-idea&logoColor=white)
 
+- **IntelliJ IDEA**: Editor de código.
+
+### Backend
+- **Spring Boot 3.3.7**: Desarrollo de backend escalable y de alto rendimiento.
+- **Java 21**: Lenguaje de programación robusto y seguro.
+- **Spring Security**: Autenticación y autorización con JWT.
+- **Spring JPA**: Interacción con la base de datos mediante JPA.
+- **MySQL**: Base de datos para almacenamiento de proyectos y usuarios.
+- **MailSender**: Envío de correos para activación de cuenta y recuperación de contraseña.
+- **Postman**: Pruebas y validación de APIs RESTful.
+
+### Frontend
+- **Angular 17.3.10**: SPA con integración a APIs RESTful.
+- **HTML**: Estructura de plantillas.
+- **Bootstrap 5**: Estilos y diseño responsivo.
+- **Quill Editor**: Edición de contenido enriquecido.
+- **Cloudinary**: Almacenamiento y optimización de imágenes.
+
+### Despliegue
+- **Docker**: Contenerización para despliegue eficiente.
+- **Render**: Plataforma de despliegue gratuita para el backend.
+- **Hostinger**: Hosting del frontend y base de datos.
+
+---
+
+## 🚀 Instalación y Ejecución
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/tuusuario/mi-web-personal.git
+cd mi-web-personal
+```
+
+### 2. Instalar las dependencias
+```bash
 npm install
-Inicia el servidor de desarrollo:
+```
 
+### 3. Iniciar el servidor de desarrollo
+```bash
 ng serve
-Inicia el backend simulado (JSON Server):
+```
 
-npx json-server --watch src/assets/simulacionBBDD.json --port 3000
-Abre el proyecto en el navegador:
-
+### 4. Abrir el proyecto en el navegador
+```
 http://localhost:4200
-⚙️ Configuración para Producción
-Configura un backend real utilizando Java y Spring Boot.
-Conecta el frontend con el backend mediante una API REST.
-Configura MySQL como base de datos en el entorno de producción.
-📄 Licencia
-Este proyecto está bajo la licencia MIT. Puedes utilizarlo, modificarlo y distribuirlo libremente.
+```
 
-🧑‍💻 Autor
-Desarrollado por Rebeca Pérez.
+---
+
+## ⚙️ Configuración para Producción
+
+### Configuración del Backend
+
+1. Configurar las variables de entorno en `application.properties`:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/portfolio_db
+spring.datasource.username=root
+spring.datasource.password=tu_contraseña
+spring.mail.host=smtp.gmail.com
+spring.mail.username=tu_correo@gmail.com
+spring.mail.password=tu_contraseña
+jwt.secret=tu_secreto
+```
+
+2. Ejecutar la aplicación backend:
+```bash
+mvn spring-boot:run
+```
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la **licencia MIT**. Puedes utilizarlo, modificarlo y distribuirlo libremente.
+
+---
+
+## ✍️ Autora
+
+Desarrollado por **Rebeca Pérez**.
+
 Si tienes dudas o sugerencias, ¡no dudes en contactarme!
 
-🌟 Agradecimientos
-Angular
-Bootstrap
-JSON Server
-ChatGPT
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/rebecaperez)  
+[![Portfolio](https://img.shields.io/badge/Portfolio-Web-orange?style=flat&logo=google-chrome)](https://rebecaperezportfolio.com)
 
+Si tienes dudas o sugerencias, ¡no dudes en contactarme!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.10.
+---
 
-## Development server
+## 🌟 Agradecimientos
+- Angular
+- Bootstrap
+- Spring Boot
+- ChatGPT
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🔧 Desarrollo con Angular CLI
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 17.3.10.
 
-## Build
+### Servidor de desarrollo
+Ejecuta `ng serve` para iniciar un servidor local y accede a `http://localhost:4200/`. La aplicación se recargará automáticamente al hacer cambios en los archivos fuente.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Generación de código
+Ejecuta `ng generate component nombre-componente` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Running unit tests
+### Construcción
+Ejecuta `ng build` para construir el proyecto. Los archivos resultantes estarán en la carpeta `dist/`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Pruebas unitarias
+Ejecuta `ng test` para ejecutar las pruebas unitarias con [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Pruebas end-to-end
+Ejecuta `ng e2e` para pruebas end-to-end con la plataforma de tu elección.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Más ayuda
+Para más ayuda sobre Angular CLI, usa `ng help` o consulta la [documentación oficial](https://angular.io/cli).
