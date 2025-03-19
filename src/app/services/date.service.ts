@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class DateService {
   constructor() {}
 
-  // Método para transformar la fecha usando Intl.DateTimeFormat
+  // Método para transformar la fecha al formato numérico en el idioma español usando Intl.DateTimeFormat
   transformDate(
     date: Date | string,
     locale: string = 'es-ES',

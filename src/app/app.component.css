@@ -1,3 +1,4 @@
+/* Estilos para el logo */
 .logo {
   font-family: "Bad Script", cursive;
   font-size: 1.6em;
@@ -5,40 +6,46 @@
   margin-right: 125px;
 }
 
+/* Estilos generales para la navegación */
 nav {
   font-size: 1.4em;
   padding-left: 200px;
   margin-bottom: -50px;
 }
 
+/* Espaciado entre enlaces */
 nav a {
   margin-right: 2rem;
 }
 
+/* Navbar pegada */
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 1000; /* Asegúrate de que quede por encima del contenido */
+  z-index: 1000;
 }
 
+/* Efecto hover en enlaces de la navbar */
 .navbar .nav-link:hover {
-  color: #f8f9fa; /* Cambia el color al pasar el mouse */
-  background-color: rgba(255, 255, 255, 0.1); /* Fondo claro en hover */
+  color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Cursor pointer para el enlace de logout */
 .navbar .logout-link {
   cursor: pointer;
 }
 
+/* Contenedor principal que ocupa el espacio disponible */
 .wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-
-  flex: 1; /* Ocupa el espacio disponible */
+  flex: 1;
 }
 
+/* Estilos para pantallas pequeñas */
 @media (max-width: 576px) {
   nav {
     font-size: 1.4em;
@@ -46,6 +53,8 @@ nav a {
     margin-bottom: -50px;
   }
 }
+
+/* Estilos para pantallas medianas */
 @media (min-width: 768px) and (max-width: 1280px) {
   nav {
     font-size: 1.3em;

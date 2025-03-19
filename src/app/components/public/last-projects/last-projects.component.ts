@@ -19,11 +19,17 @@ export class LastProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectService.projects$.subscribe((projects) => {
-      // Filtra los tres últimos proyectos
-      this.projects = projects.slice(-3).reverse();
+      // Ordenar por publishDate de forma descendente (más reciente primero)
+      this.projects = [...projects]
+        .sort(
+          (a, b) =>
+            new Date(b.publishDate).getTime() -
+            new Date(a.publishDate).getTime()
+        )
+        .slice(0, 3); // Tomar los 3 más recientes
     });
 
-    // Inicializa los proyectos si aún no se han cargado
+    // Cargar proyectos si aún no se han obtenido
     this.projectService.getProjects().subscribe();
   }
 }

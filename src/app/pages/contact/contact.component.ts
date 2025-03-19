@@ -24,6 +24,7 @@ export class ContactComponent {
   errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private contactService: ContactService) {
+    // Inicializa el formulario de contacto con sus validaciones
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -32,6 +33,7 @@ export class ContactComponent {
     });
   }
 
+  // Maneja el envío del formulario de contacto
   onSubmit(): void {
     this.submitted = true;
 
@@ -40,13 +42,15 @@ export class ContactComponent {
       return;
     }
 
+    // Prepara el mensaje de contacto a partir de los valores del formulario
     const contactMessage: ContactMessage = this.contactForm.value;
 
+    // Envía el mensaje a través del servicio y maneja la respuesta
     this.contactService.sendContactMessage(contactMessage).subscribe({
       next: (response) => {
         this.successMessage = 'Mensaje enviado con éxito.';
         this.errorMessage = null;
-        this.contactForm.reset();
+        this.contactForm.reset(); // Limpia el formulario tras el envío exitoso
         this.submitted = false;
       },
       error: (error) => {

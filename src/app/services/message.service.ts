@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { Message } from '../models/message.model';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { DateService } from './date.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class MessageService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dateService: DateService
   ) {
     this.initializeMessages(); // Carga inicial de mensajes
   }
@@ -62,7 +64,7 @@ export class MessageService {
       .map((message) => ({
         ...message,
         date: new Date(message.date),
-        formattedDate: new Date(message.date).toLocaleString(),
+        formattedDate: this.dateService.transformDate(message.date), // Usa DateService para formatear
       }))
       .sort((a, b) => b.date.getTime() - a.date.getTime());
   }
@@ -101,7 +103,7 @@ export class MessageService {
       );
   }
 
-  // Permite refrescar los mensajes desde la API
+  // Refrescar los mensajes
   refreshMessages(): Observable<Message[]> {
     return this.loadMessages();
   }

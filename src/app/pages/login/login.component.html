@@ -5,7 +5,9 @@
   >
     <div class="card-body p-5">
       <h2 class="text-center mb-4">Iniciar Sesión</h2>
+      <!-- Formulario reactivo de login -->
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Campo para el correo electrónico -->
         <div class="mb-3">
           <label for="email" class="form-label">Correo Electrónico</label>
           <input
@@ -16,6 +18,7 @@
             placeholder="Ingrese su correo electrónico"
             autocomplete="email"
           />
+          <!-- Mensajes de validación para el email -->
           <div
             *ngIf="submitted && loginForm.controls['email'].errors"
             class="text-danger"
@@ -29,6 +32,7 @@
           </div>
         </div>
 
+        <!-- Campo para la contraseña -->
         <div class="mb-3">
           <label for="password" class="form-label">Contraseña</label>
           <input
@@ -39,6 +43,7 @@
             placeholder="Ingrese su contraseña"
             autocomplete="current-password"
           />
+          <!-- Mensajes de validación para la contraseña -->
           <div
             *ngIf="submitted && loginForm.controls['password'].errors"
             class="text-danger"
@@ -52,22 +57,25 @@
           </div>
         </div>
 
+        <!-- Botón para enviar el formulario -->
         <button type="submit" class="btn btn-primary w-100">
           Iniciar Sesión
         </button>
       </form>
 
-      <!-- Mensaje de error de autenticación -->
+      <!-- Muestra error de autenticación si existe -->
       <div *ngIf="loginError" class="text-danger text-center mt-3">
         {{ loginError }}
       </div>
 
+      <!-- Enlace para recuperación de contraseña -->
       <div class="text-center mt-3">
         <a [routerLink]="'/request-password'">¿Olvidaste tu contraseña?</a>
       </div>
+      <!-- Enlace para registro de nuevos usuarios -->
       <div class="text-center mt-2">
-        <span
-          >No tienes cuenta? <a [routerLink]="'/register'">Regístrate aquí</a>
+        <span>
+          No tienes cuenta? <a [routerLink]="'/register'">Regístrate aquí</a>
         </span>
       </div>
     </div>

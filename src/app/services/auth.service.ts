@@ -19,7 +19,9 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Observables para compartir estados con los componentes
+  /* Observables para compartir estados con los componentes. 
+  Se utiliza el sufijo $ por convención para indicar que esas variables son observables.
+  Esto facilita distinguir entre valores simples y datos reactivos */
   public isLoggedIn$: Observable<boolean> = this.loggedIn.asObservable();
   public isAdmin$: Observable<boolean> = this.admin.asObservable();
   public email$: Observable<string | null> = this.email.asObservable();
@@ -35,22 +37,24 @@ export class AuthService {
     }
   }
 
+  // Registra un nuevo usuario y devuelve la respuesta del servidor
   register(userData: User): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
+  // Inicia sesión con las credenciales proporcionadas y gestiona el token devuelto
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http
       .post(`${this.apiUrl}/login`, credentials, { responseType: 'text' })
       .pipe(
         tap((token: string) => {
           try {
-            // Si el token es válido, lo guardamos en localStorage
+            // Si el token es válido, se guarda en localStorage
             if (this.isTokenExpired(token)) {
               throw new Error('Token expirado');
             }
 
-            localStorage.setItem('token', token); // Guardamos el token en localStorage
+            localStorage.setItem('token', token); // Guarda el token en localStorage
 
             // Decodificar el token y actualizar el estado
             const payload: any = jwtDecode(token);
@@ -66,6 +70,7 @@ export class AuthService {
       );
   }
 
+  // Obtiene y valida el token almacenado en localStorage; retorna el token si es válido o null en caso contrario
   getToken(): string | null {
     if (typeof window === 'undefined' || !window.localStorage) {
       return null;
@@ -77,14 +82,13 @@ export class AuthService {
     }
 
     try {
-      const parsedToken = JSON.parse(storedToken); // Parseamos el objeto JSON
+      const parsedToken = JSON.parse(storedToken); // Parseo el objeto JSON
       if (!parsedToken.token) {
         return null;
       }
 
       if (this.isTokenExpired(parsedToken.token)) {
         // Validar si el token está expirado
-
         this.logout(); // Invalida el token si está expirado
         return null;
       }
@@ -96,9 +100,12 @@ export class AuthService {
     }
   }
 
+  // Devuelve el estado actual de autenticación del usuario
   isLoggedIn(): boolean {
     return this.loggedIn.getValue();
   }
+
+  // Cierra la sesión del usuario, limpia el estado y redirige a la página principal
   logout(): void {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
@@ -110,10 +117,12 @@ export class AuthService {
     });
   }
 
+  // Devuelve true si el usuario tiene rol de administrador, false en caso contrario
   isAdmin(): boolean {
     return this.admin.getValue();
   }
 
+  // Decodifica el token y retorna el rol del usuario, o null si no se puede determinar
   getRole(): string | null {
     const token = this.getToken();
     if (token) {
@@ -141,7 +150,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/request-password-reset`, { email });
   }
 
-  // Restablece la contraseña con un token
+  // Restablece la contraseña utilizando un token y la nueva contraseña proporcionada
   resetPassword(token: string, newPassword: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/reset-password`, {
       token,
@@ -149,6 +158,7 @@ export class AuthService {
     });
   }
 
+  // Restaura la sesión del usuario si existe un token válido en localStorage
   private restoreSession(): void {
     const token = localStorage.getItem('token'); // Recupera el token del localStorage
 
@@ -168,12 +178,12 @@ export class AuthService {
     }
   }
 
+  // Limpia el estado de autenticación y rol del usuario sin redirigir
   private clearSessionState(): void {
     this.loggedIn.next(false);
     this.admin.next(false);
     this.email.next(null);
     this.username.next(null);
-
     // No redirigir automáticamente desde restoreSession
   }
 }

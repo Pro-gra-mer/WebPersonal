@@ -22,9 +22,10 @@ export class ProjectDetailComponent implements OnInit, AfterViewChecked {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private elRef: ElementRef // Inyectamos ElementRef
+    private elRef: ElementRef
   ) {}
 
+  // Se inicializa el componente: se obtiene el ID del proyecto y se carga su información
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
@@ -40,11 +41,13 @@ export class ProjectDetailComponent implements OnInit, AfterViewChecked {
         'No se encontró el ID del proyecto en los parámetros de la ruta.';
     }
 
+    /* Comprueba si el usuario es administrador para determinar si se deben mostrar funcionalidades o controles 
+    especiales (como editar o eliminar un proyecto) que solo deben estar disponibles para la administradora */
     this.isAdmin = this.authService.isAdmin();
   }
 
+  // Ajusta el tamaño de las imágenes dentro de '.card-text' después de renderizar la vista
   ngAfterViewChecked(): void {
-    // Ajustar las imágenes dentro de `.card-text` después de que se renderice el contenido
     const images = this.elRef.nativeElement.querySelectorAll('.card-text img');
     images.forEach((img: HTMLImageElement) => {
       img.style.maxWidth = '100%';

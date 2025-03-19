@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><span class="logo">Rebeca Pérez</span></a>
+    <!-- Botón para mostrar/ocultar el menú en pantallas pequeñas -->
     <button
       class="navbar-toggler ms-auto"
       type="button"
@@ -12,8 +13,10 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- Menú de navegación -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <!-- Enlaces de navegación -->
         <li class="nav-item">
           <a class="nav-link" routerLink="">Inicio</a>
         </li>
@@ -23,7 +26,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact">Contacto</a>
         </li>
-        <!-- Mostrar solo si el usuario NO está logueado -->
+        <!-- Enlaces para usuarios no autenticados -->
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" routerLink="/register">Registro</a>
         </li>
@@ -31,10 +34,11 @@
           <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
         </li>
 
-        <!-- Mostrar solo si el usuario está logueado -->
+        <!-- Enlace para cerrar sesión (solo si el usuario está autenticado) -->
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link logout-link" (click)="logout()">Cerrar Sesión</a>
         </li>
+        <!-- Enlace para el dashboard de administración (solo para administradora) -->
         <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="/admin-dashboard">Admin Dashboard</a>
         </li>
@@ -47,4 +51,5 @@
   <router-outlet></router-outlet>
 </div>
 
+<!-- Pie de página -->
 <app-footer></app-footer>

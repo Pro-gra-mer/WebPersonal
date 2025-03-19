@@ -26,6 +26,7 @@ export class RegisterComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // Configuración del formulario de registro con validaciones
     this.registerForm = this.formBuilder.group(
       {
         username: [
@@ -48,39 +49,41 @@ export class RegisterComponent {
         ],
         confirmPassword: [''],
       },
-      { validators: this.passwordMatchValidator }
+      { validators: this.passwordMatchValidator } // Aplica validación de coincidencia de contraseñas
     );
   }
 
-  // Validador de coincidencia de contraseñas
+  // Validador que verifica si 'password' y 'confirmPassword' coinciden
   passwordMatchValidator(group: FormGroup) {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-  // Manejo del envío del formulario
+  // Maneja el envío del formulario de registro
   onsubmit(): void {
     this.submitted = true;
     this.message = null;
 
+    // No continúa si el formulario es inválido
     if (this.registerForm.invalid) {
       return;
     }
 
+    // Llama al servicio de registro y maneja la respuesta
     this.authService.register(this.registerForm.value).subscribe({
       next: () => {
+        // Muestra mensaje de éxito y resetea el formulario
         this.message =
           'Registro exitoso. Te hemos enviado un enlace de confirmación a tu correo. Por favor, verifica tu cuenta.';
-        this.registerForm.reset(); // Limpia los campos del formulario
-        this.submitted = false; // Restablece el estado de envío
+        this.registerForm.reset();
+        this.submitted = false;
       },
       error: (error) => {
+        // Muestra error específico si está disponible, o un mensaje genérico
         if (error.status === 400 && error.error.message) {
-          // Captura y muestra el mensaje del backend
           this.message = 'Error en el registro: ' + error.error.message;
         } else {
-          // Mensaje genérico para errores inesperados
           this.message =
             'Ocurrió un error inesperado. Por favor, inténtalo nuevamente.';
         }

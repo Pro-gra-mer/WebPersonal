@@ -34,8 +34,8 @@ export class ProjectCardComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
+  // Al inicializar, formatea la fecha y verifica si el usuario es administrador
   ngOnInit(): void {
-    // Formatea la fecha y verifica el rol del usuario
     this.formattedDate = this.dateService.transformDate(
       this.publishDate,
       'es-ES',
@@ -48,16 +48,18 @@ export class ProjectCardComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
   }
 
+  // Activa la confirmación de eliminación
   confirmDelete(): void {
     this.confirmingDelete = true;
   }
 
+  // Cancela la confirmación de eliminación
   cancelDelete(): void {
     this.confirmingDelete = false;
   }
 
+  // Llama al servicio para eliminar el proyecto y emite el evento para actualizar la lista
   deleteProject(): void {
-    // Llama al servicio y emite el evento al eliminar el proyecto
     this.projectService.deleteProject(this.id).subscribe({
       next: () => this.projectDeleted.emit(this.id),
       error: () => {

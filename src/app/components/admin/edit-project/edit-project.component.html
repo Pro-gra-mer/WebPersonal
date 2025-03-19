@@ -1,13 +1,10 @@
 <div class="container py-5">
-  <!-- Contenedor principal con espacio vertical -->
   <div class="card shadow bg-light">
     <div class="card-body p-5">
-      <!-- Título de la página -->
       <h2 class="text-center mb-4">Editar Proyecto</h2>
 
       <!-- Formulario para editar un proyecto -->
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <!-- Título del proyecto -->
         <div class="mb-3">
           <label for="title" class="form-label">Título</label>
           <input

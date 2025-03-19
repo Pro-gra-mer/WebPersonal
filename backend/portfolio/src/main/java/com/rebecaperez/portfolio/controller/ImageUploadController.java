@@ -8,6 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
+/**
+ * Controlador REST para la carga de imágenes.
+ * Permite subir imágenes a Cloudinary mediante solicitudes POST.
+ */
 @RestController
 @RequestMapping("/api/images")
 public class ImageUploadController {
@@ -15,6 +19,14 @@ public class ImageUploadController {
   @Autowired
   private CloudinaryService cloudinaryService;
 
+  /**
+   * Sube una imagen a Cloudinary y devuelve su URL pública.
+   * Valida el tamaño y el tipo de archivo antes de procesarlo.
+   *
+   * @param file el archivo de imagen {@link MultipartFile} recibido en la solicitud
+   * @return una respuesta {@link ResponseEntity} con la URL de la imagen en caso de éxito,
+   *         o un mensaje de error si falla la validación o la subida
+   */
   @PostMapping("/upload")
   public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) {
     try {
@@ -40,5 +52,4 @@ public class ImageUploadController {
       return ResponseEntity.status(500).body("Error al subir la imagen: " + e.getMessage());
     }
   }
-
 }

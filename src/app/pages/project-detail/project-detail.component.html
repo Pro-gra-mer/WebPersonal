@@ -1,5 +1,5 @@
 <div class="container-sm mt-5 py-5" *ngIf="project">
-  <!-- Botón Editar visible solo para el administrador -->
+  <!-- Botón de edición, visible solo para administradores -->
   <a
     class="btn btn-warning mb-3"
     *ngIf="isAdmin"
@@ -8,6 +8,7 @@
     Editar Proyecto
   </a>
 
+  <!-- Tarjeta que muestra la imagen y el contenido del proyecto -->
   <div class="card mb-5">
     <img
       class="card-img-top w-100"
@@ -17,10 +18,12 @@
     />
     <div class="card-body py-4 px-3">
       <h2 class="card-title mb-5">{{ project.title }}</h2>
-      <!-- Renderizar contenido enriquecido -->
+      <!-- Contenido enriquecido del proyecto -->
       <div class="card-text" [innerHTML]="project.content"></div>
     </div>
   </div>
+
+  <!-- Enlace para volver a la lista de proyectos -->
   <div class="d-flex justify-content-between">
     <a class="btn btn-primary" [routerLink]="'/projects'"
       >Todos los Proyectos</a

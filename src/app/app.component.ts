@@ -19,6 +19,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService) {}
 
+  /* Suscribirse en el AppComponent al estado de autenticación y rol del usuario permite actualizar
+  en tiempo real la interfaz cuando el usuario inicia o cierra sesión, mostrando u ocultando 
+  elementos de la UI según corresponda */
   ngOnInit(): void {
     // Suscripción para obtener el estado de autenticación y rol del usuario
     this.authSubscription.add(
@@ -31,13 +34,16 @@ export class AppComponent implements OnInit, OnDestroy {
         this.isAdmin = admin;
       })
     );
+    // Restaura la sesión si es posible
     (this.authService as any).restoreSession();
   }
 
+  // Cancela todas las suscripciones al destruir el componente
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe(); // Limpiar suscripciones al destruir el componente
+    this.authSubscription.unsubscribe();
   }
 
+  // Cierra la sesión del usuario
   logout(): void {
     this.authService.logout();
   }

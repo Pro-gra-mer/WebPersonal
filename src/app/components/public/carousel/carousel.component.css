@@ -16,33 +16,33 @@ h5 {
 
 /* Ajuste de la altura del carrusel */
 .carousel {
-  height: 500px; /* Ajusta la altura a lo que mejor se vea */
+  height: 500px;
 }
 
 /* Control de la tarjeta dentro del carrusel */
 .carousel-item .card {
   max-width: 700px;
-  margin: auto; /* Centra la tarjeta */
+  margin: auto;
 }
 
 /* Asegúrate de que las imágenes se ajusten correctamente */
 .carousel-item img {
-  width: 100%; /* Hace que la imagen ocupe todo el ancho */
-  height: 100%; /* Hace que la imagen ocupe toda la altura */
+  width: 100%;
+  height: 100%;
   object-fit: cover; /* Mantiene la imagen proporcional sin deformarse */
 }
 
-/* Ajustes de las tarjetas en dispositivos pequeños */
+/* Ajustes en dispositivos pequeños */
 @media (max-width: 767px) {
   .carousel {
-    margin-bottom: 510px; /* Espacio entre el carrusel y el siguiente contenido */
+    margin-bottom: 510px;
   }
 
   .carousel-item .card {
-    max-width: 100%; /* En dispositivos pequeños, la tarjeta ocupa el 100% del ancho */
+    max-width: 100%;
   }
 
   .carousel-item img {
-    object-fit: cover; /* Asegura que las imágenes no se deformen */
+    object-fit: cover;
   }
 }

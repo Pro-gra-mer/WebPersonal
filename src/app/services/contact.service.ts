@@ -11,6 +11,7 @@ export class ContactService {
 
   constructor(private http: HttpClient) {}
 
+  // Envía un mensaje de contacto al servidor y retorna la respuesta como Observable
   sendContactMessage(data: any): Observable<any> {
     return this.http.post(this.apiUrl, data);
   }

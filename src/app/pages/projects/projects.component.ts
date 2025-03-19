@@ -13,16 +13,21 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
+
   constructor(private projectService: ProjectService) {}
 
+  // Al iniciar el componente, se recuperan y ordenan los proyectos por fecha de publicación (descendente)
   ngOnInit(): void {
     this.projectService.getProjects().subscribe((data) => {
-      this.projects = data.reverse();
+      this.projects = [...data].sort(
+        (a, b) =>
+          new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+      );
     });
   }
 
+  // Elimina el proyecto de la lista cuando se ha eliminado en otro componente
   onProjectDeleted(deletedId: number): void {
-    // Filtramos el proyecto eliminado
     this.projects = this.projects.filter((project) => project.id !== deletedId);
   }
 }

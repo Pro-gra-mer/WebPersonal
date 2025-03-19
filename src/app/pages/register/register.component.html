@@ -5,7 +5,9 @@
   >
     <div class="card-body p-5">
       <h2 class="text-center mb-4">Registro</h2>
+      <!-- Formulario reactivo para registro -->
       <form [formGroup]="registerForm" (ngSubmit)="onsubmit()">
+        <!-- Campo para el nombre de usuario -->
         <div class="mb-3">
           <label for="username" class="form-label">Usuario</label>
           <input
@@ -16,6 +18,7 @@
             placeholder="Ingrese su nombre de usuario"
             autocomplete="username"
           />
+          <!-- Mensaje de error si el usuario es inválido -->
           <div
             *ngIf="
               registerForm.get('username')?.invalid &&
@@ -28,6 +31,7 @@
           </div>
         </div>
 
+        <!-- Campo para el correo electrónico -->
         <div class="mb-3">
           <label for="email" class="form-label">Correo Electrónico</label>
           <input
@@ -38,6 +42,7 @@
             placeholder="Ingrese su correo electrónico"
             autocomplete="email"
           />
+          <!-- Mensaje de error para email inválido -->
           <div
             *ngIf="
               registerForm.get('email')?.invalid &&
@@ -49,6 +54,7 @@
           </div>
         </div>
 
+        <!-- Campo para la contraseña -->
         <div class="mb-3">
           <label for="password" class="form-label">Contraseña</label>
           <input
@@ -59,6 +65,7 @@
             placeholder="Ingrese su contraseña"
             autocomplete="new-password"
           />
+          <!-- Mensaje de error para contraseña inválida -->
           <div
             *ngIf="
               registerForm.get('password')?.invalid &&
@@ -71,6 +78,7 @@
           </div>
         </div>
 
+        <!-- Campo para confirmar la contraseña -->
         <div class="mb-3">
           <label for="confirmPassword" class="form-label"
             >Confirmar Contraseña</label
@@ -82,6 +90,7 @@
             formControlName="confirmPassword"
             placeholder="Confirme su contraseña"
           />
+          <!-- Mensaje de error si las contraseñas no coinciden -->
           <div
             *ngIf="
               registerForm.hasError('mismatch') &&
@@ -93,6 +102,7 @@
           </div>
         </div>
 
+        <!-- Botón para enviar el formulario -->
         <button
           type="submit"
           class="btn btn-primary w-100"
@@ -102,7 +112,7 @@
         </button>
       </form>
 
-      <!-- Mensaje dinámico de éxito -->
+      <!-- Mensaje dinámico de éxito o error -->
       <div
         *ngIf="message"
         class="alert mt-3"
@@ -114,6 +124,7 @@
         {{ message }}
       </div>
 
+      <!-- Enlace para redirigir al login -->
       <div class="text-center mt-3">
         <span
           >¿Ya tienes cuenta?

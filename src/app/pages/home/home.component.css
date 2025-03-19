@@ -1,4 +1,4 @@
-/* Imagen de cabecera */
+/* Imagen de cabecera con fondo, gradiente y clip para efecto */
 .header-img {
   position: relative;
   width: 100%;
@@ -15,10 +15,10 @@
   background-blend-mode: overlay;
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
   filter: blur(1px);
-  z-index: 0; /* Asegura que está detrás del contenido */
+  z-index: 0; /* Queda detrás del contenido */
 }
 
-/* Contenedor del contenido */
+/* Contenedor del contenido de cabecera, centrado */
 .header-content {
   position: absolute;
   top: 50%;
@@ -28,13 +28,19 @@
   z-index: 1;
 }
 
+/* Estilos del subtítulo con fondo semitransparente y sombra */
 .header-subtitle {
   display: inline-block; /* Ajusta el tamaño del fondo al contenido */
   background-color: rgba(44, 62, 80, 0.8);
   text-shadow: 4px 2px 2px rgba(0, 0, 0, 1);
   padding: 10px 10px;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: white;
+  margin-top: 15px;
 }
 
+/* Título principal con subrayado y sombra */
 .title-underline {
   font-size: 3.4rem;
   font-weight: 400;
@@ -55,7 +61,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 0; /* Comienza con 0 de ancho */
+  width: 0;
   height: 100%;
   background: linear-gradient(
     115deg,
@@ -63,39 +69,32 @@
     /* Fucsia vibrante */ rgba(44, 62, 80, 0.8) /* Azul oscuro del gradiente */
   );
   z-index: -1;
-  animation: slide-grow 1s ease-in-out forwards; /* Usamos el keyframe compartido */
+  animation: slide-grow 1s ease-in-out forwards; /* Anima el crecimiento del fondo */
 }
 
-/* Subrayado animado */
+/* Subrayado animado debajo del título */
 .title-underline::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -10px; /* Espaciado desde el texto */
-  width: 0; /* Comienza con 0 de ancho */
+  bottom: -10px; /* Posición debajo del título */
+  width: 0;
   height: 4px;
   background-color: white;
-  animation: slide-grow 1s ease-out forwards; /* Usamos el keyframe compartido */
+  animation: slide-grow 1s ease-out forwards; /* Anima el subrayado */
 }
 
+/* Animación para crecer horizontalmente */
 @keyframes slide-grow {
   from {
     width: 0;
   }
   to {
-    width: 100%; /* Crece hasta cubrir todo */
+    width: 100%; /* Crece hasta cubrir todo el ancho */
   }
 }
 
-/* Subtítulo */
-.header-subtitle {
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: white;
-  margin-top: 15px;
-}
-
-/* Responsividad */
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 576px) {
   .header-img {
     height: 350px;

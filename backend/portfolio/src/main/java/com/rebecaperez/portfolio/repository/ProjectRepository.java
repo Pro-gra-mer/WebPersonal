@@ -4,10 +4,13 @@ import com.rebecaperez.portfolio.model.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Repositorio para la entidad {@link Project}.
+ * <p>
+ * Este repositorio extiende de {@link JpaRepository} y proporciona operaciones CRUD básicas
+ * para la entidad Project, permitiendo la interacción con la base de datos para la gestión de proyectos.
+ * </p>
+ */
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 }
-/*
-  la interfaz ProjectRepository no necesitas escribir nada. Esa interfaz hereda de JpaRepository de Spring Data JPA,
-  lo que le proporciona automáticamente todas las operaciones CRUD básicas. ProjectService la uriliza
- */

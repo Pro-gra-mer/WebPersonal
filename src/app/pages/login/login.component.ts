@@ -26,26 +26,29 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // Inicializa el formulario con validaciones
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
+  // Maneja el envío del formulario de login
   onSubmit(): void {
     this.submitted = true;
-    this.loginError = null; // Reinicia el mensaje de error
+    this.loginError = null;
 
     if (this.loginForm.invalid) {
-      return;
+      return; // No procede si el formulario es inválido
     }
 
+    // Llama al servicio de login y redirige en caso de éxito
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
         this.router.navigate(['/home']);
       },
       error: (errorResponse) => {
-        // Maneja los códigos de estado HTTP y los mensajes
+        // Maneja distintos errores según el código de estado HTTP
         if (errorResponse.status === 404) {
           this.loginError = 'El usuario no existe.';
         } else if (errorResponse.status === 401) {

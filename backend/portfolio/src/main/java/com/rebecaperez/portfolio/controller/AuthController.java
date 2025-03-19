@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Controlador REST para gestionar la autenticación de usuarios.
+ * Maneja el registro, inicio de sesión, restablecimiento de contraseñas y confirmación de cuentas.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -29,7 +33,12 @@ public class AuthController {
   @Autowired
   private final PasswordEncoder passwordEncoder;
 
-
+  /**
+   * Constructor del controlador de autenticación.
+   *
+   * @param userService el servicio de usuarios {@link UserService}
+   * @param passwordEncoder el codificador de contraseñas {@link PasswordEncoder}
+   */
   @Autowired
   public AuthController(UserService userService, PasswordEncoder passwordEncoder) {
     this.userService = userService;
@@ -43,6 +52,12 @@ public class AuthController {
     this.secretKey = Keys.hmacShaKeyFor(encodedKey.getBytes());
   }
 
+  /**
+   * Registra un nuevo usuario en el sistema.
+   *
+   * @param request el objeto {@link RegisterRequest} con los datos del usuario (nombre, email, contraseña)
+   * @return una respuesta {@link ResponseEntity} con el token JWT si el registro es exitoso o un mensaje de error
+   */
   @PostMapping("/register")
   public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest request) {
     // Verificar si el email ya existe
@@ -78,8 +93,12 @@ public class AuthController {
     }
   }
 
-
-
+  /**
+   * Inicia sesión para un usuario existente.
+   *
+   * @param request el objeto {@link LoginRequest} con las credenciales (email y contraseña)
+   * @return una respuesta {@link ResponseEntity} con el token JWT si las credenciales son válidas o un mensaje de error
+   */
   @PostMapping("/login")
   public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
     // Verificar las credenciales del usuario
@@ -101,6 +120,12 @@ public class AuthController {
     return ResponseEntity.ok(Map.of("token", token));
   }
 
+  /**
+   * Solicita un enlace para restablecer la contraseña.
+   *
+   * @param payload un mapa con el email del usuario
+   * @return una respuesta {@link ResponseEntity} con un mensaje de éxito o error
+   */
   @PostMapping("/request-password-reset")
   public ResponseEntity<Map<String, String>> requestPasswordReset(@RequestBody Map<String, String> payload) {
     if (payload == null || !payload.containsKey("email") || payload.get("email").isEmpty()) {
@@ -117,6 +142,12 @@ public class AuthController {
     }
   }
 
+  /**
+   * Valida un token de restablecimiento de contraseña.
+   *
+   * @param token el token recibido como parámetro en la URL
+   * @return una respuesta {@link ResponseEntity} con un mensaje de éxito o error
+   */
   @GetMapping("/validate-reset-token")
   public ResponseEntity<Map<String, String>> validateResetToken(@RequestParam String token) {
     try {
@@ -127,6 +158,12 @@ public class AuthController {
     }
   }
 
+  /**
+   * Restablece la contraseña de un usuario usando un token válido.
+   *
+   * @param payload un mapa con el token y la nueva contraseña
+   * @return una respuesta {@link ResponseEntity} con un mensaje de éxito o error
+   */
   @PostMapping("/reset-password")
   public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> payload) {
     String token = payload.get("token");
@@ -150,8 +187,15 @@ public class AuthController {
     }
   }
 
+  /**
+   * Confirma la cuenta de un usuario mediante un token.
+   *
+   * @param token el token recibido como parámetro en la URL
+   * @param response el objeto {@link HttpServletResponse} para redirigir al frontend
+   * @throws IOException si ocurre un error al redirigir
+   */
   @GetMapping("/confirm-account")
-  public void confirmAccount(@RequestParam String token, HttpServletResponse response) throws IOException, IOException {
+  public void confirmAccount(@RequestParam String token, HttpServletResponse response) throws IOException {
     if (token == null || token.isEmpty()) {
       response.sendRedirect("http://rebecaperezportfolio.com/login?error=token_required");
       return;

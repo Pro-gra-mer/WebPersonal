@@ -1,23 +1,27 @@
 <div class="card mb-5">
+  <!-- Muestra la imagen del proyecto -->
   <img [src]="imageUrl" class="card-img-top" alt="Imagen del proyecto" />
   <div class="card-body p-4">
+    <!-- Título y descripción del proyecto -->
     <h4 class="card-title">{{ title }}</h4>
     <p class="card-text">{{ description }}</p>
     <p class="card-text">
       <small>Publicado el {{ formattedDate }}</small>
     </p>
 
-    <!-- Botón para redirigir a la página de detalles -->
+    <!-- Botón para ver los detalles del proyecto -->
     <a [routerLink]="['/projects', id]" class="btn btn-primary">Ver detalles</a>
 
-    <!-- Botones de eliminar y confirmación (solo visible si el usuario es admin) -->
+    <!-- Opciones de eliminación para administradores -->
     <div class="confirm" *ngIf="isAdmin">
       <ng-container *ngIf="!confirmingDelete; else confirmButtons">
+        <!-- Botón para iniciar el proceso de eliminación -->
         <button class="btn btn-danger" (click)="confirmDelete()">
           Eliminar
         </button>
       </ng-container>
       <ng-template #confirmButtons>
+        <!-- Botones para confirmar o cancelar la eliminación -->
         <button class="btn btn-success" (click)="deleteProject()">
           Aceptar
         </button>

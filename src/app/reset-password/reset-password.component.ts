@@ -28,6 +28,7 @@ export class ResetPasswordComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute
   ) {
+    // Configura el formulario y agrega validaciones, incluida la de coincidencia de contraseñas
     this.resetForm = this.formBuilder.group(
       {
         password: [
@@ -44,31 +45,35 @@ export class ResetPasswordComponent implements OnInit {
     );
   }
 
+  // Obtiene el token de la URL al inicializar el componente
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token') || '';
   }
 
-  // Validador de coincidencia de contraseñas
+  // Valida que los campos 'password' y 'confirmPassword' coincidan
   passwordMatchValidator(group: FormGroup) {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
+    // Retorna null si coinciden, o un error en caso contrario
     return password === confirmPassword ? null : { mismatch: true };
   }
 
+  // Envía el formulario y procesa el restablecimiento de contraseña
   onSubmit(): void {
     if (this.resetForm.invalid) {
-      return;
+      return; // No procede si el formulario es inválido
     }
 
     const password = this.resetForm.get('password')?.value;
 
+    // Llama al servicio de autenticación para restablecer la contraseña usando el token y la nueva contraseña
     this.authService.resetPassword(this.token, password).subscribe({
       next: () => {
-        this.isSuccess = true;
+        this.isSuccess = true; // Indica que la operación fue exitosa
         this.isError = false;
       },
       error: (err) => {
-        this.isError = true;
+        this.isError = true; // Indica que ocurrió un error
         this.errorMessage =
           err.error.message || 'Error al restablecer la contraseña.';
         this.isSuccess = false;
